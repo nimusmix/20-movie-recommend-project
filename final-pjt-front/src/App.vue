@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <!-- navbar -->
-    <nav class="navbar">
-      <div class="profile">
-        <img src="#" alt="logo" class="navbar-brand">
-        <img src="#" alt="프로필 사진">
-        <div class="dropdown">
-          <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">username</button>
-          <ul class="dropdown-menu">
-            <li><a href="#" class="dropdown-item">내 프로필</a></li>
-            <li><a href="#" class="dropdown-item">회원정보 수정</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a href="#" class="dropdown-item">로그아웃</a></li>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item"
+            v-for="(routerName, routerLink, index) in routerLinks" :key="index"
+            >
+              <router-link :to="{ name: routerLink }" class="nav-link active">{{ routerName }}</router-link>
+            </li>
           </ul>
         </div>
       </div>
@@ -19,7 +17,24 @@
     <router-view/>
   </div>
 </template>
+<script>
+  export default {
+    data(){
+      return{
+        routerLinks:{
+          'LandingView':'랜딩페이지',
+          'LoginView':'로그인',
+          'SignupView':'회원가입',
+          'HomeView':'홈',
+          'FeedView':'피드',
+          'RecommendView':'추천영화',
+          'CategoryView':'카테고리'
+        }
+      }
+    }
+  }
 
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
