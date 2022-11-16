@@ -45,11 +45,17 @@ def get_movies():
             
             for result in results:
                 # 이미 들어있는지 없는지 판별하기
-                new_result = dict()
+                
                 if result['id'] not in movie_ids:
                     movie_ids.append(result['id'])
+                    main_result = dict()
+                    main_result['model'] = 'movies.movie'
+                    main_result['pk'] = result['id']
+                    
+                    
+                    new_result = dict()
                     # 초기화
-                    new_result['pk'] = result['id']
+                    #new_result['pk'] = result['id']
                     new_result['title'] = result['title']
                     new_result['genres'] = result['genre_ids']
                     new_result['overview'] = result['overview']
@@ -70,16 +76,17 @@ def get_movies():
 
                     new_result[key] = True
 
+                    main_result['fields'] = new_result
                     # 저장
-                    movies.append(new_result)
+                    movies.append(main_result)
 
                 # 들어있는 경우
                 else:
                     # OTT
                     for movie in movies:
-                        if result.get('id') == movie.get('pk'):
-                            print(movie['title'])
-                            movie[key] = True
+                        if result.get('id') == movie['fields'].get('pk'):
+                            print(movie['fields']['title'])
+                            movie['fields'][key] = True
                     
 
     # # 받아오기
