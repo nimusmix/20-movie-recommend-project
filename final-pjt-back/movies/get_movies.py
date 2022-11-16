@@ -1,6 +1,7 @@
 import requests
 import json
-import csv
+
+import api_keys  # 숨겨놓은 api키
 provider_ids = {
     'watcha':97,
     'wavve':356,
@@ -17,7 +18,8 @@ def make_url(url, params):
 def get_movies():
     movies = []
     movie_ids = []
-    api_key = 'b62d15126d65f2f351e77aa02c968e67'
+    api_key = api_keys.API_KEY
+    
     #URL에 api_key를 넣어준다.
 
     page_num = 0
@@ -33,7 +35,7 @@ def get_movies():
 
     # ott별 검색
     for key, value in provider_ids.items():
-        for page_num in range(1,2):
+        for page_num in range(1,5):
             params['with_watch_providers'] = value   # 제공사 바꾸기
             params['page'] = page_num
             maked_url = make_url(URL, params)        # ott url 제공
@@ -52,7 +54,7 @@ def get_movies():
                     main_result['model'] = 'movies.movie'
                     main_result['pk'] = result['id']
                     
-                    
+                    # 새로운 딕트에 저장 후 append
                     new_result = dict()
                     # 초기화
                     #new_result['pk'] = result['id']
@@ -75,7 +77,6 @@ def get_movies():
                     new_result['disney'] = False
 
                     new_result[key] = True
-
                     main_result['fields'] = new_result
                     # 저장
                     movies.append(main_result)
@@ -84,7 +85,7 @@ def get_movies():
                 else:
                     # OTT
                     for movie in movies:
-                        if result.get('id') == movie['fields'].get('pk'):
+                        if result.get('id') == movie.get('pk'):
                             print(movie['fields']['title'])
                             movie['fields'][key] = True
                     
@@ -101,6 +102,7 @@ def get_movies():
     
     with open(file_path, 'w', encoding="UTF-8") as outfile:
         json.dump(movies, outfile, indent=4, ensure_ascii=False)
-    return
+    print(len(movies))
+    return 
     
 get_movies()
