@@ -15,7 +15,6 @@
           </ul>
         </div>
       </div>
-      <!-- <router-link :to="{ name: 'ArticleView' }">Articles</router-link> |  -->
     </nav>
     <router-view/>
   </div>
