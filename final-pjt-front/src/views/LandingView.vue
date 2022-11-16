@@ -1,8 +1,13 @@
 <template>
   <div>
     <h1>LandingView</h1>
-    <router-link :to="{ name: 'LoginView' }">로그인</router-link> | 
-    <router-link :to="{ name: 'SignupView' }">회원가입</router-link>
+    <div v-if="isLogin">
+      <router-link :to="{ name: 'HomeView' }">들어가기</router-link>
+    </div>
+    <div v-else>
+      <router-link :to="{ name: 'LoginView' }">로그인</router-link> | 
+      <router-link :to="{ name: 'SignupView' }">회원가입</router-link>
+    </div>
   </div>
 </template>
 
@@ -13,6 +18,11 @@ export default {
     getMovies() {
       this.$store.dispatch('getMovies')
     },
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin
+    }
   },
   created() {
     this.getMovies()

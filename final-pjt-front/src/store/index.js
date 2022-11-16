@@ -6,7 +6,6 @@ import router from '@/router'
 
 Vue.use(Vuex)
 
-
 export default new Vuex.Store({
   plugins: [
     createPersistedState()
@@ -29,6 +28,10 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({ name: 'HomeView' })
+    },
+    LOGOUT(state) {
+      state.token = null
+      router.push({ name: 'LandingView' })
     }
   },
   actions: {
