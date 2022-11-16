@@ -14,7 +14,6 @@ from .serializers import ReviewSerializer #MovieListSerializer, MovieSerializer,
 from .models import Movie, Review
 
 
-
 @api_view(['GET'])
 def review_list(request):
     if request.method == 'GET':
@@ -43,11 +42,9 @@ def review_detail(request, review_pk):
             serializer.save()
             return Response(serializer.data)
 
-    
-
 
 @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def review_create(request, movie_pk):
     # movie = Movie.objects.get(pk=movie_pk)
     movie = get_object_or_404(Movie, pk=movie_pk)
