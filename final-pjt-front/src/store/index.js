@@ -6,7 +6,6 @@ import router from '@/router'
 
 Vue.use(Vuex)
 
-const API_URL = 'http://127.0.0.1:8000'
 
 export default new Vuex.Store({
   plugins: [
@@ -15,6 +14,7 @@ export default new Vuex.Store({
   state: {
     movies: [],
     token: null,
+    API_URL:'http://127.0.0.1:8000'
   },
   getters: {
     isLogin(state) {
@@ -35,7 +35,7 @@ export default new Vuex.Store({
     getMovies(context) {
       axios({
         method: 'get',
-        url: `${API_URL}/api/v1/movies/`,
+        url: `${context.state.API_URL}/api/v1/movies/`,
         headers: {
           Authorization: `Token ${context.state.token}`
         }
