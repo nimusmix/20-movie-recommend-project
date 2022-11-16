@@ -2,6 +2,7 @@
   <div>
     <h1>CategoryView</h1>
     <CategoryItem/>
+    {{ movies }}
   </div>
 </template>
 
@@ -12,6 +13,11 @@ export default {
   name: 'CategoryView',
   components: {
     CategoryItem,
+  },
+  computed:{
+    movies(){
+      return this.$store.state.movies
+    }
   }
 }
 </script>
