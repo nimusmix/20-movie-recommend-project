@@ -18,7 +18,8 @@ export default {
     ReviewCreate,
     MovieReviews,
     MovieCollections,
-  }
+  },
+  
 }
 </script>
 
