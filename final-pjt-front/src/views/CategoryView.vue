@@ -1,8 +1,16 @@
 <template>
   <div>
-    <h1>CategoryView</h1>
-    <CategoryItem/>
-    {{ movies }}
+    <div class="row row-cols-1 row-cols-md-4
+         g-4">
+      <article 
+      v-for="(movie, index) in movies"
+      :key="index"
+      class="col"
+      >
+      <CategoryItem :movie="movie"/>
+    </article>
+    </div>
+    
   </div>
 </template>
 

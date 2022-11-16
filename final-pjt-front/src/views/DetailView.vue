@@ -2,8 +2,9 @@
   <div>
     <h1>DetailView</h1>
     <ReviewCreate/>
-    <MovieReviews/>
+    <MovieReviews :movie="movie"/>
     <MovieCollections/>
+    {{ movie }}
   </div>
 </template>
 
@@ -19,7 +20,9 @@ export default {
     MovieReviews,
     MovieCollections,
   },
-  
+  props:{
+    movie:Object
+  }
 }
 </script>
 

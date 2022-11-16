@@ -65,6 +65,7 @@ const routes = [
     path: '/movies/:pk',
     name: 'DetailView',
     component: DetailView,
+    props: true,
   },
 ]
 
