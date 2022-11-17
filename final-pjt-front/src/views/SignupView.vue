@@ -76,7 +76,11 @@ export default {
         }
       })
         .then((res) => {
-          this.$store.commit('SAVE_TOKEN', res.data.key)
+          const user = {
+            username: this.username,
+            token: res.data.key
+          }
+          this.$store.commit('SAVE_USER', user)
         })
         .catch((err) => {
           console.log('회원가입에 실패했습니다.')

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LandingView from '@/views/LandingView'
+import LoginView from '@/views/LoginView'
+import SignupView from '@/views/SignupView'
 
 Vue.use(VueRouter)
 
@@ -14,17 +16,17 @@ const routes = [
   {
     path: '/login',
     name: 'LoginView',
-    component: () => import('@/views/LoginView')
+    component: LoginView
   },
 
   {
     path: '/signup',
     name: 'SignupView',
-    component: () => import('@/views/SignupView')
+    component: SignupView
   },
 
   {
-    path: '/accounts/:username',
+    path: '/profile/:username',
     name: 'ProfileView',
     component: () => import('@/views/ProfileView')
   },

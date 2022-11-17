@@ -21,6 +21,9 @@
             >
               <router-link :to="{ name: routerLink }" class="nav-link active">{{ routerName }}</router-link>
             </li>
+            <!-- <li class="nav-item">
+              <router-links :to="{ name: ProfileView }" class="nav-link active">{{ username }}</router-links>
+            </li> -->
           </ul>
         </div>
       </div>

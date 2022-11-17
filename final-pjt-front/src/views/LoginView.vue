@@ -43,7 +43,11 @@ export default {
         }
       })
         .then((res) => {
-          this.$store.commit('SAVE_TOKEN', res.data.key)
+          const user = {
+            username: this.username,
+            token: res.data.key
+          }
+          this.$store.commit('SAVE_USER', user)
         })
         .catch(() => {
           this.errMsg = '입력한 정보를 확인해주세요.'

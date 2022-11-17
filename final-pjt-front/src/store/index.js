@@ -32,6 +32,7 @@ export default new Vuex.Store({
         name: 'netflix',
       },    
     ],
+    username: null,
     token: null,
     API_URL:'http://127.0.0.1:8000'
   },
@@ -48,11 +49,13 @@ export default new Vuex.Store({
       state.genres = genres
     },
     // 회원가입 && 로그인
-    SAVE_TOKEN(state, token) {
-      state.token = token
+    SAVE_USER(state, user) {
+      state.username = user.username
+      state.token = user.token
       router.push({ name: 'HomeView' })
     },
     LOGOUT(state) {
+      state.username = null
       state.token = null
       router.push({ name: 'LandingView' })
     },
