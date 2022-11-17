@@ -71,12 +71,13 @@ def get_movies():
                     new_result['original_language'] = result['original_language']
                     new_result['original_title'] = result['original_title']
                     # OTT
-                    new_result['netflix'] = False
-                    new_result['watcha'] = False
-                    new_result['wavve'] = False
-                    new_result['disney'] = False
+                    new_result['otts'] = [key]
+                    # new_result['netflix'] = False
+                    # new_result['watcha'] = False
+                    # new_result['wavve'] = False
+                    # new_result['disney'] = False
 
-                    new_result[key] = True
+                    # new_result[key] = True
                     main_result['fields'] = new_result
                     # 저장
                     movies.append(main_result)
@@ -86,8 +87,9 @@ def get_movies():
                     # OTT
                     for movie in movies:
                         if result.get('id') == movie.get('pk'):
-                            print(movie['fields']['title'])
-                            movie['fields'][key] = True
+                            if not key in movie['fields']['otts']:
+                                print(movie['fields']['title'])
+                                movie['fields']['otts'].append(key)
                     
 
     # # 받아오기
