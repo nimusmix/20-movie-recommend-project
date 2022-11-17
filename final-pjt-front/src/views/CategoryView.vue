@@ -11,17 +11,17 @@
       </button>
 
       <button
-        v-for="ott in ottList"
+        v-for="ott in otts"
         :key="ott.id"
         @click="ottFilter"
       >
-        {{ ott }}
+        {{ ottList[ott.name] }}
       </button>
     </div>
 
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <article 
-        v-for="movie in movies.filter(movieFilter)"
+        v-for="movie in movies"
         :key="movie.id"
         class="col"
       >
@@ -42,21 +42,25 @@ export default {
   data() {
     return {
       ottList: {
-        netflix: '넷플릭스',
         watcha: '왓챠',
-        wavve: '웨이브',
+        waave: '웨이브',
         disney: '디즈니',
+        netflix: '넷플릭스',
       },
       selectedGenres: [],
       selectedOtts: [],
+      filteredMovies: [],
     }
   },
   computed: {
-    movies(){
+    movies() {
       return this.$store.state.movies
     },
-    genres(){
+    genres() {
       return this.$store.state.genres
+    },
+    otts() {
+      return this.$store.state.otts
     }
   },
   methods: {
@@ -89,24 +93,16 @@ export default {
       }
       console.log(this.selectedOtts)
     },
-    // movieFilter(movie) {
-    //   if (this.selectedGenres.length + this.selectedOtts.length > 0) {
-    //     const genreFlag = movie.genres.some((tmpGenre) => this.selectedGenres.includes(tmpGenre))
-    //     // const ottFlag = false
-    //     if (movie.netflix && selectedOtts.includes('neflix')) {
-    //       return true
-    //     } elif (movie.watcha && selectedOtts.includes('watcha')) {
-    //       return true
-    //     } elif (movie.wavve && selectedOtts.includes('waave')) {
-    //       return true
-    //     }
-    //     return genreFlag
-    //     }
-    //   } else {
-    //     return true
-    //   }
-    // }
-  }
+    movieFilter(movie) {
+      if (this.selectedGenres.length + this.selectedOtts.length > 0) {
+        const genreFlag = movie.genres.some((tmpGenre) => this.selectedGenres.includes(tmpGenre));
+        const ottFlag = movie.otts.some((tmpOtt) => this.selectedOtts.includes(tmpOtt));
+        return genreFlag || ottFlag
+      } else {
+        return true
+      }
+    }
+  },
 }
 </script>
 

@@ -14,6 +14,24 @@ export default new Vuex.Store({
     movies: [],
     reviews: [],
     genres: [],
+    otts: [
+      {
+        id: 97,
+        name: 'watcha',
+      },
+      {
+        id: 356,
+        name: 'waave',
+      },
+      {
+        id: 337,
+        name: 'disney',
+      },
+      {
+        id: 8,
+        name: 'netflix',
+      },    
+    ],
     token: null,
     API_URL:'http://127.0.0.1:8000'
   },
@@ -72,7 +90,7 @@ export default new Vuex.Store({
         .catch(() => {
           console.log('actions의 getReviews 실패!')
         })
-     },
+    },
     getGenres(context) {
       axios({
         method: 'get',
