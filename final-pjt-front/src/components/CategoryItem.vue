@@ -4,7 +4,6 @@
       <img :src="`https://image.tmdb.org/t/p/original/${ movie.poster_path }`" 
       class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">{{ movie.id }}</h5>
         <h5 class="card-title">{{ movie.title }}</h5>
         <p class="card-text">{{ movie.vote_average }}</p>
       </div>

@@ -6,10 +6,12 @@
       <div>{{ content.length }}.</div>
       <div>{{ length_warning }}</div>                         <!-- 확인 -->
       <input id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @input="test($event.target.value)"><br>
+      <div>
+        <input id="checkbox" type="checkbox" v-model="is_spoiler"> 스포일러가 포함되어 있습니다.
+      </div>
       <input type="submit" id="submit">
       <div style="width:100%">
         <b-form-rating v-model="value" color="#ff8800" show-value></b-form-rating>
-        <p class="mt-2">Value: {{ value }}</p>
       </div>
 
 
@@ -28,6 +30,7 @@ export default {
       value: 3,
       length_warning: false,
       maxlength: 30,
+      is_spoiler: false,
     }
   },
   methods:{
@@ -44,6 +47,7 @@ export default {
         data: {
           content: content,
           score: value,
+          is_spoiler: this.is_spoiler,
         },
         headers: {
           Authorization: `Token ${this.$store.state.token}`
@@ -58,30 +62,34 @@ export default {
               const now_sum = res.data.vote_average * res.data.vote_count
               const new_sum = now_sum + this.value
               const new_cnt = res.data.vote_count + 1
-              const new_avg = new_sum / new_cnt
+              const new_avg = Math.round(new_sum / new_cnt * 10) / 10
+              const new_data = {
+                title: res.data.title,
+                overview: res.data.overview,
+                release_date: res.data.release_date,
+                popularity: res.data.popularity,
+                adult: res.data.adult,
+                vote_count: new_cnt,
+                vote_average: new_avg,
+                backdrop_path: res.data.backdrop_path,
+                poster_path: res.data.poster_path,
+                original_language: res.data.original_language,
+                original_title: res.data.original_title,
+                genres: res.data.genres,
+                otts: res.data.otts,
+              }
+
               axios({
                 method: 'put',
                 url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.id}/`,
-                data: {
-                  title: res.data.title,
-                  overview: res.data.overview,
-                  release_date: res.data.release_date,
-                  popularity: res.data.popularity,
-                  adult: res.data.adult,
-                  vote_count: new_cnt,
-                  vote_average: new_avg,
-                  backdrop_path: res.data.backdrop_path,
-                  poster_path: res.data.poster_path,
-                  original_language: res.data.original_language,
-                  original_title: res.data.original_title,
-                  genres: res.data.genres,
-                  otts: res.data.otts,
-                },
+                data: new_data,
                 headers: {
                   Authorization: `Token ${this.$store.state.token}`
                 },
               })
-        })
+
+              location.reload()                      // 페이지 새로고침하는 코드
+          })
         })
         .catch((err) => {
           console.log(err)
@@ -101,6 +109,9 @@ export default {
           console.log(this.content)
         }, 100);
       }
+    },
+    test2() {
+      console.log(this.is_spoiler)
     }
   },
   computed:{
