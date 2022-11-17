@@ -12,6 +12,7 @@ export default new Vuex.Store({
   ],
   state: {
     movies: [],
+    reviews: [],
     token: null,
     API_URL:'http://127.0.0.1:8000'
   },
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     LOGOUT(state) {
       state.token = null
       router.push({ name: 'LandingView' })
+    },
+    GET_REVIEWS(state, reivews) {
+      state.reviews = reivews
     }
   },
   actions: {
@@ -48,6 +52,21 @@ export default new Vuex.Store({
         })
         .catch(() => {
           console.log('actions의 getMovies 실패!')
+        })
+    },
+    getReviews(context) {
+      axios({
+        method: 'get',
+        url: `${context.state.API_URL}/api/v2/reviews/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+          context.commit('GET_REVIEWS', res.data)
+        })
+        .catch(() => {
+          console.log('actions의 getReviews 실패!')
         })
     },
   },
