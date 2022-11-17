@@ -27,7 +27,7 @@ export default {
       return this.$store.state.reviews
     }
   },
-  mounted() {
+  created() {
     this.getReviews()
   },
 

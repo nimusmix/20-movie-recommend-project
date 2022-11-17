@@ -33,8 +33,8 @@ export default {
   },
   methods:{
     createReview() {
-      const content = this.content
-
+      const content = this.content.substring(0, 20)
+      const value = this.value
       if (!content) {
         alert('내용을 입력해주세요')
         return
@@ -44,7 +44,7 @@ export default {
         url: `${this.$store.state.API_URL}/api/v2/movies/118/reviews/`,
         data: {
           content: content,
-          score:0,
+          score:value,
         },
         headers: {
           Authorization: `Token ${this.$store.state.token}`
