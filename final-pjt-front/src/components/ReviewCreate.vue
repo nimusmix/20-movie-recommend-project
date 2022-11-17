@@ -50,7 +50,6 @@ export default {
         }
       })
         .then((res) => {
-          console.log(res)
           this.$router.push({ name: 'HomeView' })                          // review create 후 어디로 이동할지 상의해보기
           axios({                                                          // movie detail 받아오기
             method: 'get',
@@ -61,13 +60,23 @@ export default {
               const new_sum = now_sum + this.value
               const new_cnt = res.data.vote_count + 1
               const new_avg = new_sum / new_cnt
-              console.log(res.data)
               axios({
                 method: 'put',
                 url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.id}/`,
                 data: {
+                  title: res.data.title,
+                  overview: res.data.overview,
+                  release_date: res.data.release_date,
+                  popularity: res.data.popularity,
+                  adult: res.data.adult,
                   vote_count: new_cnt,
                   vote_average: new_avg,
+                  backdrop_path: res.data.backdrop_path,
+                  poster_path: res.data.poster_path,
+                  original_language: res.data.original_language,
+                  original_title: res.data.original_title,
+                  genres: res.data.genres,
+                  otts: res.data.otts,
                 },
                 headers: {
                   Authorization: `Token ${this.$store.state.token}`

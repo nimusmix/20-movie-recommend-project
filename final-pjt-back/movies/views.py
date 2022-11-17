@@ -48,7 +48,6 @@ def movie_detail(request, movie_pk):
         serializer = MovieSerializer(movie, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            print(serializer.data)
             return Response(serializer.data)
 
 @api_view(['GET'])
