@@ -4,7 +4,7 @@
     <form @submit.prevent="createReview">
       <label for="content">내용 : </label>
       <div>{{ content.length }}.</div>
-      <div>{{ length_warning }}</div>
+      <div>{{ length_warning }}</div>                         <!-- 확인 -->
       <input id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @input="test($event.target.value)"><br>
       <input type="submit" id="submit">
       <div style="width:100%">
@@ -50,7 +50,6 @@ export default {
         }
       })
         .then((res) => {
-          this.$router.push({ name: 'HomeView' })                          // review create 후 어디로 이동할지 상의해보기
           axios({                                                          // movie detail 받아오기
             method: 'get',
             url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.movie}/`

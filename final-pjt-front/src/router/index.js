@@ -59,7 +59,6 @@ const routes = [
     path: '/movies/:pk',
     name: 'DetailView',
     component: () => import('@/views/DetailView'),
-    props: true,
   },
 ]
 
