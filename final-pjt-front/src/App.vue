@@ -57,6 +57,9 @@
       logout() {
         this.$store.commit('LOGOUT')
       }
+    },
+    updated() {
+      this.$store.dispatch('getMovies')
     }
   }
 

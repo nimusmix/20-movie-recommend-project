@@ -88,8 +88,8 @@ export default {
                 },
               })
 
-              location.reload()                      // 페이지 새로고침하는 코드
-          })
+              location.reload()                      // 페이지 새로고침하는 코드. DetailView에 리뷰 출력 기능 구현 후 리뷰 작성 시 페이지 업데이트 된다면
+          })                                         // 여기서 reload 하지 말고 DetailView updated()로 movie 데이터 업데이트하기
         })
         .catch((err) => {
           console.log(err)
