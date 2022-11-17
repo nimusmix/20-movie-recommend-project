@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import ReviewSerializer #MovieListSerializer, MovieSerializer, 
+from .serializers import ReviewSerializer, ReviewCustomSerializer #MovieListSerializer, MovieSerializer, 
 from .models import Movie, Review
 
 
@@ -30,6 +30,26 @@ def review_detail(request, review_pk):
 
     if request.method == 'GET':
         serializer = ReviewSerializer(review)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        review.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'PUT':
+        serializer = ReviewSerializer(review, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+
+
+@api_view(['GET', 'DELETE', 'PUT'])
+def review_custom_detail(request, review_pk):
+    # review = Review.objects.get(pk=review_pk)
+    review = get_object_or_404(Review, pk=review_pk)
+
+    if request.method == 'GET':
+        serializer = ReviewCustomSerializer(review)
         return Response(serializer.data)
 
     elif request.method == 'DELETE':

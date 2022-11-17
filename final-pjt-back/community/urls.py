@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('reviews/', views.review_list),
     path('reviews/<int:review_pk>/', views.review_detail),
+    path('reviews_c/<int:review_pk>/', views.review_custom_detail),
     path('movies/<int:movie_pk>/reviews/', views.review_create),
     # # 필수 작성
     path('schema/', SpectacularAPIView.as_view(), name='schema'),

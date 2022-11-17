@@ -10,3 +10,4 @@ class Review(models.Model):
     score = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_spoiler = models.BooleanField(default=False) 
