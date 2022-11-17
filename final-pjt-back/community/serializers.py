@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Movie, Review
+from datetime import date, timedelta, datetime, timezone
 # from .serializers import MovieSerializer
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -12,17 +13,32 @@ class ReviewSerializer(serializers.ModelSerializer):
     
     movie_title = serializers.CharField(source='movie.title', read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
-    plus_content = serializers.SerializerMethodField()
+    last_time = serializers.SerializerMethodField()
 
     class Meta:
         model = Review
         fields = '__all__'
         read_only_fields = ('movie','user',)
     
-    def get_plus_content(self,obj):
-        # 현재시간 - 생성시간
-	    return (obj.content + 'aaaaaaaaaaaaaaaaaaaa')
-
+    def get_last_time(self, obj):
+        ## 어웨어와 네이브 타입 주의!!
+        time = datetime.now(timezone.utc) - obj.created_at
+        str_time = str(time)
+        hour, minute, second = str_time.split(':')
+        second = second.split('.')[0]
+        hour = int(hour)
+        minute = int(minute)
+        second = int(second)
+        result = ''
+        if hour > 24:
+            result = f'{hour//24}일 전'
+        elif hour >= 1:
+            result = f'{hour}시간 전'
+        elif minute >= 1:
+            result = f'{minute}분 전'
+        else:
+            result = f'{second}초 전'
+        return result
 
 
 class ReviewCustomSerializer(serializers.ModelSerializer):

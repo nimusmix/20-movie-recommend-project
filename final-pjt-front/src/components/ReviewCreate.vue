@@ -1,10 +1,19 @@
 <template>
-  <div>
+  <div style="width:500px">
     <h1>ReviewCreate</h1>
     <form @submit.prevent="createReview">
       <label for="content">내용 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
+      <div>{{ content.length }}.</div>
+      <div>{{ length_warning }}</div>
+      {{ content }}
+      <input id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @input="test($event.target.value)"><br>
       <input type="submit" id="submit">
+      <div style="width:100%">
+        <b-form-rating v-model="value" color="#ff8800" show-value></b-form-rating>
+        <p class="mt-2">Value: {{ value }}</p>
+      </div>
+
+
     </form>
   </div>
 </template>
@@ -16,7 +25,10 @@ export default {
   name: 'ReviewCreate',
   data(){
     return{
-      content:null,
+      content:'Default Message',
+      value: 3,
+      length_warning: false,
+      maxlength: 30
     }
   },
   methods:{
@@ -45,7 +57,24 @@ export default {
         .catch((err) => {
           console.log(err)
         })
+    },
+    test(testinja){
+      this.content = testinja
+      if (this.content.length < 20){
+        this.length_warning = false
+        this.maxlength = 30
+      }
+      else{
+        this.length_warning = true
+        setTimeout(() => {
+          console.log("after")
+          this.content = this.content.substring(0, 20)
+          console.log(this.content)
+        }, 100);
+      }
     }
+  },
+  computed:{
   }
 }
 
