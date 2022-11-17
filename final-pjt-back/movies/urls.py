@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('movies/', views.movie_list),
     path('movies/<int:movie_pk>/', views.movie_detail),
+    path('genres/', views.genre_list),
     # # 필수 작성
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # # optional UI
