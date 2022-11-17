@@ -71,7 +71,7 @@ def get_movies():
                     new_result['original_language'] = result['original_language']
                     new_result['original_title'] = result['original_title']
                     # OTT
-                    new_result['otts'] = [key]
+                    new_result['otts'] = [value]
                     # new_result['netflix'] = False
                     # new_result['watcha'] = False
                     # new_result['wavve'] = False
@@ -87,9 +87,9 @@ def get_movies():
                     # OTT
                     for movie in movies:
                         if result.get('id') == movie.get('pk'):
-                            if not key in movie['fields']['otts']:
+                            if not value in movie['fields']['otts']:
                                 print(movie['fields']['title'])
-                                movie['fields']['otts'].append(key)
+                                movie['fields']['otts'].append(value)
                     
 
     # # 받아오기
