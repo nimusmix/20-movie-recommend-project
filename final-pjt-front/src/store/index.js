@@ -13,6 +13,7 @@ export default new Vuex.Store({
   state: {
     movies: [],
     reviews: [],
+    genres: [],
     token: null,
     API_URL:'http://127.0.0.1:8000'
   },
@@ -24,6 +25,9 @@ export default new Vuex.Store({
   mutations: {
     GET_MOVIES(state, movies) {
       state.movies = movies
+    },
+    GET_GENRES(state, genres) {
+      state.genres = genres
     },
     // 회원가입 && 로그인
     SAVE_TOKEN(state, token) {
@@ -62,11 +66,26 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.token}`
         }
       })
-        .then((res) => {
+      .then((res) => {
           context.commit('GET_REVIEWS', res.data)
         })
         .catch(() => {
           console.log('actions의 getReviews 실패!')
+        })
+     },
+    getGenres(context) {
+      axios({
+        method: 'get',
+        url: `${context.state.API_URL}/api/v1/genres/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+          context.commit('GET_GENRES', res.data)
+        })
+        .catch(() => {
+          console.log('actions의 getGenres 실패!')
         })
     },
   },

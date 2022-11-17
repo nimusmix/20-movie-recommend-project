@@ -1,14 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LandingView from '@/views/LandingView'
-import LoginView from '@/views/LoginView'
-import SignupView from '@/views/SignupView'
-import ProfileView from '@/views/ProfileView'
-import HomeView from '@/views/HomeView'
-import FeedView from '@/views/FeedView'
-import RecommendView from '@/views/RecommendView'
-import CategoryView from '@/views/CategoryView'
-import DetailView from '@/views/DetailView'
 
 Vue.use(VueRouter)
 
@@ -22,49 +14,49 @@ const routes = [
   {
     path: '/login',
     name: 'LoginView',
-    component: LoginView,
+    component: () => import('@/views/LoginView')
   },
 
   {
     path: '/signup',
     name: 'SignupView',
-    component: SignupView,
+    component: () => import('@/views/SignupView')
   },
 
   {
     path: '/accounts/:username',
     name: 'ProfileView',
-    component: ProfileView
+    component: () => import('@/views/ProfileView')
   },
 
   {
     path: '/home',
     name: 'HomeView',
-    component: HomeView
+    component: () => import('@/views/HomeView')
   },
 
   {
     path: '/feed',
     name: 'FeedView',
-    component: FeedView
+    component: () => import('@/views/FeedView')
   },
 
   {
     path: '/recommend',
     name: 'RecommendView',
-    component: RecommendView
+    component: () => import('@/views/RecommendView')
   },
 
   {
     path: '/category',
     name: 'CategoryView',
-    component: CategoryView
+    component: () => import('@/views/CategoryView')
   },
 
   {
     path: '/movies/:pk',
     name: 'DetailView',
-    component: DetailView,
+    component: () => import('@/views/DetailView'),
     props: true,
   },
 ]
