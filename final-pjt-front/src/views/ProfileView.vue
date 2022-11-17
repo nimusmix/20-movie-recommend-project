@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>ProfileView</h1>
+    <h1 class="h1">프로필</h1>
     <CollectionList/>
     <collection-modal/>
     <ReviewList/>

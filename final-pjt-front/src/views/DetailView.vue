@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="h1">{{ movie?.title }}</h1>
     <div style="background-color: white;">
       <img :src="backdropUrl" alt="background" style="width: 100%; opacity: 70%;">
     </div>

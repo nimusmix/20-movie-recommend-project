@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Signup</h1>
+    <h1 class="h1">회원가입</h1>
     <form @submit.prevent="signup">
       <label for="username">username : </label>
       <input type="text" id="username" v-model="username"><br>

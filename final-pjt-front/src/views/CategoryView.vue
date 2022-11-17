@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>카테고리</h2>
+    <h1 class="h1">카테고리</h1>
     <div>
       <button
         v-for="ott in otts"

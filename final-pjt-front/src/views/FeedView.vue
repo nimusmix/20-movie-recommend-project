@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>FeedView</h1>
+    <h1 class="h1">피드</h1>
     <article v-for="review in reviews" :key="review.id">
       <FeedItem :review="review"/>
     </article>

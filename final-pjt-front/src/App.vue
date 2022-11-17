@@ -101,6 +101,7 @@
   #app.light {
     //시맨틱 컬러
     --primary-color: #FF715E;
+    --primary-color-15: #ff715e60;
     --danger-color: #F16464 ;
     --warning-color: #F5AB35;
     --success-color: #47C1C3;
@@ -110,12 +111,14 @@
     //전역설정 컬러
     --bg-color:#FFF;
     --bg-router-color:#FFFAFA;
+    --disable-color:#5F5F5F;
     --text-color:#000;
   }
 
   #app.dark {
     //시맨틱 컬러
     --primary-color: #FF715E;
+    --primary-color-15: #ff715e24;
     --danger-color: #F16464 ;
     --warning-color: #F5AB35;
     --success-color: #47C1C3;
@@ -125,9 +128,25 @@
     //전역설정 컬러
     --bg-color:#000;
     --bg-router-color:#1F1F1F;
+    --disable-color:#c8c8c8;
     --text-color:#FFF;
   }
+// 텍스트 스타일
+  // 큰 텍스트 - h1
+  $lg-font-size:2rem;
+  $lg-font-weight:600;
 
+  // 일반 텍스트 - 기본
+  $main-font-size:1rem;
+  $main-font-weight:400;
+
+  // 본문 텍스트 - 얇게
+  $main-font-weight-light:300;
+
+  #app .h1 {
+    font-size: $lg-font-size;
+    font-weight: $lg-font-weight;
+  }
 // 전역 스타일
   $trans-global:width 2s, height 2s, background-color 1s, transform 2s !global;
 
@@ -137,6 +156,8 @@
     color: var(--text-color);
     // -webkit-transition:width 2s, height 2s, background-color 2s, -webkit-transform 2s;
     transition:$trans-global;
+    font-size:$main-font-size;
+    font-weight:$main-font-weight;
   }
   //텍스트 데코레이션
   .t-d-none{
@@ -151,7 +172,7 @@
 // 네비 스타일
   #col-nav{
     $nav-width:240px !global;
-    width: $nav-width;
+    min-width: $nav-width;
     position: fixed;
     height: 100%;
     overflow: auto;
@@ -161,10 +182,10 @@
     $main-nav-padding-left:42px;
     background-color: var(--bg-color);
     svg {
-      stroke: var(--text-color);
+      stroke: var(--disable-color);
     }
     a {
-      color: var(--text-color);
+      color: var(--disable-color);
       text-decoration: none;
     }
     .nav-hover:hover{
@@ -191,6 +212,7 @@
       }
     }
     #nav-logo {
+      color: var(--text-color);
       display: block;
       text-align: center;
       padding: 0px $main-nav-padding-left;
@@ -203,7 +225,8 @@
   #router-view{
     margin-left:$nav-width;
     padding-top: 48px;
-    padding-left: 48px;
+    padding-left: 80px;
+    min-height: 100vh;
   }
    
   

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>LandingView</h1>
+    <h1 class="h1">LandingView</h1>
     <div v-if="isLogin">
       <router-link :to="{ name: 'HomeView' }">들어가기</router-link>
     </div>

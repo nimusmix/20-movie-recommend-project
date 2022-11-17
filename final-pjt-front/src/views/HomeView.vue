@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>HomeView</h1>
+  <div class="h1">
+    <h1>홈</h1>
     <HomeRecommend/>
     <HomeFeed/>
   </div>

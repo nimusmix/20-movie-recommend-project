@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>RecommendView</h1>
+    <h1 class="h1">추천영화</h1>
     <RecommendSimilar/>
     <RecommendGenre/>
     <RecommendRecentlyReview/>

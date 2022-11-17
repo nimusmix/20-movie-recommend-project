@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Login</h1>
+    <h1 class="h1">로그인</h1>
     <form @submit.prevent="login">
       <label for="username">username : </label>
       <input type="text" id="username" v-model="username"><br>
