@@ -38,7 +38,6 @@ def movie_detail(request, movie_pk):
 
     if request.method == 'GET':
         serializer = MovieSerializer(movie)
-        print(serializer.data)
         return Response(serializer.data)
     
     # elif request.method == 'DELETE':
@@ -46,8 +45,7 @@ def movie_detail(request, movie_pk):
     #     return Response(status=status.HTTP_204_NO_CONTENT)
 
     elif request.method == 'PUT':
-        print(movie)
-        serializer = MoviePutSerializer(movie, data=request.data)
+        serializer = MovieSerializer(movie, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)

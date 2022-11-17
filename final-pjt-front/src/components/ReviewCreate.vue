@@ -5,7 +5,6 @@
       <label for="content">내용 : </label>
       <div>{{ content.length }}.</div>
       <div>{{ length_warning }}</div>
-      {{ content }}
       <input id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @input="test($event.target.value)"><br>
       <input type="submit" id="submit">
       <div style="width:100%">
@@ -28,7 +27,7 @@ export default {
       content:'Default Message',
       value: 3,
       length_warning: false,
-      maxlength: 30
+      maxlength: 30,
     }
   },
   methods:{
@@ -41,18 +40,49 @@ export default {
       }
       axios({
         method: 'post',
-        url: `${this.$store.state.API_URL}/api/v2/movies/118/reviews/`,
+        url: `${this.$store.state.API_URL}/api/v2/movies/${this.$route.params.pk}/reviews/`,
         data: {
           content: content,
-          score:value,
+          score: value,
         },
         headers: {
           Authorization: `Token ${this.$store.state.token}`
         }
       })
         .then((res) => {
-          console.log(res)
-          this.$router.push({ name: 'HomeView' })
+          this.$router.push({ name: 'HomeView' })                          // review create 후 어디로 이동할지 상의해보기
+          axios({                                                          // movie detail 받아오기
+            method: 'get',
+            url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.movie}/`
+          })
+            .then((res) => {                                               // movie의 vote_count와 vote_avg 수정
+              const now_sum = res.data.vote_average * res.data.vote_count
+              const new_sum = now_sum + this.value
+              const new_cnt = res.data.vote_count + 1
+              const new_avg = new_sum / new_cnt
+              axios({
+                method: 'put',
+                url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.id}/`,
+                data: {
+                  title: res.data.title,
+                  overview: res.data.overview,
+                  release_date: res.data.release_date,
+                  popularity: res.data.popularity,
+                  adult: res.data.adult,
+                  vote_count: new_cnt,
+                  vote_average: new_avg,
+                  backdrop_path: res.data.backdrop_path,
+                  poster_path: res.data.poster_path,
+                  original_language: res.data.original_language,
+                  original_title: res.data.original_title,
+                  genres: res.data.genres,
+                  otts: res.data.otts,
+                },
+                headers: {
+                  Authorization: `Token ${this.$store.state.token}`
+                },
+              })
+        })
         })
         .catch((err) => {
           console.log(err)
