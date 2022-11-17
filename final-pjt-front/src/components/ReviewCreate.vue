@@ -1,20 +1,19 @@
 <template>
   <div style="width:500px">
     <h1>ReviewCreate</h1>
-    <form @submit.prevent="createReview">
-      <label for="content">내용 : </label>
-      <div>{{ content.length }}.</div>
-      <div>{{ length_warning }}</div>                         <!-- 확인 -->
+    <form id="REVIEW_CREATE" @submit.prevent="createReview">
+      <!-- <label for="content">내용 : </label> -->
+      <div class="logo">{{ content.length }}.</div>
+      <!-- <div>{{ length_warning }}</div>                         확인 -->
       <input id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @input="test($event.target.value)"><br>
-      <div>
-        <input id="checkbox" type="checkbox" v-model="is_spoiler"> 스포일러가 포함되어 있습니다.
+      
+      <div style="display:inline-block">
+        <b-form-rating class="star-rating" size="lg" v-model="value"></b-form-rating> 
       </div>
+      <!-- show-value -->
+      <input id="checkbox" type="checkbox" v-model="is_spoiler"> 스포일러 포함
+      
       <input type="submit" id="submit">
-      <div style="width:100%">
-        <b-form-rating v-model="value" color="#ff8800" show-value></b-form-rating>
-      </div>
-
-
     </form>
   </div>
 </template>
@@ -26,7 +25,7 @@ export default {
   name: 'ReviewCreate',
   data(){
     return{
-      content:'Default Message',
+      content:'내용을 입력해주세요',
       value: 3,
       length_warning: false,
       maxlength: 30,
@@ -120,6 +119,42 @@ export default {
 
 </script>
 
-<style>
-
+<style lang="scss">
+    #REVIEW_CREATE {
+      border: 1px solid var(--text-color);
+      padding: 1rem 1.5rem ;
+      background: var(--bg-color);
+      border-radius: 8px;
+      border-color: var(--primary-color);
+      box-shadow: 0px 0px 10px 0px var(--primary-color-15);
+      .logo{
+        display: inline-block;
+      }
+      input{
+        color: var(--disable-color);
+        background-color: none;
+        border: none;
+      }
+    }
+    .b-rating{
+      margin: 0px;
+      padding: 0px;
+    }
+    .star-rating{
+      background-color: none;
+      border: none;
+      
+      .b-rating-star{
+        margin: 0px;
+        padding: 4px;
+      }
+      .b-rating-icon{
+        color: var(--primary-color);
+        margin: 0px;
+        padding: 0px;
+        svg{
+          min-width:1px;
+        }
+      }
+    }
 </style>
