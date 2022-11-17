@@ -3,25 +3,28 @@
     <h2>카테고리</h2>
     <div>
       <button
-        v-for="genre in genres"
-        :key="genre.id"
-        @click="genreFilter"
-      >
-        {{ genre.name }}
-      </button>
-
-      <button
         v-for="ott in otts"
         :key="ott.id"
+        :class="{'selected': isSelectedOtt(ott)}"
         @click="ottFilter"
       >
         {{ ottList[ott.name] }}
       </button>
+
+      <button
+        v-for="genre in genres"
+        :key="genre.id"
+        :class="{'selected': isSelectedGenre(genre)}"
+        @click="genreFilter"
+      >
+        {{ genre.name }}
+      </button>
     </div>
 
+    <p>{{ filteredMovies.length }}개의 영화가 있습니다.</p>
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <article 
-        v-for="movie in movies"
+        v-for="movie in filteredMovies"
         :key="movie.id"
         class="col"
       >
@@ -47,23 +50,42 @@ export default {
         disney: '디즈니',
         netflix: '넷플릭스',
       },
-      selectedGenres: [],
       selectedOtts: [],
-      filteredMovies: [],
+      selectedGenres: [],
     }
   },
   computed: {
     movies() {
       return this.$store.state.movies
     },
+    otts() {
+      return this.$store.state.otts
+    },
     genres() {
       return this.$store.state.genres
     },
-    otts() {
-      return this.$store.state.otts
+    filteredMovies() {
+      return this.$store.state.movies.filter(this.movieFilter)
     }
   },
   methods: {
+    ottFilter(event) {
+      const ott = event.target.innerText
+      const ottEng = Object.keys(this.ottList).find((key) => this.ottList[key] === ott)
+
+      for (const tmpOtt of this.otts) {
+        if (tmpOtt.name === ottEng) {
+          const id = tmpOtt.id
+          if (this.selectedOtts.includes(id)) {
+            const idx = this.selectedOtts.indexOf(ott)
+            this.selectedOtts.splice(idx, 1)
+          } else {
+            this.selectedOtts.push(id)
+          }
+          break
+        }
+      }
+    },
     genreFilter(event) {
       const genre = event.target.innerText
       for (const tmpGenre of this.genres) {
@@ -79,33 +101,39 @@ export default {
           break
         }
       }
-      console.log(this.selectedGenres)
-    },
-    ottFilter(event) {
-      const ott = event.target.innerText
-      const ottEng = Object.keys(this.ottList).find((key) => this.ottList[key] === ott)
-
-      if (this.selectedOtts.includes(ottEng)) {
-        const idx = this.selectedOtts.indexOf(ottEng)
-        this.selectedOtts.splice(idx, 1)
-      } else {
-        this.selectedOtts.push(ottEng)
-      }
-      console.log(this.selectedOtts)
     },
     movieFilter(movie) {
-      if (this.selectedGenres.length + this.selectedOtts.length > 0) {
-        const genreFlag = movie.genres.some((tmpGenre) => this.selectedGenres.includes(tmpGenre));
-        const ottFlag = movie.otts.some((tmpOtt) => this.selectedOtts.includes(tmpOtt));
-        return genreFlag || ottFlag
-      } else {
-        return true
+      let ottFlag = true
+      let genreFlag = true
+
+      if (this.selectedOtts.length) {
+        ottFlag = this.selectedOtts.every((selectedOtt) => movie.otts.includes(selectedOtt))
       }
-    }
+      if (this.selectedGenres.length) {
+        genreFlag = this.selectedGenres.every((selectedGenre) => movie.genres.includes(selectedGenre))
+      }
+      return ottFlag && genreFlag
+    },
+    isSelectedOtt(ott) {
+      if (this.selectedOtts.includes(ott.id)) {
+        return true
+      } else{
+        return false
+      }
+    },
+    isSelectedGenre(genre) {
+      if (this.selectedGenres.includes(genre.id)) {
+        return true
+      } else{
+        return false
+      }
+    },
   },
 }
 </script>
 
 <style>
-
+  .selected {
+    background-color: red;
+  }
 </style>
