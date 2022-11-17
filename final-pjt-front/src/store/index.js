@@ -68,9 +68,6 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: `${context.state.API_URL}/api/v1/movies/`,
-        headers: {
-          Authorization: `Token ${context.state.token}`
-        }
       })
         .then((res) => {
           context.commit('GET_MOVIES', res.data)
@@ -79,34 +76,28 @@ export default new Vuex.Store({
           console.log('actions의 getMovies 실패!')
         })
     },
-    getReviews(context) {
-      axios({
-        method: 'get',
-        url: `${context.state.API_URL}/api/v2/reviews/`,
-        headers: {
-          Authorization: `Token ${context.state.token}`
-        }
-      })
-      .then((res) => {
-          context.commit('GET_REVIEWS', res.data)
-        })
-        .catch(() => {
-          console.log('actions의 getReviews 실패!')
-        })
-    },
     getGenres(context) {
       axios({
         method: 'get',
         url: `${context.state.API_URL}/api/v1/genres/`,
-        headers: {
-          Authorization: `Token ${context.state.token}`
-        }
       })
         .then((res) => {
           context.commit('GET_GENRES', res.data)
         })
         .catch(() => {
           console.log('actions의 getGenres 실패!')
+        })
+    },
+    getReviews(context) {
+      axios({
+        method: 'get',
+        url: `${context.state.API_URL}/api/v2/reviews/`,
+      })
+      .then((res) => {
+          context.commit('GET_REVIEWS', res.data)
+        })
+        .catch(() => {
+          console.log('actions의 getReviews 실패!')
         })
     },
   },
