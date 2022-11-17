@@ -19,6 +19,8 @@ def review_list(request):
     if request.method == 'GET':
         # reviews = Review.objects.all()
         reviews = get_list_or_404(Review)
+        reviews.reverse()
+        print(reviews)
         serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
 
