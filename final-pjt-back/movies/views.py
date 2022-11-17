@@ -10,7 +10,7 @@ from rest_framework.decorators import permission_classes
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import MovieListSerializer, MovieSerializer, GenreListSerializer
+from .serializers import MovieListSerializer, MovieSerializer, GenreListSerializer,MoviePutSerializer
 from .models import Movie, Genre
 
 
@@ -45,11 +45,12 @@ def movie_detail(request, movie_pk):
     #     movie.delete()
     #     return Response(status=status.HTTP_204_NO_CONTENT)
 
-    # elif request.method == 'PUT':
-    #     serializer = MovieSerializer(movie, data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save()
-    #         return Response(serializer.data)
+    elif request.method == 'PUT':
+        print(movie)
+        serializer = MoviePutSerializer(movie, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
 
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated])

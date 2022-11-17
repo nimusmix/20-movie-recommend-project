@@ -17,6 +17,14 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class MoviePutSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
+        read_only_fields = ('backdrop_path','title','overview','release_date','popularity','poster_path','original_language','original_title','genres','otts')
+
+
 class GenreListSerializer(serializers.ModelSerializer):
 
     class Meta:
