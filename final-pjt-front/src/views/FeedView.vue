@@ -18,18 +18,18 @@ export default {
     FeedItem,
   },  
   methods: {
-    getReviews() {
-      this.$store.dispatch('getReviews')
-    },
+    // getReviews() {
+    //   this.$store.dispatch('getReviews')
+    // },
   },
   computed:{
     reviews(){
       return this.$store.state.reviews
     }
   },
-  created() {
-    this.getReviews()
-  },
+  // created() {
+  //   this.getReviews()
+  // },
 
 }
 </script>
