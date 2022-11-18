@@ -43,6 +43,8 @@
         <button @click="changeClass">변경하기</button>
       </nav>
       <router-view id="router-view" />
+      {{ width }} 
+      {{ height }}
   </div>
   </div>
 </template>
@@ -50,6 +52,8 @@
   export default {
     data(){
       return{
+        width:0,
+        height:0,
         mainclass:'light',
         routerLinks:{
           'LandingView': '랜딩페이지',
@@ -78,6 +82,11 @@
         }else{
           this.mainclass='light'
         }
+      },
+      handleResize() {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        console.log(this.width);
       }
     },
     updated() {
@@ -85,7 +94,10 @@
       this.$store.dispatch('getGenres')
       this.$store.dispatch('getMovies')
       this.$store.dispatch('getReviews')
-    }
+    },
+    mounted(){ 
+      window.addEventListener('resize', this.handleResize);
+    },
   }
 
 </script>
@@ -148,19 +160,38 @@
   $lg-font-weight:600;
 
   // 일반 텍스트 - 기본
-  $main-font-size:1rem;
+  $main-font-size:1.0rem;
   $main-font-weight:400;
 
+  // 영화카드
+  $movie-h3-font: 1.2rem;
   // 본문 텍스트 - 얇게
   $main-font-weight-light:300;
+
+// 애니메이션 스타일
+  $trans-global:width 1s, height 1s, background-color 1s, transform 1s, border-color 1s, color 1s;
+  $trans-global-fast:width 0.5s, height 0.5s, background-color 0.5s, transform 0.5s, border-color 0.5s, color 0.5s;
+  $trans-global-very-fast:width 0.1s, height 0.1s, background-color 0.1s, transform 0.1s, border-color 0.1s, color 0.1s;
+
+// border 스타일
+  $border-radius-4: 4px;
+  $border-radius-8: 6px;
+  $border-radius-12: 12px;
+
 
   #app .h1 {
     font-size: $lg-font-size;
     font-weight: $lg-font-weight;
   }
-  $trans-global:width 1s, height 1s, background-color 1s, transform 1s, border-color 1s, color 1s;
-  $trans-global-fast:width 0.5s, height 0.5s, background-color 0.5s, transform 0.5s, border-color 0.5s, color 0.5s;
-  $trans-global-very-fast:width 0.1s, height 0.1s, background-color 0.1s, transform 0.1s, border-color 0.1s, color 0.1s;
+  #app .h3 {
+    font-size: $movie-h3-font;
+    font-weight: $lg-font-weight;
+  }
+  #app .h3 a{
+    font-size: $movie-h3-font;
+    font-weight: $lg-font-weight;
+  }
+
 // button 스타일
   .button-list{
     .main-button{
@@ -289,9 +320,29 @@
     padding-left: 80px;
     min-height: 100vh;
   }
-   
   
-  // test
+  @function w_to_h(){
+        
+  }
+  
+  // 영화카드
+  .movie-card{
+    a{
+      color:var(--text-color);
+      img {
+        width: 100%;
+        aspect-ratio: 3 / 5;
+        object-fit: cover;
+        border-radius: $border-radius-8;
+      }
+      h3{
+        margin: 0.4rem 0px 0px 0px;
+      }
+      a{
+        font-size: $main-font-size;
+      }
+    }
+  }
 
 
 
