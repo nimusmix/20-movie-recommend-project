@@ -49,6 +49,9 @@ export default {
           }
           this.$store.commit('SAVE_USER', user)
         })
+        .then(() => {
+          this.$store.dispatch('getLoginUser')
+        })
         .catch(() => {
           this.errMsg = '입력한 정보를 확인해주세요.'
         })

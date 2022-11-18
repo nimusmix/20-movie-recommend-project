@@ -36,6 +36,7 @@ export default new Vuex.Store({
     ],
     username: null,
     token: null,
+    loginUser: null,
     API_URL:'http://127.0.0.1:8000'
   },
   getters: {
@@ -44,6 +45,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    GET_LOGIN_USER(state, user) {
+      state.loginUser = user
+    },
     GET_MOVIES(state, movies) {
       state.movies = movies
     },
@@ -66,6 +70,19 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    getLoginUser(context) {
+      const username = context.state.username
+      axios({
+        method: 'get',
+        url: `${context.state.API_URL}/api/v3/accounts/${username}/`,
+      })
+        .then((res) => {
+          context.commit('GET_LOGIN_USER', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     getMovies(context) {
       axios({
         method: 'get',

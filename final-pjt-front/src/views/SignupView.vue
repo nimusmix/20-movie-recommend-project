@@ -82,9 +82,12 @@ export default {
           }
           this.$store.commit('SAVE_USER', user)
         })
+        .then(() => {
+          this.$store.dispatch('getLoginUser')
+        })
         .catch((err) => {
           console.log('회원가입에 실패했습니다.')
-          const errData = err.response.data
+          const errData = err.response?.data
           for (const key in errData) {
             errData[key].forEach((errMsg) => {
               switch(key) {

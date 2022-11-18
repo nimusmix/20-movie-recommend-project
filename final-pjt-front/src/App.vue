@@ -78,6 +78,7 @@
       }
     },
     updated() {
+      this.$store.dispatch('getLoginUser')
       this.$store.dispatch('getMovies')
     }
   }
