@@ -48,7 +48,7 @@ export default {
           this.profileUser = res.data
         })
         .then(() => {
-          if (this.profileUser?.follwers?.includes(this.loginUser.id)) {
+          if (this.loginUser.followings.includes(this.profileUser.id)) {
             this.isFollowing = true
           }
         })
@@ -58,33 +58,36 @@ export default {
     },
     follow() {
       this.isFollowing = !this.isFollowing
-      let new_followings = this.loginUser.followings
-      // console.log(new_followings)
+      // let new_followings = this.loginUser.followings
+
       if (this.isFollowing) {
-        new_followings.push(this.profileUser.id)
+        // 포스트맨에서는 됨 ,, 이렇게 보내면 안 됨.. 대체 왜 ,,,
+        // 근데 팔로잉 여러 명 하는 거 안 됨 지금..!!! 자꾸 하나만 됨 ..
+        axios({
+          method: 'put',
+          url: `${this.$store.state.API_URL}/api/v3/accounts/${this.loginUser.username}/follow`,
+          data: {
+            username: this.loginUser.username,
+            followings: this.profileUser.id,
+            // collection: this.loginUser.collection,
+            // genre_preference: this.loginUser.genre_preference,
+            // using_otts: this.loginUser.using_otts,
+          },
+          headers: {
+            Authorization: `Token ${this.$store.state.token}`
+          },
+        })
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       } else {
-        const idx = new_followings.indexOf(this.profileUser.id)
-        new_followings.splice(idx, 1)
-      }
-      console.log(new_followings)
-      const new_data = {
-        username: this.loginUser.username,
-        follwings: new_followings,
-        collection: this.loginUser.collection,
-        using_otts: this.loginUser.using_otts,
+        // 언팔 아직 구현 안함..
+        // axios delete로 구현하면 될 듯!
       }
 
-      axios({
-        method: 'put',
-        url: `${this.$store.state.API_URL}/api/v3/accounts/${this.loginUser.username}/`,
-        data: new_data,
-      })
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
     },
   },
   created() {
