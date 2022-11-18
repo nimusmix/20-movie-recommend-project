@@ -237,8 +237,8 @@
   }
 
 // 네비 스타일
-  #col-nav{
-    $nav-width:240px !global;
+  $nav-width:240px;
+  #col-nav {
     min-width: $nav-width;
     position: fixed;
     height: 100%;

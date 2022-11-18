@@ -48,7 +48,7 @@ export default {
           this.profileUser = res.data
         })
         .then(() => {
-          if (this.profileUser?.follwers?.includes(this.loginUser.username)) {
+          if (this.profileUser?.follwers?.includes(this.loginUser.id)) {
             this.isFollowing = true
           }
         })
@@ -59,26 +59,40 @@ export default {
     follow() {
       this.isFollowing = !this.isFollowing
       let new_followings = this.loginUser.followings
+      // console.log(new_followings)
+      if (this.isFollowing) {
+        new_followings.push(this.profileUser.id)
+      } else {
+        const idx = new_followings.indexOf(this.profileUser.id)
+        new_followings.splice(idx, 1)
+      }
       console.log(new_followings)
-      // 언팔 상태에서 팔로우한 거
-      // if (this.isFollowing) {
+      const new_data = {
+        username: this.loginUser.username,
+        follwings: new_followings,
+        collection: this.loginUser.collection,
+        using_otts: this.loginUser.using_otts,
+      }
 
-      // }
-
-      // axios({
-      //   method: 'put',
-      //   url: `${this.$store.state.API_URL}/api/v3/accounts/${this.loginUser.username}/`,
-      // })
-      //   .then((res) => {
-      //     console.log(res)
-      //   })
-      //   .catch((err) => {
-      //     console.log(err)
-      //   })
+      axios({
+        method: 'put',
+        url: `${this.$store.state.API_URL}/api/v3/accounts/${this.loginUser.username}/`,
+        data: new_data,
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
   created() {
     this.getProfileUser()
+  },
+  beforeupdate() {
+    this.getProfileUser()
+    console.log('ddsf') 
   },
 }
 </script>

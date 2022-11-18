@@ -20,7 +20,6 @@ def review_list(request):
         # reviews = Review.objects.all()
         reviews = get_list_or_404(Review)
         reviews.reverse()
-        print(reviews)
         serializer = ReviewSerializer(reviews, many=True)
         return Response(serializer.data)
 
