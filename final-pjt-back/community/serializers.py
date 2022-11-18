@@ -3,15 +3,10 @@ from .models import Movie, Review
 from datetime import date, timedelta, datetime, timezone
 # from .serializers import MovieSerializer
 
-class MovieSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Movie
-        fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
-    
     movie_title = serializers.CharField(source='movie.title', read_only=True)
+    movie_poster_path = serializers.CharField(source='movie.poster_path', read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
     last_time = serializers.SerializerMethodField()
 
@@ -41,12 +36,21 @@ class ReviewSerializer(serializers.ModelSerializer):
         return result
 
 
-class ReviewCustomSerializer(serializers.ModelSerializer):
-    movie_title = serializers.CharField(source='movie.title', read_only=True)
-    username = serializers.CharField(source='user.username', read_only=True)
+class MovieReviewSerializer(serializers.ModelSerializer):
+    review_set = ReviewSerializer(many=True, read_only=True)
+    
     class Meta:
-        model = Review
-        fields = '__all__'
-        read_only_fields = ('user', )
-        #read_only_fields = ('movie','user','movie_set','movie_score')
+        model = Movie
+        fields = ['review_set']
+
+
+
+# class ReviewCustomSerializer(serializers.ModelSerializer):
+#     movie_title = serializers.CharField(source='movie.title', read_only=True)
+#     username = serializers.CharField(source='user.username', read_only=True)
+#     class Meta:
+#         model = Review
+#         fields = '__all__'
+#         read_only_fields = ('user', )
+#         #read_only_fields = ('movie','user','movie_set','movie_score')
 

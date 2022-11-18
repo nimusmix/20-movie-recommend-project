@@ -16,7 +16,7 @@
     <div>{{ movie?.vote_average }}</div>
     <div v-for="genre in this.genreList" :key="genre.id">{{ genre }}</div>
     <ReviewCreate/>
-    <MovieReviews :movie="movie"/>
+    <MovieReviews :reviews="reviews"/>
     <MovieCollections/>
   </div>
 </template>
@@ -41,6 +41,7 @@ export default {
       genreList: [],
       backdropUrl: null,
       posterUrl: null,
+      reviews: null,
     }
   },
   computed: {
@@ -66,6 +67,18 @@ export default {
           const imgUrl = 'https://image.tmdb.org/t/p/w500/'
           this.backdropUrl = imgUrl + this.movie.backdrop_path
           this.posterUrl = imgUrl + this.movie.poster_path
+        }).then(() => {
+          axios({
+            method: 'get',
+            url: `${this.$store.state.API_URL}/api/v2/movies/${this.movie.id}/get-reviews/`,
+          })
+            .then((res) => {
+              console.log('actions의 get-reviews 성공!')
+              this.reviews = res.data.review_set.reverse()
+            })
+            .catch(() => {
+              console.log('actions의 get-reviews 실패!')
+            })
         })
         .catch((err) => {
           console.log(err)
