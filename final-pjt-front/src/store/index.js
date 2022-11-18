@@ -83,28 +83,30 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    getMovies(context) {
-      axios({
-        method: 'get',
-        url: `${context.state.API_URL}/api/v1/movies/`,
-      })
-        .then((res) => {
-          context.commit('GET_MOVIES', res.data)
-        })
-        .catch(() => {
-          console.log('actions의 getMovies 실패!')
-        })
-    },
     getGenres(context) {
       axios({
         method: 'get',
         url: `${context.state.API_URL}/api/v1/genres/`,
       })
         .then((res) => {
+          console.log('1 actions의 getGenres 성공!')
           context.commit('GET_GENRES', res.data)
         })
         .catch(() => {
           console.log('actions의 getGenres 실패!')
+        })
+    },
+    getMovies(context) {
+      axios({
+        method: 'get',
+        url: `${context.state.API_URL}/api/v1/movies/`,
+      })
+        .then((res) => {
+          console.log('2 actions의 getMovies 성공!')
+          context.commit('GET_MOVIES', res.data)
+        })
+        .catch(() => {
+          console.log('actions의 getMovies 실패!')
         })
     },
     getReviews(context) {
@@ -113,6 +115,7 @@ export default new Vuex.Store({
         url: `${context.state.API_URL}/api/v2/reviews/`,
       })
       .then((res) => {
+          console.log('3 actions의 getReviews 성공!')
           context.commit('GET_REVIEWS', res.data)
         })
         .catch(() => {

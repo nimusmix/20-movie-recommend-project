@@ -74,12 +74,13 @@
         }else{
           this.mainclass='light'
         }
-        
       }
     },
     updated() {
       this.$store.dispatch('getLoginUser')
+      this.$store.dispatch('getGenres')
       this.$store.dispatch('getMovies')
+      this.$store.dispatch('getReviews')
     }
   }
 

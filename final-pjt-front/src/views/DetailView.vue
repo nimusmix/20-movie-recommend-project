@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="h1">{{ movie?.title }}</h1>
+    <button @click="inputCollection">콜렉션에 넣기</button>
     <div style="background-color: white;">
       <img :src="backdropUrl" alt="background" style="width: 100%; opacity: 70%;">
     </div>
@@ -50,7 +51,10 @@ export default {
     },
   },
   methods: {
+    inputCollection(){
+    },
     getMovie() {
+      // 개별 영화정보를 받아오기 위한 axios
       axios({
         method: 'get',
         url: `${this.$store.state.API_URL}/api/v1/movies/${this.$route.params.pk}/`
@@ -68,6 +72,7 @@ export default {
           this.backdropUrl = imgUrl + this.movie.backdrop_path
           this.posterUrl = imgUrl + this.movie.poster_path
         }).then(() => {
+          // 리뷰를 받아오기 위한 axios
           axios({
             method: 'get',
             url: `${this.$store.state.API_URL}/api/v2/movies/${this.movie.id}/get-reviews/`,
