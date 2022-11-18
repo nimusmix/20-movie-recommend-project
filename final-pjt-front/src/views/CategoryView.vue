@@ -1,20 +1,20 @@
 <template>
   <div>
     <h1 class="h1">카테고리</h1>
-    <div>
+    <div class="button-list">
       <button
         v-for="ott in otts"
         :key="ott.id"
-        :class="{'selected': isSelectedOtt(ott)}"
+        :class="[{'selected': isSelectedOtt(ott)}, 'main-button']"
         @click="ottFilter"
       >
         {{ ottList[ott.name] }}
       </button>
 
-      <button
+      <button 
         v-for="genre in genres"
         :key="genre.id"
-        :class="{'selected': isSelectedGenre(genre)}"
+        :class="[{'selected': isSelectedGenre(genre)}, 'main-button']"
         @click="genreFilter"
       >
         {{ genre.name }}
@@ -133,7 +133,4 @@ export default {
 </script>
 
 <style>
-  .selected {
-    background-color: red;
-  }
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <div class="card">
-    <router-link :to="{ name: 'DetailView', params: { pk: movie.id, movie:movie }}">
+  <div class="movie-card">
+    <router-link class="t-d-none" :to="{ name: 'DetailView', params: { pk: movie.id, movie:movie }}">
       <img :src="`https://image.tmdb.org/t/p/original/${ movie.poster_path }`" 
       class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{ movie.title }}</h5>
-        <p class="card-text">{{ movie.vote_average }}</p>
-      </div>
+      <h5>{{ movie.title }}</h5>
+      <p><span>평균 별 </span>{{ movie.vote_average }}</p>
     </router-link>
   </div>
 </template>
