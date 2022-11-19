@@ -62,9 +62,14 @@ export default {
       const username = this.username
       const password1 = this.password1
       const password2 = this.password2
-      this.usernameErrors = [],
-      this.password1Errors = [],
-      this.password2Errors = [],
+      this.usernameErrors = []
+      this.password1Errors = []
+      this.password2Errors = []
+
+      if (password1 !== password2) {
+        this.password2Errors.push('패스워드가 일치하지 않습니다.')
+        return
+      }
 
       axios({
         method: 'post',
