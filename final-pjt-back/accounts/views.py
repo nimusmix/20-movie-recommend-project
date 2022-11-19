@@ -6,7 +6,8 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 
 from movies.models import Movie, Genre
 from accounts.models import Preference
-from .serializers import UserSerializer, UserAllSerializer,UserPreferenceSerializer, PreferenceSerializer, PreferenceMakeSerializer ## ,PreferenceSerializer
+from .serializers import UserSerializer, UserAllSerializer, UserPreferenceDepthSerializer, UserPreferenceSerializer
+from .serializers import UserOttSerializer
 
 # Create your views here.
 @api_view(['GET'])
@@ -46,48 +47,32 @@ def user_collect(request, movie_pk):
     return Response(serializer.data)
 
 
-
-# 유저 선호 장르 정보를 출력
-@api_view(['GET', 'POST'])
-def user_like_genres(request, username):
-    user = get_object_or_404(get_user_model(), username=username)
-
-    if request.method == 'GET':
-        serializer = UserPreferenceSerializer(user)
-        return Response(serializer.data)
-
-
 # 선호 정보를 전부 출력
+# 선호도 관계조사
+# 아직안쓰임
 @api_view(['GET'])
 def perference_list(request):
     preferences = get_list_or_404(Preference)
     if request.method == 'GET':
-        serializer = PreferenceSerializer(preferences, many=True)
+        serializer = UserPreferenceSerializer(preferences, many=True)
         return Response(serializer.data)
 
 
-# 선호 정보를 개인만 출력
+# 개인 선호장르 정보를 출력
+# 회원가입, 정보수정
 @api_view(['GET'])
 def user_perference(request, username):
     user = get_object_or_404(get_user_model(), username=username)
     preferences = get_list_or_404(Preference, user=user)
 
     if request.method == 'GET':
-        serializer = PreferenceSerializer(preferences, many=True)
+        serializer = UserPreferenceDepthSerializer(preferences, many=True)
         return Response(serializer.data)
 
 
-# 선호 장르의 전부 출력
-@api_view(['GET'])
-def user_perference_edit(request, username):
-    user = get_object_or_404(get_user_model(), username=username)
-    preferences = get_list_or_404(Preference, user=user)
 
-    if request.method == 'GET':
-        serializer = PreferenceSerializer(preferences, many=True)
-        return Response(serializer.data)
-
-
+# 유저당 선호장르 수정
+# 회원가입, 정보수정, 조회수, 선호 점수 수정
 @api_view(['GET', 'PUT'])
 def user_perference_like(request, username, genre_pk):
     user = get_object_or_404(get_user_model(), username=username)
@@ -95,28 +80,33 @@ def user_perference_like(request, username, genre_pk):
 
     if request.method == 'GET':
         preferences = get_object_or_404(Preference, user=user, genre=genre)
-        serializer = PreferenceSerializer(preferences)
+        serializer = UserPreferenceSerializer(preferences)
         return Response(serializer.data)
     if request.method == 'PUT':
         preferences = get_object_or_404(Preference, user=user, genre=genre)
-        serializer = PreferenceSerializer(preferences, data=request.data)
+        serializer = UserPreferenceSerializer(preferences, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
 
+
+# 회원가입 시 장르 전체 생성
 @api_view(['POST'])
 def user_perference_make_likes(request, username):
     user = get_object_or_404(get_user_model(), username=username)
     genres = get_list_or_404(Genre)
     
     for genre in genres:
-        a = {
+        default_data = {
             'user': f'{user.pk}', 
             'genre': f'{genre.pk}', 
             'like': 'false', 
             'score': 0
         }
-        serializer = PreferenceSerializer(data=a)
+        serializer = UserPreferenceSerializer(data=default_data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=user, genre=genre)
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    

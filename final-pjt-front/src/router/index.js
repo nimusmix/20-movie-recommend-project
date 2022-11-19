@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import LandingView from '@/views/LandingView'
 import LoginView from '@/views/LoginView'
 import SignupView from '@/views/SignupView'
+import UserEditView from '@/views/UserEditView'
 
 Vue.use(VueRouter)
 
@@ -24,7 +25,11 @@ const routes = [
     name: 'SignupView',
     component: SignupView
   },
-
+  {
+    path: '/edit/:signUpFlag',
+    name: 'UserEditView',
+    component: UserEditView,
+  },
   {
     path: '/profile/:username',
     name: 'ProfileView',

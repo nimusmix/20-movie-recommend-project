@@ -42,6 +42,13 @@
           </li>
         </ul>
         <button @click="changeClass">변경하기</button>
+        <router-link  :to="{
+            name: 'UserEditView',
+            params: { name: 'UserEditView', signUpFlag: 1 },
+          }"
+          >
+          회원정보수정
+        </router-link>
       </nav>
       <router-view id="router-view" />
       {{ width }} 

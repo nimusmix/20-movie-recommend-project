@@ -14,8 +14,4 @@ urlpatterns = [
     path('accounts/follow/<str:username>/', views.user_follow),
     path('accounts/collect/<int:movie_pk>/', views.user_collect),
     path('accounts/<str:username>/', views.user_detail),
-
-    # 디테일한 유저 탐색
-    path('accounts/like-genres/<str:username>/', views.user_like_genres),
-
 ]
