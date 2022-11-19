@@ -106,7 +106,7 @@ export default {
       this.isCollected = !this.isCollected
 
       axios({
-        method: 'put',
+        method: 'post',
         url: `${this.$store.state.API_URL}/api/v3/accounts/collect/${this.movie.id}/`,
         headers: {
           Authorization: `Token ${this.$store.state.token}`

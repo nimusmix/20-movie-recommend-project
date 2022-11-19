@@ -7,8 +7,7 @@
     </div>
     <div>팔로워 {{ profileUser?.followers.length }}</div>
     <div>팔로잉 {{ profileUser?.followings.length }}</div>
-    <CollectionList/>
-    <collection-modal/>
+    <CollectionList :collectionId="profileUser?.collection"/>
     <ReviewList/>
   </div>
 </template>
@@ -17,14 +16,13 @@
 import axios from 'axios'
 
 import CollectionList from '@/components/CollectionList'
-import CollectionModal from '@/components/CollectionModal'
+
 import ReviewList from '@/components/ReviewList'
 
 export default {
   name: 'ProfileView',
   components: {
     CollectionList,
-    CollectionModal,
     ReviewList,
   },
   data() {
@@ -41,20 +39,20 @@ export default {
   methods: {
     getProfileUser() {
       axios({
-      method: 'get',
-      url: `${this.$store.state.API_URL}/api/v3/accounts/${this.$route.params.username}/`,
+        method: 'get',
+        url: `${this.$store.state.API_URL}/api/v3/accounts/${this.$route.params.username}/`,
       })
-        .then((res) => {
-          this.profileUser = res.data
-        })
-        .then(() => {
-          if (this.loginUser.followings.includes(this.profileUser.id)) {
-            this.isFollowing = true
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      .then((res) => {
+        this.profileUser = res.data
+      })
+      .then(() => {
+        if (this.loginUser.followings.includes(this.profileUser.id)) {
+          this.isFollowing = true
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     },
     follow() {
       this.isFollowing = !this.isFollowing
