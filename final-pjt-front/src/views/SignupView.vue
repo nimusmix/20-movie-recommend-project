@@ -2,7 +2,7 @@
   <div>
     <h1 class="h1">회원가입</h1>
     <form @submit.prevent="signup">
-      <label for="username">username : </label>
+      <label for="username">이름 : </label>
       <input type="text" id="username" v-model="username"><br>
       <div v-if="usernameErrors">
         <p
@@ -13,7 +13,7 @@
         </p>
       </div>
 
-      <label for="password1"> password : </label>
+      <label for="password1"> 비밀번호 : </label>
       <input type="password" id="password1" v-model="password1"><br>
       <div v-if="password1Errors">
         <p
@@ -24,16 +24,9 @@
         </p>
       </div>
 
-      <label for="password2"> password confirmation : </label>
-      <input type="password" id="password2" v-model="password2">
-      <div v-if="password2Errors">
-        <p
-          v-for="password2Error in password2Errors"
-          :key="password2Error.id"
-        >
-          {{ password2Error }}
-        </p>
-      </div>
+      <label for="password2"> 비밀번호 : </label>
+      <input type="password" id="password2" v-model="password2" @input="passwordConfirmation">
+      <p v-if="password2State">{{ password2State }}</p>
       
       <input type="submit" value="Signup">
     </form>
@@ -54,7 +47,7 @@ export default {
       password2: null,
       usernameErrors: [],
       password1Errors: [],
-      password2Errors: [],
+      password2State: null,
     }
   },
   methods: {
@@ -76,9 +69,8 @@ export default {
       const username = this.username
       const password1 = this.password1
       const password2 = this.password2
-      this.usernameErrors = [],
-      this.password1Errors = [],
-      this.password2Errors = [],
+      this.usernameErrors = []
+      this.password1Errors = []
 
       axios({
         method: 'post',
@@ -114,16 +106,18 @@ export default {
                   this.password1Errors.push(errMsg)
                   break
                 }
-                case 'password2': {
-                  this.password2Errors.push(errMsg)
-                  break
-                }
               }
             })
           }
         })
     },
-    
+    passwordConfirmation() {
+      if (this.password1 !== this.password2) {
+        this.password2State = '패스워드가 일치하지 않습니다.'
+      } else {
+        this.password2State = '패스워드가 일치합니다.'
+      }
+    }
   },
 
 }
