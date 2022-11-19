@@ -1,9 +1,12 @@
 <template>
   <div>
     <h1 class="h1">@{{ profileUser?.username }}</h1>
-    <div v-if="loginUser.username !== profileUser?.username" @click="follow">
-      <button id="followBtn" v-if="isFollowing">언팔로우</button>
-      <button id="followBtn" v-else>팔로우</button>
+    <div>
+      <div v-if="loginUser.username !== profileUser?.username" @click="follow">
+        <button id="followBtn" v-if="isFollowing">언팔로우</button>
+        <button id="followBtn" v-else>팔로우</button>
+      </div>
+      <button v-else> 회원정보 수정</button>
     </div>
     <div>팔로워 {{ profileUser?.followers.length }}</div>
     <div>팔로잉 {{ profileUser?.followings.length }}</div>
@@ -16,7 +19,6 @@
 import axios from 'axios'
 
 import CollectionList from '@/components/CollectionList'
-
 import ReviewList from '@/components/ReviewList'
 
 export default {
@@ -66,6 +68,7 @@ export default {
       })
         .then(() => {
           this.getProfileUser()
+          this.$store.dispatch('getLoginUser')
         })
         .catch((err) => {
           console.log(err)

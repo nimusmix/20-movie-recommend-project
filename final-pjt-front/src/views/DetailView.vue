@@ -2,10 +2,10 @@
   <div>
     <h1 class="h1">{{ movie?.title }}</h1>
     <div @click="collect">
+      {{ isCollected }}
       <button id="collectBtn" v-if="isCollected">콜렉션에서 빼기</button>
       <button id="collectBtn" v-else>콜렉션에 넣기</button>
     </div>
-    <p>{{ isCollected }}</p>
     <div style="background-color: white;">
       <img :src="backdropUrl" alt="background" style="width: 100%; opacity: 70%;">
     </div>
@@ -57,6 +57,14 @@ export default {
     loginUser() {
       return this.$store.state.loginUser
     },
+    // isCollected() {
+    //   console.log('isCollected 호출됨!')
+    //   if (this.loginUser.collection.includes(this.movie?.id)) {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // },
   },
   methods: {
     getMovie() {
@@ -65,22 +73,36 @@ export default {
         method: 'get',
         url: `${this.$store.state.API_URL}/api/v1/movies/${this.$route.params.pk}/`
       })
-      .then((res) => {
-        this.movie = res.data
-        this.movie.genres.forEach((genre) => {
-          for (const genreObj of this.genres) {
-            if (genreObj.id === genre) {
-              this.genreList.push(genreObj.name)
+        .then((res) => {
+          this.movie = res.data
+          this.movie.genres.forEach((genre) => {
+            for (const genreObj of this.genres) {
+              if (genreObj.id === genre) {
+                this.genreList.push(genreObj.name)
+              }
             }
+          })
+
+          const imgUrl = 'https://image.tmdb.org/t/p/w500/'
+          this.backdropUrl = imgUrl + this.movie.backdrop_path
+          this.posterUrl = imgUrl + this.movie.poster_path
+
+          if (this.loginUser.collection.includes(this.movie?.id)) {
+            this.isCollected = true
+          } else {
+            this.isCollected = false
           }
         })
-        const imgUrl = 'https://image.tmdb.org/t/p/w500/'
-        this.backdropUrl = imgUrl + this.movie.backdrop_path
-        this.posterUrl = imgUrl + this.movie.poster_path
-      })
-      .then(() => {
-        // 리뷰를 받아오기 위한 axios
-        axios({
+        .then(() => {
+          this.getReviews()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+
+    getReviews() {
+      axios({
           method: 'get',
           url: `${this.$store.state.API_URL}/api/v2/movies/${this.movie.id}/get-reviews/`,
         })
@@ -91,20 +113,11 @@ export default {
         .catch(() => {
           console.log('detailView의 get-reviews 실패!')
         })
-        // 로그인한 사용자의 colletion에 해당 영화가 존재하는지 여부를 판단
-        .then(() => {
-          if (this.loginUser.collection.includes(this.movie.id)) {
-            this.isCollected = true
-          }
-        })
-      })
-      .catch((err) => {
-        console.log(err)
-      })
     },
+
     collect() {
       this.isCollected = !this.isCollected
-
+      
       axios({
         method: 'post',
         url: `${this.$store.state.API_URL}/api/v3/accounts/collect/${this.movie.id}/`,
@@ -113,7 +126,7 @@ export default {
         },
       })
         .then(() => {
-          console.log('콜렉션에 넣기 성공!')
+          this.$store.dispatch('getLoginUser')
         })
         .catch((err) => {
           console.log(err)
@@ -122,7 +135,7 @@ export default {
   },
   created() {
     this.getMovie()
-  }
+  },
 }
 </script>
 
