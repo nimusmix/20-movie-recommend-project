@@ -58,44 +58,24 @@ export default {
     },
     follow() {
       this.isFollowing = !this.isFollowing
-      // let new_followings = this.loginUser.followings
 
-      if (this.isFollowing) {
-        // 포스트맨에서는 됨 ,, 이렇게 보내면 안 됨.. 대체 왜 ,,,
-        // 근데 팔로잉 여러 명 하는 거 안 됨 지금..!!! 자꾸 하나만 됨 ..
-        axios({
-          method: 'put',
-          url: `${this.$store.state.API_URL}/api/v3/accounts/${this.loginUser.username}/follow`,
-          data: {
-            username: this.loginUser.username,
-            followings: this.profileUser.id,
-            // collection: this.loginUser.collection,
-            // genre_preference: this.loginUser.genre_preference,
-            // using_otts: this.loginUser.using_otts,
-          },
-          headers: {
-            Authorization: `Token ${this.$store.state.token}`
-          },
+      axios({
+        method: 'post',
+        url: `${this.$store.state.API_URL}/api/v3/accounts/follow/${this.profileUser.username}/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        },
+      })
+        .then(() => {
+          this.getProfileUser()
         })
-          .then((res) => {
-            console.log(res)
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      } else {
-        // 언팔 아직 구현 안함..
-        // axios delete로 구현하면 될 듯!
-      }
-
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
   created() {
     this.getProfileUser()
-  },
-  beforeupdate() {
-    this.getProfileUser()
-    console.log('ddsf') 
   },
 }
 </script>

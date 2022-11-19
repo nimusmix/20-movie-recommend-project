@@ -104,25 +104,20 @@ export default {
     },
     collect() {
       this.isCollected = !this.isCollected
-      if (this.isCollected) {
-        axios({
-          method: 'put',
-          url: `${this.$store.state.API_URL}/api/v3/accounts/${this.loginUser.username}/collect`,
-          data: {
-            username: this.loginUser.username,
-            collection: this.movie.id,
-          }
+
+      axios({
+        method: 'put',
+        url: `${this.$store.state.API_URL}/api/v3/accounts/collect/${this.movie.id}/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        },
+      })
+        .then(() => {
+          console.log('콜렉션에 넣기 성공!')
         })
-          .then((res) => {
-            console.log(res)
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      } else {
-        // 아직 구현 안함..
-        // axios delete로 구현하면 될 듯!
-      }
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
   created() {
