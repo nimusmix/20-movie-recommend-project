@@ -18,7 +18,7 @@ def user_detail(request, username):
         return Response(serializer.data)
 
 
-@api_view(['GET', 'POST', 'PUT'])
+@api_view(['POST'])
 def user_follow(request, username):
     target = get_object_or_404(get_user_model(), username=username)
 
@@ -32,7 +32,7 @@ def user_follow(request, username):
     return Response(serializer.data)
 
 
-@api_view(['PUT', 'DELETE'])
+@api_view(['POST'])
 def user_collect(request, movie_pk):
     target = get_object_or_404(Movie, pk=movie_pk)
     user = get_object_or_404(get_user_model(), username=request.user.username)

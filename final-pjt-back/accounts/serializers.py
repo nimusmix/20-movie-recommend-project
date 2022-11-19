@@ -16,7 +16,6 @@ class UserAllSerializer(serializers.ModelSerializer):
         model = get_user_model()
         exclude = ['password',]
 
-
 class PreferenceSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -39,3 +38,4 @@ class PreferenceMakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Preference
         fields = '__all__'
+

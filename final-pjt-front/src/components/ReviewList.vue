@@ -18,8 +18,8 @@ export default {
     FeedItemVue,
   },
   computed:{
-    myReviews(){
-      const myReviews = this.$store.state.reviews.filter((review)=>{
+    myReviews() {
+      const myReviews = this.$store.state.reviews.filter((review) => {
         if (review.username === this.$store.state.username){
           return true
         }
