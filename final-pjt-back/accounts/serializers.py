@@ -2,28 +2,32 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import Preference, Ott
 
+
+# 기본 선호 조사, 다수사용
+class UserPreferenceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Preference
+        fields = '__all__'
+        read_only_fields = ('user', 'genre')
+
+
 class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = get_user_model()
         exclude = ['password',]
+        depth = 2
 
 
 class UserAllSerializer(serializers.ModelSerializer):
     followers = UserSerializer(many=True, read_only=True)
+    preference_set = UserPreferenceSerializer(many=True, read_only=True)
     
     class Meta:
         model = get_user_model()
         exclude = ['password',]
-
-
-# 기본 선호 조사, 다수사용
-class UserPreferenceSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Preference
-        fields = '__all__'
-        read_only_fields = ('user', 'genre')
+        depth = 2
 
 
 # 사용자 모든 선호 장르 출력

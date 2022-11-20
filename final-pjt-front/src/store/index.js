@@ -39,20 +39,25 @@ export default new Vuex.Store({
     loginUser: null,
     API_URL:'http://127.0.0.1:8000'
   },
+
   getters: {
     isLogin(state) {
       return state.token ? true : false
     }
   },
+
   mutations: {
-    GET_LOGIN_USER(state, user) {
-      state.loginUser = user
+    GET_GENRES(state, genres) {
+      state.genres = genres
     },
     GET_MOVIES(state, movies) {
       state.movies = movies
     },
-    GET_GENRES(state, genres) {
-      state.genres = genres
+    GET_REVIEWS(state, reivews) {
+      state.reviews = reivews
+    },
+    GET_LOGIN_USER(state, user) {
+      state.loginUser = user
     },
     // 회원가입 && 로그인
     SAVE_USER(state, user) {
@@ -65,24 +70,8 @@ export default new Vuex.Store({
       state.token = null
       router.push({ name: 'LandingView' })
     },
-    GET_REVIEWS(state, reivews) {
-      state.reviews = reivews
-    }
   },
   actions: {
-    getLoginUser(context) {
-      const username = context.state.username
-      axios({
-        method: 'get',
-        url: `${context.state.API_URL}/api/v3/accounts/${username}/`,
-      })
-        .then((res) => {
-          context.commit('GET_LOGIN_USER', res.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
     getGenres(context) {
       axios({
         method: 'get',
@@ -122,16 +111,26 @@ export default new Vuex.Store({
           console.log('actions의 getReviews 실패!')
         })
     },
-    putPreference(context, genre){
+    getLoginUser(context) {
       const username = context.state.username
-      // console.log(genre_pk, preferenceData, context)
+      axios({
+        method: 'get',
+        url: `${context.state.API_URL}/api/v3/accounts/${username}/`,
+      })
+        .then((res) => {
+          context.commit('GET_LOGIN_USER', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    putPreference(context, genre){
       axios({
         method: 'put',
-        url: `${context.state.API_URL}/api/v2/accounts/perferences/${username}/${genre}/`,
-        data: {
-          like: 0,
-          score: 0,
-        }
+        url: `${context.state.API_URL}/api/v3/accounts/edit-perferences-score/${genre}/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        },
       })
       .then((res) => {
           console.log('actions의 putPreference 성공!')

@@ -43,7 +43,10 @@ export default {
         getPerferences(){
             axios({
                 method: 'get',
-                url: `${this.$store.state.API_URL}/api/v3/accounts/perferences/${this.$store.state.username}/`,
+                url: `${this.$store.state.API_URL}/api/v3/accounts/perferences/`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`
+                },
             })
                 .then((res) => {
                 console.log('1 actions의 editPerferences 성공!')
@@ -57,21 +60,22 @@ export default {
         //선호장르를 수정한다.
         editPerferences(nextPage, is_axios){
             // 1은 회원가입 후를 
-            if (is_axios){
+            if (is_axios) {
                 for (const perference of this.perferences){
                     axios({
                         method: 'put',
-                        url: `${this.$store.state.API_URL}/api/v3/accounts/perferences/${this.$store.state.username}/${perference.genre}/`,
+                        url: `${this.$store.state.API_URL}/api/v3/accounts/edit-perferences-like/${perference.genre}/`,
                         data:{
-                            'like':perference.like,
-                            'score':perference.score,
-                        }
+                            'like': perference.like,
+                        },
+                        headers: {
+                            Authorization: `Token ${this.$store.state.token}`
+                        },
                     })
                         .then(() => {
                         console.log(`${perference.genre} editPerferences 성공!`)
                         })
                         .catch((err) => {
-                        // console.log('actions의 editPerferences 실패!')
                         console.log(err)
                         })
                 }
@@ -89,11 +93,8 @@ export default {
         },
         isSelectedGenre(perference) {
             const idx = this.perferences.indexOf(perference)
-            if (this.perferences[idx].like) {
-                this.perferences[idx].like = false
-            } else{
-                this.perferences[idx].like = true
-            }
+
+            this.perferences[idx].like = !this.perferences[idx].like
         },
     },
     computed:{

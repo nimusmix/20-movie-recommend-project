@@ -51,11 +51,13 @@ export default {
     }
   },
   methods: {
-    makeGenres(){
-      const username = this.username
+    makePreferences(){
       axios({
         method: 'post',
-        url: `${this.$store.state.API_URL}/api/v3/accounts/perferences-make/${username}/`,
+        url: `${this.$store.state.API_URL}/api/v3/accounts/make-preferences/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        },
       })
         .then(()=>{
           console.log('[성공] [회원가입] 선호장르 초기화')
@@ -89,8 +91,8 @@ export default {
           this.$store.commit('SAVE_USER', user)
         })
         .then(() => {
-          this.$store.dispatch('getLoginUser')
-          this.makeGenres()
+          // this.$store.dispatch('getLoginUser')
+          this.makePreferences()
         })
         .catch((err) => {
           console.log('회원가입에 실패했습니다.')

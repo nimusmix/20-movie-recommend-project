@@ -9,7 +9,7 @@ class User(AbstractUser):
     collection = models.ManyToManyField(Movie)
     genre_preference = models.ManyToManyField(Genre, related_name='prefer_users', through='Preference')
     using_otts = models.ManyToManyField(Ott, related_name='using_users')
-    
+
 
 class Preference(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
