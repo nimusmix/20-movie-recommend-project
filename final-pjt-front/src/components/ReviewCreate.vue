@@ -120,41 +120,6 @@ export default {
 </script>
 
 <style lang="scss">
-    #REVIEW_CREATE {
-      border: 1px solid var(--text-color);
-      padding: 1rem 1.5rem ;
-      background: var(--bg-color);
-      border-radius: 8px;
-      border-color: var(--primary-color);
-      box-shadow: 0px 0px 10px 0px var(--primary-color-15);
-      .logo{
-        display: inline-block;
-      }
-      input{
-        color: var(--disable-color);
-        background-color: none;
-        border: none;
-      }
-    }
-    .b-rating{
-      margin: 0px;
-      padding: 0px;
-    }
-    .star-rating{
-      background-color: none;
-      border: none;
-      
-      .b-rating-star{
-        margin: 0px;
-        padding: 4px;
-      }
-      .b-rating-icon{
-        color: var(--primary-color);
-        margin: 0px;
-        padding: 0px;
-        svg{
-          min-width:1px;
-        }
-      }
-    }
+    
+    
 </style>

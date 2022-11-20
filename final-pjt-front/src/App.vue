@@ -147,6 +147,9 @@
 
     //버튼 텍스트 컬러
     --button-live-text-color:#FFF;
+
+    //피드 그림자
+    --feed-shadow:rgba(0, 0, 0, 0.05);
   }
 
   #app.dark {
@@ -168,6 +171,9 @@
 
     //버튼 텍스트 컬러
     --button-live-text-color:#FFF;
+    
+    //피드 그림자
+    --feed-shadow:rgb(255, 255, 255, 0.05);
   }
 // 텍스트 스타일
   // 큰 텍스트 - h1
@@ -230,7 +236,11 @@
       color:var(--button-live-text-color);
     }
   }
-  
+// 커서 스타일
+
+
+
+
 // 전역 스타일
   #app {
     font-family:$body-font;
@@ -244,6 +254,9 @@
   //텍스트 데코레이션
   .t-d-none{
     text-decoration: none;
+  }
+  .cusor-pointer{
+    cursor:pointer;
   }
   // 로고
   .logo{
@@ -329,34 +342,99 @@
     }
   }
 
-  //라우터 뷰 전역설정
-  #router-view{
-    margin-left:$nav-width;
-    padding-top: 48px;
-    padding-left: 80px;
-    min-height: 100vh;
-  }
-  
-  @function w_to_h(){
-        
-  }
-  
-  // 영화카드
-  .movie-card{
+//라우터 뷰 전역설정
+#router-view{
+  margin-left:$nav-width;
+  // padding-top: 48px;
+  // padding-left: 80px;
+  min-height: 100vh;
+}
+
+@function w_to_h(){
+      
+}
+
+// 영화카드
+.movie-card{
+  a{
+    color:var(--text-color);
+    img {
+      width: 100%;
+      aspect-ratio: 3 / 5;
+      object-fit: cover;
+      border-radius: $border-radius-8;
+    }
+    h3{
+      margin: 0.4rem 0px 0px 0px;
+    }
     a{
-      color:var(--text-color);
-      img {
-        width: 100%;
-        aspect-ratio: 3 / 5;
-        object-fit: cover;
-        border-radius: $border-radius-8;
+      font-size: $main-font-size;
+    }
+  }
+}
+
+// 피드 아이템
+.feed-item{
+  border: none;
+  background: var(--bg-color);
+  box-shadow: 4px 0px 20px var(--feed-shadow);
+  border-radius: $border-radius-8;
+  padding: 0rem 0rem;
+  img {
+    display:inline-block;
+    height: 100px;
+  }
+  .feed-item-contents{
+    display:inline-block;
+    padding: 1rem 1rem;
+  }
+  .feed-item-name{
+    display:inline-block;
+  }
+  .feed-item-lasttime{
+    float: right;
+    display:inline-block;
+  }
+}
+// 리뷰 만들 때
+#REVIEW_CREATE {
+      border: 1px solid var(--text-color);
+      padding: 1rem 1.5rem ;
+      background: var(--bg-color);
+      border-radius: 8px;
+      border-color: var(--primary-color);
+      box-shadow: 0px 0px 10px 0px var(--primary-color-15);
+      .logo{
+        display: inline-block;
       }
-      h3{
-        margin: 0.4rem 0px 0px 0px;
+      input{
+        color: var(--disable-color);
+        background-color: none;
+        border: none;
       }
-      a{
-        font-size: $main-font-size;
+}
+// 별
+output.b-rating{
+      margin: 0px;
+      padding: 0px;
+      height: 0px;
+      border: none;
+    }
+    
+  .star-rating{
+    background-color: none;
+    .b-rating-star{
+      margin: 0px;
+      padding: 4px;
+    }
+    .b-rating-icon{
+      color: var(--primary-color);
+      margin: 0px;
+      padding: 0px;
+      svg{
+        min-width:1px;
       }
     }
   }
+
 </style>
