@@ -24,7 +24,7 @@
         </p>
       </div>
 
-      <label for="password2"> 비밀번호 : </label>
+      <label for="password2"> 비밀번호 확인: </label>
       <input type="password" id="password2" v-model="password2" @input="passwordConfirmation">
       <p v-if="password2State">{{ password2State }}</p>
       
