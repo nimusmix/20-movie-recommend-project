@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="d-flex">
-    <h1>CollectionList</h1>
-    <div @click="openModal">더보기</div>
+      <h3 class="h3">내 컬렉션</h3>
+      <div @click="openModal">더보기</div>
     </div>
     <div v-if="isModalViewed">
       <CollectionModal
@@ -32,7 +32,7 @@ export default {
     CollectionModal,
   },
   props: {
-    collectionId: Array,
+    collection: Array,
   },
   data() {
     return {
@@ -43,16 +43,8 @@ export default {
     movies() {
       return this.$store.state.movies
     },
-    collection() {
-      const myCollection = this.movies.filter((movie) => {
-        if (this.collectionId?.includes(movie.id)) {
-          return true
-        }
-      })
-      return myCollection
-    },
     cuttedCollection() {
-      return this.collection.slice(0, 4)
+      return this.collection?.slice(0, 4)
     }
   },
   methods: {
