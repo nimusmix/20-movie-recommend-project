@@ -122,6 +122,25 @@ export default new Vuex.Store({
           console.log('actions의 getReviews 실패!')
         })
     },
+    putPreference(context, genre){
+      const username = context.state.username
+      // console.log(genre_pk, preferenceData, context)
+      axios({
+        method: 'put',
+        url: `${context.state.API_URL}/api/v2/accounts/perferences/${username}/${genre}/`,
+        data: {
+          like: 0,
+          score: 0,
+        }
+      })
+      .then((res) => {
+          console.log('actions의 putPreference 성공!')
+          console.log(res)
+        })
+        .catch(() => {
+          console.log('actions의 putPreference 실패!')
+        })
+    }
   },
   modules: {
   }
