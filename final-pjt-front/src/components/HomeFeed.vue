@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>HomeFeed</h1>
+    <h3 class="h3">피드</h3>
   </div>
 </template>
 

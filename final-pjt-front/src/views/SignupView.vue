@@ -1,34 +1,36 @@
 <template>
-  <div>
-    <h1 class="h1">회원가입</h1>
-    <form @submit.prevent="signup">
-      <label for="username">이름 : </label>
-      <input type="text" id="username" v-model="username"><br>
+  <div class="all">
+    <div class="logo t-d-none">20.</div>
+    <h3 class="h3">회원가입</h3>
+    <form @submit.prevent="signup" class="signup-form">
+      <label for="username">유저 이름을 입력해주세요.</label>
+      <input type="text" id="username" class="user-input" v-model="username">
       <div v-if="usernameErrors">
         <p
+          class="err-msg"
           v-for="usernameError in usernameErrors"
           :key="usernameError.id"
         >
           {{ usernameError }}
         </p>
-      </div>
+      </div><br>
 
-      <label for="password1"> 비밀번호 : </label>
-      <input type="password" id="password1" v-model="password1"><br>
-      <div v-if="password1Errors">
+      <label for="password1">비밀번호를 입력해주세요.</label>
+      <input type="password" id="password1" class="user-input" v-model="password1">
+      <div v-if="password1Errors" class="errors">
         <p
+          class="err-msg m-0"
           v-for="password1Error in password1Errors"
           :key="password1Error.id"
         >
           {{ password1Error }}
         </p>
-      </div>
+      </div><br>
 
-      <label for="password2"> 비밀번호 확인: </label>
-      <input type="password" id="password2" v-model="password2" @input="passwordConfirmation">
-      <p v-if="password2State">{{ password2State }}</p>
-      
-      <input type="submit" value="Signup">
+      <label for="password2">비밀번호를 한 번 더 입력해주세요.</label>
+      <input type="password" id="password2" class="user-input" v-model="password2" @input="passwordConfirmation">
+      <p class="err-msg" v-if="password2State">{{ password2State }}</p><br>
+      <input type="submit" class="main-button selected" value="회원가입">
     </form>
   </div>
 </template>
@@ -51,7 +53,7 @@ export default {
     }
   },
   methods: {
-    makePreferences(){
+    makePreferences() {
       axios({
         method: 'post',
         url: `${this.$store.state.API_URL}/api/v3/accounts/make-preferences/`,
@@ -59,10 +61,10 @@ export default {
           Authorization: `Token ${this.$store.state.token}`
         },
       })
-        .then(()=>{
+        .then(() => {
           console.log('[성공] [회원가입] 선호장르 초기화')
         })
-        .catch((err)=>{
+        .catch((err) => {
           console.log('[실패] [회원가입] 선호장르 초기화')
           console.log(err)
         })
@@ -124,3 +126,31 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+  .all {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      font-size: 100px;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+
+      .errors {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+</style>

@@ -4,10 +4,10 @@
       <img :src="backdropUrl" class="backdropImg">
     </div>
 
-    <div class="contentBox">
-      <div class="movieBox">
-        <img :src="posterUrl" class="posterImg">
-        <div class="detailBox">
+    <div class="content-box">
+      <div class="movie-box">
+        <img :src="posterUrl" class="poster-img">
+        <div class="detail-box">
           <h1 class="h1">{{ movie?.title }}</h1>
           <div class="details">
             <div class="detail">{{ movie?.release_date.substring(0, 4) }}</div>
@@ -22,7 +22,7 @@
         </div>
       </div>
       
-      <div class="overviewBox">
+      <div class="overview-box">
         <h3 class="h3">줄거리</h3>
         <p>{{ movie?.overview }}</p>
       </div>
@@ -171,18 +171,18 @@ export default {
     }
   }
 
-.contentBox {
+.content-box {
   margin: 56px;
 
-  .movieBox {
+  .movie-box {
     display: flex;
   
-    .posterImg {
+    .poster-img {
       width: 200px;
       height: auto;
     }
   
-    .detailBox {
+    .detail-box {
       margin-left: 24px;
   
       .details {
@@ -195,7 +195,7 @@ export default {
     }
   }
 
-  .overviewBox {
+  .overview-box {
     margin-top: 20px;
 
     p {

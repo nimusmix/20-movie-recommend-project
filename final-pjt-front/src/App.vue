@@ -96,6 +96,7 @@
       },
       goToLink(routerLink) {
         this.$router.push({ name: routerLink })
+          .catch(() => {})
       }
     },
     updated() {
@@ -432,6 +433,19 @@ output.b-rating{
       }
     }
   }
+
+.user-input {
+  margin: 10px 0px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+.err-msg {
+  color: var(--danger-color);
+}
 
 .space {
   height: 56px;

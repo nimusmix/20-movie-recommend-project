@@ -113,16 +113,18 @@ export default new Vuex.Store({
     },
     getLoginUser(context) {
       const username = context.state.username
-      axios({
-        method: 'get',
-        url: `${context.state.API_URL}/api/v3/accounts/${username}/`,
-      })
-        .then((res) => {
-          context.commit('GET_LOGIN_USER', res.data)
+      if (username) {
+        axios({
+          method: 'get',
+          url: `${context.state.API_URL}/api/v3/accounts/${username}/`,
         })
-        .catch((err) => {
-          console.log(err)
-        })
+          .then((res) => {
+            context.commit('GET_LOGIN_USER', res.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     },
     putPreference(context, genre){
       axios({
