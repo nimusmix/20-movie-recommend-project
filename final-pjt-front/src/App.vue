@@ -3,17 +3,17 @@
     
     <div id="color-mode" >
       <nav id="col-nav">
-        <a id="nav-logo" class="logo t-d-none">20.</a>
+        <a id="nav-logo" class="logo t-d-none cusor-pointer">20.</a>
         <router-link :to="{ name: 'ProfileView', params: { username: username } }">{{ username }}</router-link>
         <div v-if="isLogin">
           <button @click="logout">로그아웃</button>
         </div>
         <ul id="nav-ul">
           <div v-if="!isLogin">
-            <li 
+            <li
               v-for="(routerName, routerLink, index) in loginLinks" :key="index"
             >
-              <div class="li-inner-box" @click="goToLink(routerLink)">
+              <div class="li-inner-box cusor-pointer" @click="goToLink(routerLink)">
                 <router-link class="nav-item" :to="{ name: routerLink }" >
                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M1.52 16.11H20.48M1.52 6.11H20.48M5.97 16.11V20.46M11 16.11V20.97M15.97 16.11V20.52M5.97 1.11V5.46M11 1.11V5.97M11 6.03V17.03M15.97 1.11V5.52M21 14V8C21 3 19 1 14 1H8C3 1 1 3 1 8V14C1 19 3 21 8 21H14C19 21 21 19 21 14Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -29,7 +29,7 @@
           <li 
           v-for="(routerName, routerLink, index) in routerLinks" :key="index"
           >
-            <div class="li-inner-box" @click="goToLink(routerLink)">
+            <div class="li-inner-box cusor-pointer" @click="goToLink(routerLink)">
               <router-link class="nav-item"  :to="{ name: routerLink }" >
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.52 16.11H20.48M1.52 6.11H20.48M5.97 16.11V20.46M11 16.11V20.97M15.97 16.11V20.52M5.97 1.11V5.46M11 1.11V5.97M11 6.03V17.03M15.97 1.11V5.52M21 14V8C21 3 19 1 14 1H8C3 1 1 3 1 8V14C1 19 3 21 8 21H14C19 21 21 19 21 14Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -236,7 +236,7 @@
       color:var(--button-live-text-color);
     }
   }
-// 커서 스타일
+
 
 
 
@@ -255,6 +255,7 @@
   .t-d-none{
     text-decoration: none;
   }
+  // 커서 스타일
   .cusor-pointer{
     cursor:pointer;
   }
@@ -286,7 +287,7 @@
       margin: 0px;
       padding: 0px;
       li{
-        padding-left: $main-nav-padding-left;
+        
         height: 56px;
         border-right: 5px solid var(--bg-color);
         svg{
@@ -300,6 +301,7 @@
        transition:$trans-global-fast;
       }
       a {
+        padding-left: $main-nav-padding-left;
         display: inline-block;
         vertical-align: middle;
         color: var(--disable-color);
