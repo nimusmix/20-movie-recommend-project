@@ -1,0 +1,600 @@
+[
+{
+    "model": "community.review",
+    "pk": 1,
+    "fields": {
+        "movie": 550,
+        "user": 2,
+        "content": "재밌었어요.",
+        "score": 5,
+        "created_at": "2022-11-20T06:58:39.033Z",
+        "updated_at": "2022-11-20T06:58:39.033Z",
+        "is_spoiler": true
+    }
+},
+{
+    "model": "community.review",
+    "pk": 2,
+    "fields": {
+        "movie": 808,
+        "user": 2,
+        "content": "희제 닮았어요.",
+        "score": 5,
+        "created_at": "2022-11-20T06:58:54.833Z",
+        "updated_at": "2022-11-20T06:58:54.833Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 3,
+    "fields": {
+        "movie": 8960,
+        "user": 2,
+        "content": "내용을 입력해주세요.",
+        "score": 3,
+        "created_at": "2022-11-20T06:59:04.983Z",
+        "updated_at": "2022-11-20T06:59:04.983Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 4,
+    "fields": {
+        "movie": 744,
+        "user": 2,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T06:59:14.098Z",
+        "updated_at": "2022-11-20T06:59:14.099Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 5,
+    "fields": {
+        "movie": 772,
+        "user": 2,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T06:59:24.180Z",
+        "updated_at": "2022-11-20T06:59:24.181Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 6,
+    "fields": {
+        "movie": 99861,
+        "user": 2,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T06:59:31.613Z",
+        "updated_at": "2022-11-20T06:59:31.613Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 7,
+    "fields": {
+        "movie": 118,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T07:00:20.229Z",
+        "updated_at": "2022-11-20T07:00:20.229Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 8,
+    "fields": {
+        "movie": 744,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T07:00:27.177Z",
+        "updated_at": "2022-11-20T07:00:27.177Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 9,
+    "fields": {
+        "movie": 772,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:00:35.844Z",
+        "updated_at": "2022-11-20T07:00:35.844Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 10,
+    "fields": {
+        "movie": 673,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T07:00:40.849Z",
+        "updated_at": "2022-11-20T07:00:40.849Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 11,
+    "fields": {
+        "movie": 862,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:00:47.062Z",
+        "updated_at": "2022-11-20T07:00:47.062Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 12,
+    "fields": {
+        "movie": 8871,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:00:54.983Z",
+        "updated_at": "2022-11-20T07:00:54.983Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 13,
+    "fields": {
+        "movie": 863,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:01:07.074Z",
+        "updated_at": "2022-11-20T07:01:07.075Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 14,
+    "fields": {
+        "movie": 8456,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:01:12.178Z",
+        "updated_at": "2022-11-20T07:01:12.178Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 15,
+    "fields": {
+        "movie": 9502,
+        "user": 3,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T07:01:20.581Z",
+        "updated_at": "2022-11-20T07:01:20.581Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 16,
+    "fields": {
+        "movie": 12445,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:03:12.566Z",
+        "updated_at": "2022-11-20T07:03:12.566Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 17,
+    "fields": {
+        "movie": 550,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T07:03:19.175Z",
+        "updated_at": "2022-11-20T07:03:19.175Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 18,
+    "fields": {
+        "movie": 118,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:03:25.121Z",
+        "updated_at": "2022-11-20T07:03:25.121Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 19,
+    "fields": {
+        "movie": 8960,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:03:31.041Z",
+        "updated_at": "2022-11-20T07:03:31.041Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 20,
+    "fields": {
+        "movie": 2062,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:03:37.186Z",
+        "updated_at": "2022-11-20T07:03:37.186Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 21,
+    "fields": {
+        "movie": 808,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T07:03:44.592Z",
+        "updated_at": "2022-11-20T07:03:44.592Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 22,
+    "fields": {
+        "movie": 615,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:03:48.865Z",
+        "updated_at": "2022-11-20T07:03:48.865Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 23,
+    "fields": {
+        "movie": 184315,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:03:57.253Z",
+        "updated_at": "2022-11-20T07:03:57.253Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 24,
+    "fields": {
+        "movie": 3933,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:04:05.738Z",
+        "updated_at": "2022-11-20T07:04:05.738Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 25,
+    "fields": {
+        "movie": 10144,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:04:13.938Z",
+        "updated_at": "2022-11-20T07:04:13.938Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 26,
+    "fields": {
+        "movie": 8871,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:04:23.069Z",
+        "updated_at": "2022-11-20T07:04:23.069Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 27,
+    "fields": {
+        "movie": 744,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:04:28.452Z",
+        "updated_at": "2022-11-20T07:04:28.452Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 28,
+    "fields": {
+        "movie": 9820,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:04:41.272Z",
+        "updated_at": "2022-11-20T07:04:41.272Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 29,
+    "fields": {
+        "movie": 674,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:04:57.356Z",
+        "updated_at": "2022-11-20T07:04:57.356Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 30,
+    "fields": {
+        "movie": 1010821,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:05:09.252Z",
+        "updated_at": "2022-11-20T07:05:09.252Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 31,
+    "fields": {
+        "movie": 120,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 4,
+        "created_at": "2022-11-20T07:05:47.071Z",
+        "updated_at": "2022-11-20T07:05:47.071Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 32,
+    "fields": {
+        "movie": 671,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 4,
+        "created_at": "2022-11-20T07:05:55.941Z",
+        "updated_at": "2022-11-20T07:05:55.941Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 33,
+    "fields": {
+        "movie": 597,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 2,
+        "created_at": "2022-11-20T07:06:02.925Z",
+        "updated_at": "2022-11-20T07:06:02.925Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 34,
+    "fields": {
+        "movie": 14574,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:06:15.156Z",
+        "updated_at": "2022-11-20T07:06:15.156Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 35,
+    "fields": {
+        "movie": 1930,
+        "user": 4,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T07:06:36.406Z",
+        "updated_at": "2022-11-20T07:06:36.406Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 36,
+    "fields": {
+        "movie": 12,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 4,
+        "created_at": "2022-11-20T07:07:08.207Z",
+        "updated_at": "2022-11-20T07:07:08.207Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 37,
+    "fields": {
+        "movie": 22,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 4,
+        "created_at": "2022-11-20T07:07:12.739Z",
+        "updated_at": "2022-11-20T07:07:12.739Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 38,
+    "fields": {
+        "movie": 118,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:07:19.502Z",
+        "updated_at": "2022-11-20T07:07:19.502Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 39,
+    "fields": {
+        "movie": 411,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:07:33.101Z",
+        "updated_at": "2022-11-20T07:07:33.101Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 40,
+    "fields": {
+        "movie": 550,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:07:39.451Z",
+        "updated_at": "2022-11-20T07:07:39.451Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 41,
+    "fields": {
+        "movie": 808,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:07:45.319Z",
+        "updated_at": "2022-11-20T07:07:45.319Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 42,
+    "fields": {
+        "movie": 862,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 4,
+        "created_at": "2022-11-20T07:07:51.319Z",
+        "updated_at": "2022-11-20T07:07:51.319Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 43,
+    "fields": {
+        "movie": 8871,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 4,
+        "created_at": "2022-11-20T07:08:32.268Z",
+        "updated_at": "2022-11-20T07:08:32.268Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 44,
+    "fields": {
+        "movie": 615,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 3,
+        "created_at": "2022-11-20T07:08:42.553Z",
+        "updated_at": "2022-11-20T07:08:42.553Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 45,
+    "fields": {
+        "movie": 21208,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:08:52.973Z",
+        "updated_at": "2022-11-20T07:08:52.973Z",
+        "is_spoiler": false
+    }
+},
+{
+    "model": "community.review",
+    "pk": 46,
+    "fields": {
+        "movie": 278,
+        "user": 5,
+        "content": "내용을 입력해주세요",
+        "score": 5,
+        "created_at": "2022-11-20T07:09:07.683Z",
+        "updated_at": "2022-11-20T07:09:07.683Z",
+        "is_spoiler": false
+    }
+}
+]
