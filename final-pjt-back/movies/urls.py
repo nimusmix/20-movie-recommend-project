@@ -10,4 +10,7 @@ urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # # optional UI
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+
+    # 잠재 모델 기반 추천 알고리즘
+    path('recommend/<str:username>/', views.user_recommend_movies_latent_model)
 ]
