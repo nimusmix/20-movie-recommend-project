@@ -1,6 +1,6 @@
 <template>
   <div style="width:500px">
-    <h1>ReviewCreate</h1>
+    <h3 class="h3">리뷰 남기기</h3>
     <form id="REVIEW_CREATE" @submit.prevent="createReview">
       <!-- <label for="content">내용 : </label> -->
       <div class="logo">{{ content.length }}.</div>

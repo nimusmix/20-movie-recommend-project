@@ -6,11 +6,22 @@
         <button id="followBtn" v-if="isFollowing">언팔로우</button>
         <button id="followBtn" v-else>팔로우</button>
       </div>
-      <button v-else> 회원정보 수정</button>
+      <router-link
+        v-else
+        :to="{ name: 'UserEditView', params: { name: 'UserEditView', signUpFlag: 1 } }"
+        >
+          회원정보수정
+        </router-link>
     </div>
-    <div>팔로워 {{ profileUser?.followers.length }}</div>
-    <div>팔로잉 {{ profileUser?.followings.length }}</div>
-    <CollectionList :collectionId="profileUser?.collection"/>
+    <div class="d-flex">
+      <div>팔로워 &nbsp;<b>{{ profileUser?.followers.length }}</b></div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <div>팔로잉 &nbsp;<b>{{ profileUser?.followings.length }}</b></div>
+    </div>
+
+    <div class="space"></div>
+    <CollectionList :collection="profileUser?.collection"/>
+    <div class="space"></div>
     <ReviewList/>
   </div>
 </template>

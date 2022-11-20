@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import HomeRecommend from '@/components/HomeRecommend'
 import HomeFeed from '@/components/HomeFeed'
+import HomeRecommend from '@/components/HomeRecommend'
 
 export default {
   name: 'HomeView',

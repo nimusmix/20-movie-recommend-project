@@ -1,28 +1,39 @@
 <template>
   <div>
-    <h1 class="h1">{{ movie?.title }}</h1>
-    <div @click="collect">
-      {{ isCollected }}
-      <button id="collectBtn" v-if="isCollected">콜렉션에서 빼기</button>
-      <button id="collectBtn" v-else>콜렉션에 넣기</button>
-    </div>
-    <div style="background-color: white;">
-      <img :src="backdropUrl" alt="background" style="width: 100%; opacity: 70%;">
-    </div>
-    <img :src="posterUrl" alt="poster">
-    <div>{{ movie?.title }}</div>
-    <div>{{ movie?.release_date.substring(0, 4) }}</div>
-
-    <div>
-      <div>줄거리</div>
-      <p>{{ movie?.overview }}</p>
+    <div class="backdropBox">
+      <img :src="backdropUrl" class="backdropImg">
     </div>
 
-    <div>{{ movie?.vote_average }}</div>
-    <div v-for="genre in this.genreList" :key="genre.id">{{ genre }}</div>
-    <ReviewCreate/>
-    <MovieReviews :reviews="reviews"/>
-    <MovieCollections/>
+    <div class="content-box">
+      <div class="movie-box">
+        <img :src="posterUrl" class="poster-img">
+        <div class="detail-box">
+          <h1 class="h1">{{ movie?.title }}</h1>
+          <div class="details">
+            <div class="detail">{{ movie?.release_date.substring(0, 4) }}</div>
+            <p class="detail">·</p>
+            <div class="detail" v-for="genre in this.genreList" :key="genre.id">{{ genre }}</div>
+          </div>
+          <div>평균 별 {{ movie?.vote_average }}</div>
+          <div>
+            <button id="collectBtn" @click="collect" v-if="isCollected">내 콜렉션에서 제외하기</button>
+            <button id="collectBtn" @click="collect" v-else>내 컬렉션에 추가하기</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="overview-box">
+        <h3 class="h3">줄거리</h3>
+        <p>{{ movie?.overview }}</p>
+      </div>
+      
+      <div class="space"></div>
+      <ReviewCreate/>
+      <div class="space"></div>
+      <MovieReviews :reviews="reviews"/>
+      <div class="space"></div>
+      <MovieCollections/>
+    </div>
   </div>
 </template>
 
@@ -127,6 +138,11 @@ export default {
       })
         .then(() => {
           this.$store.dispatch('getLoginUser')
+          if (this.isCollected) {
+            alert('내 컬렉션에 추가했습니다.')
+          } else {
+            alert('내 컬렉션에서 제외했습니다.')
+          }
         })
         .catch((err) => {
           console.log(err)
@@ -139,6 +155,54 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  .backdropBox {
+    position: relative;
+    // background-color: black;
+    height: 400px;
+    overflow: hidden;
 
+    .backdropImg {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      opacity: 70%;
+      transform: translate(0%, -50%);
+    }
+  }
+
+.content-box {
+  margin: 56px;
+
+  .movie-box {
+    display: flex;
+  
+    .poster-img {
+      width: 200px;
+      height: auto;
+    }
+  
+    .detail-box {
+      margin-left: 24px;
+  
+      .details {
+        display: flex;
+  
+        .detail {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .overview-box {
+    margin-top: 20px;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+  
 </style>

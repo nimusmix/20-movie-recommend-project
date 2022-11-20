@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>MovieReviews</h1>
+    <h3 class="h3">다른 사용자의 리뷰</h3>
     <div v-for="review in reviews" :key="review.id">
       <FeedItem :review="review"/>
     </div>

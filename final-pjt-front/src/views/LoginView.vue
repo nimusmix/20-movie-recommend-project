@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <h1 class="h1">로그인</h1>
-    <form @submit.prevent="login">
-      <label for="username">username : </label>
-      <input type="text" id="username" v-model="username"><br>
+  <div class="all">
+    <div class="logo t-d-none">20.</div>
+    <h3 class="h3">로그인</h3>
+    <form @submit.prevent="login" class="login-form">
+      <label for="username">유저 이름을 입력해주세요.</label>
+      <input type="text" id="username" class="user-input" v-model="username"><br>
 
-      <label for="password"> password : </label>
-      <input type="password" id="password" v-model="password"><br>
+      <label for="password">비밀번호를 입력해주세요.</label>
+      <input type="password" id="password" class="user-input" v-model="password">
 
-      <p v-if="errMsg">{{ errMsg }}</p>
-      <input type="submit" value="login">
+      <p v-if="errMsg" class="err-msg">{{ errMsg }}</p><br>
+      <input type="submit" class="main-button selected" value="로그인">
     </form>
   </div>
 </template>
@@ -59,3 +60,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .all {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      font-size: 100px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+  }
+</style>

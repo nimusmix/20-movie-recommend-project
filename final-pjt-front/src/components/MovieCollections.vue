@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>MovieCollections</h1>
+    <h3 class="h3">이 작품이 담긴 컬렉션</h3>
   </div>
 </template>
 
