@@ -1,14 +1,13 @@
 <template>
   <div id="app" :class="mainclass">
-    
-    <div id="color-mode" >
+
       <nav id="col-nav">
         <div id="nav-logo" class="logo t-d-none cusor-pointer" @click="goToHome">20.</div>
         <div class="profile-img-box cusor-pointer">
           <img v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`" @click="goToProfile">
           <img v-else src="@/assets/basic.png" @click="goToProfile">
         </div>
-        <router-link :to="{ name: 'ProfileView', params: { username: loginUser.username } }">{{ loginUser.username }}</router-link>
+        <router-link :to="{ name: 'ProfileView', params: { username: loginUser?.username } }">{{ loginUser?.username }}</router-link>
         <div v-if="isLogin">
           <button @click="logout">로그아웃</button>
         </div>
@@ -51,7 +50,6 @@
       <router-view id="router-view"/>
       {{ width }} 
       {{ height }}
-  </div>
   </div>
 </template>
 <script>
@@ -155,15 +153,15 @@
     //버튼 텍스트 컬러
     --button-live-text-color:#FFF;
 
-    //피드 그림자
-    --feed-shadow:rgba(0, 0, 0, 0.05);
+    //피드 및 네비 그림자
+    --feed-shadow:rgba(0, 0, 0, 0.03);
   }
 
   #app.dark {
     //시맨틱 컬러
     --primary-color: #FF715E;
-    --primary-color-15: #ff715e24;
-    --primary-color-10: #ff715e11;
+    --primary-color-15: #ff715e6b;
+    --primary-color-10: #ff715e4f;
     --danger-color: #F16464 ;
     --warning-color: #F5AB35;
     --success-color: #47C1C3;
@@ -180,7 +178,7 @@
     --button-live-text-color:#FFF;
     
     //피드 그림자
-    --feed-shadow:rgb(255, 255, 255, 0.05);
+    --feed-shadow:rgb(255, 255, 255, 0.01);
   }
 // 텍스트 스타일
   // 큰 텍스트 - h1
@@ -197,9 +195,9 @@
   $main-font-weight-light:300;
 
 // 애니메이션 스타일
-  $trans-global:width 1s, height 1s, background-color 1s, transform 1s, border-color 1s, color 1s;
-  $trans-global-fast:width 0.5s, height 0.5s, background-color 0.5s, transform 0.5s, border-color 0.5s, color 0.5s;
-  $trans-global-very-fast:width 0.1s, height 0.1s, background-color 0.1s, transform 0.1s, border-color 0.1s, color 0.1s;
+  $trans-global:width 1s, height 1s, background-color 1s, transform 1s, border-color 1s, color 1s, box-shadow 1s;
+  $trans-global-fast:width 0.5s, height 0.5s, background-color 0.5s, transform 0.5s, border-color 0.5s, color 0.5s, box-shadow 0.5s;
+  $trans-global-very-fast:width 0.1s, height 0.1s, background-color 0.1s, transform 0.1s, border-color 0.1s, color 0.1s, box-shadow 0.1s;
 
 // border 스타일
   $border-radius-4: 4px;
@@ -224,6 +222,14 @@
     font-weight: $lg-font-weight;
   }
 
+// 여백 스타일
+.space {
+    height: 56px;
+  }
+// 그림자 스타일
+$shadow-default: 4px 0px 20px var(--feed-shadow);
+$shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
+
 // button 스타일
   .button-list {
     .main-button {
@@ -238,15 +244,20 @@
     border: 1px solid var(--primary-color);
     background: none;
     border-radius: 30px;
-    transition: $trans-global-fast;//$trans-global;
-
+    transition: $trans-global-very-fast;//$trans-global;
+    
     &.selected {
       background-color: var(--primary-color);
       color:var(--button-live-text-color);
     }
     &:hover {
-      background-color: var(--primary-color);
-      color:var(--button-live-text-color);
+      box-shadow: $shadow-primary;
+      transition: $trans-global-fast;
+      // background-color: var(--primary-color-15);
+      // color:var(--button-live-text-color);
+    }
+    &:active{
+      background: none;
     }
   }
 
@@ -287,12 +298,13 @@
     height: 100%;
     overflow: auto;
     transition:$trans-global;
+    box-shadow: $shadow-default;
   }
 
   nav {
     $main-nav-padding-left:42px;
     background-color: var(--bg-color);
-
+    
     svg {
       stroke: var(--disable-color);
     }
@@ -424,7 +436,7 @@
     width: 500px;
     height: 148px;
     background: var(--bg-color);
-    box-shadow: 4px 0px 20px var(--feed-shadow);
+    box-shadow: $shadow-default;
     border-radius: $border-radius-8;
     padding: 0rem 0rem;
     margin-bottom: 0.8rem;
@@ -460,7 +472,7 @@
     background: var(--bg-color);
     border-radius: 8px;
     border-color: var(--primary-color);
-    box-shadow: 0px 0px 10px 0px var(--primary-color-15);
+    box-shadow: $shadow-primary;
 
     .logo {
       display: inline-block;
@@ -512,9 +524,7 @@
     color: var(--danger-color);
   }
 
-  .space {
-    height: 56px;
-  }
+  
 
   .profile-img-box {
     width: 140px;
