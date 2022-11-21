@@ -2,27 +2,22 @@
   <div class="router-view-padding">
     <h1 class="h1">회원정보수정</h1>
     <div class="space"></div>
-    <h3 class="h3">내 프로필 사진 변경</h3>
-    <div>
-      <img v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`">
-        <img v-else src="@/assets/basic.png" >
-        
-      <div class="box-file-input">
-        <label>
-          <input type="file" class="file-input" id="inputGroupFile02" accept="image/*" @change="changeImg" ref="profileImg">
-        </label>
-          <span class="filename">파일을 선택해주세요.</span>
-        </div>
-
-      <div class="input-group mb-3">
-        <input type="file" class=""   >
+      
+    <h3 class="h3">내 프로필 사진</h3>
+      <div>
+        <img class="img-circle-80" v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`">
+        <img class="img-circle-80" v-else src="@/assets/basic.png" >
       </div>
-      <!-- <div class="main-button" style="max-width:500px">
-        <input type="file" value=""  />
-      </div> -->
-    </div>
+      
+      <div class="box-file-input" style="margin-top:8px">
+        <label for="inputGroupFile02" class="cicle-lr">
+          <input type="file" class="file-input cicle-lr" id="inputGroupFile02" accept="image/*" @change="changeImg" ref="profileImg">
+        </label>
+      </div>
+      
+
     <div class="space"></div>
-    <h3  class="h3">좋아하는 장르를 선택해주세요!</h3>
+    <h3  class="h3">좋아하는 장르를 선택해주세요.</h3>
     <div class="button-list">
       <button
         v-for="perference in perferences" :key="perference.genre.id"
@@ -32,7 +27,7 @@
       </button>
     </div>
     <div class="space"></div>
-    <h3 class="h3">사용 중인 OTT를 골라주세요!</h3>
+    <h3 class="h3">사용 중인 OTT를 골라주세요.</h3>
     <div class="button-list">
       <button
         v-for="ott in otts" :key="ott.id"
@@ -45,23 +40,15 @@
 
     <div v-if="this.$route.params.signUpFlag === '1'">
       <form @submit.prevent="editInfo('HomeView')">
-        <button>건너뛰기</button>
-      </form>
-      <form @submit.prevent="editInfo('HomeView')">
         <button>가입완료</button>
       </form>
     </div>
 
     <div v-else>
       <form @submit.prevent="editInfo('ProfileView')">
-        <button>수정취소</button>
-      </form>
-      <form @submit.prevent="editInfo('ProfileView')">
         <button>수정하기</button>
       </form>
     </div>
-
-    <!-- <button @click="editOtt">장르 1</button> -->
   </div>
 </template>
 
@@ -231,7 +218,6 @@ export default {
 .box-file-input label{
   display:inline-block;
   background: none;
-  color: var(--primary-color);
   background-color: var(--primary-color);
   color:var(--button-live-text-color);
   padding:0px 15px;
@@ -240,15 +226,11 @@ export default {
 }
 
 .box-file-input label:after{
-  content:"파일등록";
+  content:"사진 변경";
 }
 
 .box-file-input .file-input{
   display:none;
 }
 
-.box-file-input .filename{
-  display:inline-block;
-  padding-left:10px;
-}
 </style>

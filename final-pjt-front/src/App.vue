@@ -161,6 +161,9 @@
 
     //피드 및 네비 그림자
     --feed-shadow:rgba(0, 0, 0, 0.03);
+
+    //프로필 이미지 외곽선
+    --img-border:rgba(0, 0, 0, 0.05);
   }
 
   #app.dark {
@@ -185,6 +188,9 @@
     
     //피드 그림자
     --feed-shadow:rgb(255, 255, 255, 0.01);
+
+    //프로필 이미지 외곽선
+    --img-border:rgba(255, 255, 255, 0.05);
   }
 // 텍스트 스타일
   // 큰 텍스트 - h1
@@ -209,6 +215,20 @@
   $border-radius-4: 4px;
   $border-radius-8: 6px;
   $border-radius-12: 12px;
+
+  // 
+  .circle{
+    border-radius: 50%;
+  }
+  .img-circle-80{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--img-border);
+  }
+  .cicle-lr{
+    border-radius: 32px;
+  }
 
 
   #app .h1 {
