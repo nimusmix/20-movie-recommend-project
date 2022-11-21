@@ -28,19 +28,19 @@
         :key="movie.id"
         class="col"
       >
-      <CategoryItem :movie="movie"/>
+      <MovieItem :movie="movie"/>
       </article>
     </div>
   </div>
 </template>
 
 <script>
-import CategoryItem from '@/components/CategoryItem'
+import MovieItem from '@/components/MovieItem'
 
 export default {
   name: 'CategoryView',
   components: {
-    CategoryItem,
+    MovieItem,
   },
   data() {
     return {

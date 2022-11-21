@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <h1>RecommendGenre</h1>
-  </div>
+    <div>
+        <h1>RecommendList</h1>
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'RecommendGenre'
+    name:'RecommendList'
 }
 </script>
 

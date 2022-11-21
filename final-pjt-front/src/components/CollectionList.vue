@@ -12,7 +12,7 @@
       />
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <CollectionListItem
+      <MovieItem
         v-for="movie in cuttedCollection"
         :key="movie.id"
         :movie="movie"
@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import CollectionListItem from '@/components/CollectionListItem'
+import MovieItem from '@/components/MovieItem'
 import CollectionModal from '@/components/CollectionModal'
 
 export default {
   name: 'CollectionList',
   components: {
-    CollectionListItem,
+    MovieItem,
     CollectionModal,
   },
   props: {
