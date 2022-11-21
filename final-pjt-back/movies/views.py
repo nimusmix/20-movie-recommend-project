@@ -79,41 +79,36 @@ def recommend_latent_model(request):
     movies = get_list_or_404(Movie)
     print('--------------------')
     
-    result_movies_score = dict()
-    for movie in movies:  # movie 하나를 구해서 
-        movie_score = 0
+    result_movie_scores = defaultdict(int)
+    for movie in movies:  # movie 하나를 구해서
         # 여러 장르를 구한다.
-        movie_genres_len = len(movie.genres.values('id'))
+        genres_len = movie.genres.count()
         genres = []
 
         # 점수 = (가중치 // 장르개수) * 장르수
-        for value in movie.genres.values('id'): 
-            movie_score += (score[value['id']] * 1000) // movie_genres_len
-        if movie_score > 0:
-            result_movies_score[movie.pk] = movie_score
+        genres_id = list(movie.genres.values_list('id', flat=True))
+        for genre_id in genres_id:
+            result_movie_scores[movie.pk] += (score[genre_id] * 1000) // genres_len
 
     # 본 영화 제외하기
-    reviews = get_list_or_404(Review, user=request.user)
-    for review in reviews:
-        result_movies_score[review.movie.pk] = 0
-    result_movies_score = list(result_movies_score.items())
-    result_movies_score.sort(key=lambda x:x[1], reverse=True)
+    # reviews = get_list_or_404(Review, user=request.user)
+    reviewed_movies = list(Review.objects.filter(user_id=request.user.id).values_list('movie_id', flat=True))
+    for reviewed_movie in reviewed_movies:
+        result_movies_score[reviewed_movie] = 0
 
-    # 20개를 잘라서 pk만 조립한다.
-    results = list(map(list, zip(*result_movies_score)))[0][:20]
+    result_movie_scores = list(result_movie_scores.items())
+    result_movie_scores.sort(key=lambda x:x[1], reverse=True)
+
+    # 10개를 잘라서 pk만 조립한다.
+    results = list(map(list, zip(*result_movie_scores)))[0][:10]
     
     # Movie모델로 바꿔주는 과정을 거쳐야한다.
     results_movies = list()
     for result in results:
         results_movies.append(Movie.objects.get(pk=result))
 
-    # 결과값이 제대로 나왔음에 환호한다.
-    print(results_movies)
-
-    # 결과값 찾아내기
-    if request.method == 'GET':
-        serializer = MovieSerializer(results_movies, many=True)
-        return Response(serializer.data)
+    serializer = MovieSerializer(results_movies, many=True)
+    return Response(serializer.data)
 
 
 # 유사 사용자 기반 알고리즘
@@ -132,23 +127,29 @@ def recommend_similar_user(request):
         score = 0
         not_yet = []
 
+        # 해당 유저가 리뷰 남긴 영화의 id
         user_review_ids = list(Review.objects.filter(user_id=user_id).values_list('movie_id', flat=True))
         for user_review_id in user_review_ids:
-            if user_review_id in my_review_ids:
+            if user_review_id in my_review_ids:                                     # 유저가 리뷰 남긴 영화가 내가 리뷰 남긴 영화 리스트에 있으면 점수 올리기
                 score += 1
-            else:
+            else:                                                                   # 그렇지 않으면 아직 안 본 영화 리스트에 추가
                 not_yet.append(user_review_id)
 
-        all_information.append((score, user_id, not_yet))
+        all_information.append((score, user_id, not_yet))                           # (점수, 유저, 아직 안 본 영화 리스트)
+    all_information = sorted(all_information, reverse=True)[:10]                    # 점수 높은 순으로 정렬하여 10개를 자름.
 
-    all_information = sorted(all_information, reverse=True)[:10]
-
+    not_yet_list = list(map(list, zip(*all_information)))[2]                        # 아직 안 본 영화 리스트만 추출
     not_yet_score_dict = defaultdict(int)
-    not_yet_list = list(map(list, zip(*all_information)))[2]
-    for not_yet in not_yet_list:
+    for not_yet in not_yet_list:                                                    # 아직 안 본 영화가 겹칠 때마다 해당 영화의 id를 key로 하고 value에 +1
         for movie_id in not_yet:
             not_yet_score_dict[movie_id] += 1
 
-    print(not_yet_score_dict)
     not_yet_score_dict = sorted(not_yet_score_dict.items(), reverse=True, key=itemgetter(1))[:10]
-    print(not_yet_score_dict)
+    
+    result = []
+    for movie_id in not_yet_score_dict:
+        movie = get_object_or_404(Movie, pk=movie_id[0])
+        result.append(movie)
+
+    serializer = MovieSerializer(result, many=True)
+    return Response(serializer.data)
