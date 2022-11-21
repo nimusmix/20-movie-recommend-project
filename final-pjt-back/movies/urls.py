@@ -15,5 +15,8 @@ urlpatterns = [
     path('recommend/latent/', views.recommend_latent_model),
 
     # 유사 사용자 기반 알고리즘
-    path('recommend/similar/', views.recommend_similar_user)
+    path('recommend/similar/', views.recommend_similar_user),
+
+    # 사용자 선호장르 추천
+    path('recommend/preference/', views.recommend_preference_genre)
 ]

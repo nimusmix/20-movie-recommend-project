@@ -14,7 +14,7 @@ from rest_framework.decorators import permission_classes
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, get_list_or_404
 
-from .serializers import MovieSerializer, GenreListSerializer
+from .serializers import MovieSerializer, GenreListSerializer, TestSerializer
 from .models import Movie, Genre
 from community.models import Review
 from accounts.models import Preference
@@ -94,7 +94,7 @@ def recommend_latent_model(request):
     # reviews = get_list_or_404(Review, user=request.user)
     reviewed_movies = list(Review.objects.filter(user_id=request.user.id).values_list('movie_id', flat=True))
     for reviewed_movie in reviewed_movies:
-        result_movies_score[reviewed_movie] = 0
+        result_movie_scores[reviewed_movie] = 0
 
     result_movie_scores = list(result_movie_scores.items())
     result_movie_scores.sort(key=lambda x:x[1], reverse=True)
@@ -152,4 +152,44 @@ def recommend_similar_user(request):
         result.append(movie)
 
     serializer = MovieSerializer(result, many=True)
+    return Response(serializer.data)
+
+
+# 선호 장르 추출
+@api_view(['GET'])
+def recommend_preference_genre(request):
+    # 유저 선호 장르를 전체 불러온다.
+    user_preferences = Preference.objects.filter(user=request.user).order_by('score')
+    # 유저 선호 장르 top 3를 genre.pk 로 가져온다.
+    prefers_top3 = list(user_preferences[:3].values_list('genre', flat=True))
+
+    # 결과 값 form을 세팅
+    result = [
+        {
+            'label': user_preferences[0].genre.name,
+            'movies': [],
+            'count': 0,
+        },
+        {
+            'label': user_preferences[1].genre.name,
+            'movies': [],
+            'count': 0,
+        },
+        {
+            'label': user_preferences[2].genre.name,
+            'movies': [],
+            'count': 0,
+        }
+    ]
+    movies = Movie.objects.all()
+    # 장르당 10개씩만 구함
+    for movie in movies:
+        for idx, prefer in enumerate(prefers_top3):
+            if result[idx]['count'] < 10:
+                if(movie.genres.filter(pk=prefer)):
+                    result[idx]['movies'].append(movie)
+                    result[idx]['count'] += 1
+    
+    # Json 추출
+    serializer = TestSerializer(result, many=True)
     return Response(serializer.data)
