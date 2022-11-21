@@ -12,5 +12,8 @@ urlpatterns = [
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 
     # 잠재 모델 기반 추천 알고리즘
-    path('recommend/<str:username>/', views.user_recommend_movies_latent_model)
+    path('recommend/latent/', views.recommend_latent_model),
+
+    # 유사 사용자 기반 알고리즘
+    path('recommend/similar/', views.recommend_similar_user)
 ]

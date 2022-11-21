@@ -12,7 +12,6 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, get_list_or_404
 
 from .serializers import MovieSerializer, GenreListSerializer
-from .serializers import MoviePkSerializer
 from .models import Movie, Genre
 from community.models import Review
 from accounts.models import Preference
@@ -23,16 +22,8 @@ from accounts.models import Preference
 def movie_list(request):
     if request.method == 'GET':
         movies = get_list_or_404(Movie)
-        print(movies)
         serializer = MovieSerializer(movies, many=True)
         return Response(serializer.data)
-
-    # elif request.method == 'POST':
-    #     serializer = MovieSerializer(data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         # serializer.save()
-    #         serializer.save(user=request.user)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
@@ -49,10 +40,6 @@ def movie_detail(request, movie_pk):
             serializer.save()
             return Response(serializer.data)
 
-    # elif request.method == 'DELETE':
-    #     movie.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated])
@@ -65,9 +52,8 @@ def genre_list(request):
 
 # 잠재 모델 기반 추천 알고리즘
 @api_view(['GET'])
-def user_recommend_movies_latent_model(request, username):
-    user = get_object_or_404(get_user_model(), username=username)
-    user_preferences = get_list_or_404(Preference, user=user)
+def recommend_latent_model(request):
+    user_preferences = get_list_or_404(Preference, user=request.user)
     genres = get_list_or_404(Genre)
     score = dict()
     all_score = 0
@@ -123,4 +109,9 @@ def user_recommend_movies_latent_model(request, username):
     if request.method == 'GET':
         serializer = MovieSerializer(results_movies, many=True)
         return Response(serializer.data)
-    
+
+
+# 유사 사용자 기반 알고리즘
+@api_view(['GET'])
+def recommend_similar_user(request):
+    pass
