@@ -8,10 +8,10 @@ urlpatterns = [
     path('reviews/<int:review_pk>/', views.review_detail),
     path('movies/<int:movie_pk>/reviews/', views.review_create),
     path('movies/<int:movie_pk>/get-reviews/', views.movie_reviews),
-    # # 필수 작성
+    path('get-similar/', views.get_similar_user),
+    # 필수 작성
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
-    # # optional UI
-    # # api별로 필요한거
+    # optional UI
+    # api별로 필요한거
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-
 ]

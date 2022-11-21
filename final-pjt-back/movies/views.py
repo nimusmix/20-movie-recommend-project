@@ -123,6 +123,9 @@ def recommend_similar_user(request):
     user_ids = list(User.objects.values_list('id', flat=True))
 
     for user_id in user_ids:
+        if user_id == request.user.id:
+            continue
+        
         score = 0
         not_yet = []
 
