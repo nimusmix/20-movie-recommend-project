@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="h3">이 작품이 담긴 컬렉션</h3>
-    <div v-for="user in collectedUsers" :key="user.pk" class="user-box" @click="goToProfile(`${user.username}`)">
+    <div v-for="user in collectedUsers" :key="user.pk" class="user-box cusor-pointer" @click="goToProfile(`${user.username}`)">
       <img v-if="user?.profile_img" :src="`http://127.0.0.1:8000${user?.profile_img}`" class="img-circle-100">
       <img v-else src="@/assets/basic.png" class="img-circle-100">
       <p class="mt-2">{{ user.username }}</p>

@@ -6,7 +6,7 @@
 
     <div class="feed-item-contents d-flex justify-content-between">
       <div>
-        <div class="feed-item-name cusor-pointer">{{ review.username }}</div>
+        <div class="feed-item-name cusor-pointer" @click="goToProfile(`${review.username}`)">{{ review.username }}</div>
         <div class="cusor-pointer mt-1" @click="pushMovie"><b>{{ review.movie_title }}</b></div>
 
         <div>
@@ -28,7 +28,7 @@ export default {
   name: 'FeedItem',
   data(){
     return {
-      isSpoiler:true,
+      isSpoiler: true,
     }
   },
   props:{
@@ -45,8 +45,8 @@ export default {
       // putPreference()
       this.$router.push({ name: 'DetailView', params: { pk: this.review.movie }}) 
     },
-    pushProfile() {
-
+    goToProfile(username) {
+      this.$router.push({ name: 'ProfileView', params: { username: username }})
     },
   },
   created() {
