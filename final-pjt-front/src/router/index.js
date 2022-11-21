@@ -4,6 +4,7 @@ import LandingView from '@/views/LandingView'
 import LoginView from '@/views/LoginView'
 import SignupView from '@/views/SignupView'
 import UserEditView from '@/views/UserEditView'
+import FeedView from '@/views/FeedView'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,13 @@ const routes = [
     name: 'UserEditView',
     component: UserEditView,
   },
+
+  {
+    path: '/feed',
+    name: 'FeedView',
+    component: FeedView
+  },
+
   {
     path: '/profile/:username',
     name: 'ProfileView',
@@ -40,12 +48,6 @@ const routes = [
     path: '/home',
     name: 'HomeView',
     component: () => import('@/views/HomeView')
-  },
-
-  {
-    path: '/feed',
-    name: 'FeedView',
-    component: () => import('@/views/FeedView')
   },
 
   {

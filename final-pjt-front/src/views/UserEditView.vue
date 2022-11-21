@@ -1,6 +1,7 @@
 <template>
   <div class="router-view-padding">
-    <h1 class="h1">회원정보수정</h1>
+    <h1 class="h1" v-if="this.$route.params.signUpFlag === '1'">선택 정보 입력</h1>
+    <h1 class="h1" v-else>회원정보수정</h1>
     <div class="space"></div>
       
     <h3 class="h3">내 프로필 사진</h3>
@@ -17,7 +18,7 @@
       
 
     <div class="space"></div>
-    <h3  class="h3">좋아하는 장르를 선택해주세요.</h3>
+    <h3 class="h3">좋아하는 장르를 선택해주세요.</h3>
     <div class="button-list">
       <button
         v-for="perference in perferences" :key="perference.genre.id"

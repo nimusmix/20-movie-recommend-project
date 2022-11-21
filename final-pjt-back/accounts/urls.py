@@ -14,6 +14,7 @@ urlpatterns = [
     path('accounts/edit-perferences-like/<int:genre_pk>/', views.edit_perferences_like),
     # 선호장르 한번에 19개 만들기 POST
     path('accounts/make-preferences/', views.make_preferences),
+    path('accounts/collected-users/<int:movie_pk>/', views.collected_users),
 
     path('accounts/edit-profile-img/', views.edit_profile_img),
     path('accounts/follow/<str:username>/', views.user_follow),

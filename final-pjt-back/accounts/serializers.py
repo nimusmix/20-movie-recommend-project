@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+
 from .models import Preference, Ott
+from movies.models import Movie
 
 
 # 기본 선호 조사, 다수사용
@@ -57,3 +59,11 @@ class UserImgSerializer(serializers.ModelSerializer):
         model = get_user_model()
         fields = ['profile_img',]
         # read_only_fields = ('username', 'followings', )
+        
+
+class CollectedUserSerializer(serializers.ModelSerializer):
+    user_set = UserSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Movie
+        fields = ['user_set']

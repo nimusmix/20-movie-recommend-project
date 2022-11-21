@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import FeedItem from '@/components/FeedItem'
 
 export default {
@@ -24,7 +24,6 @@ export default {
   data() {
     return {
       filteredReviews: [],
-      similarUsers: [],
     }
   },
   methods: {
@@ -59,25 +58,6 @@ export default {
         }
       }
     },
-    getSimilar() {
-      axios({
-          method: 'get',
-          url: `${this.$store.state.API_URL}/api/v2/get-similar`,
-          headers: {
-              Authorization: `Token ${this.$store.state.token}`
-          },
-      })
-        .then((res) => {
-          let tmpSimilarUsers = []
-          for (const user of res.data) {
-            tmpSimilarUsers.push(user.id)
-          }
-          this.similarUsers = tmpSimilarUsers
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    }
   },
   computed: {
     loginUser() {
@@ -90,12 +70,15 @@ export default {
       }
       return tmp_followings
     },
+    similarUsers() {
+      return this.$store.state.similarUsers
+    },
     reviews() {
       return this.$store.state.reviews
     }
   },
   created() {
-    this.getSimilar()
+    // this.$store.dispatch('getSimilar')
     this.filtering('all')
   },
 }

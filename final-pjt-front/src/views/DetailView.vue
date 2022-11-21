@@ -32,7 +32,7 @@
       <div class="space"></div>
       <MovieReviews :reviews="reviews"/>
       <div class="space"></div>
-      <MovieCollections/>
+      <MovieCollections :movie="movie"/>
     </div>
   </div>
 </template>
@@ -68,14 +68,6 @@ export default {
     loginUser() {
       return this.$store.state.loginUser
     },
-    // isCollected() {
-    //   console.log('isCollected 호출됨!')
-    //   if (this.loginUser.collection.includes(this.movie?.id)) {
-    //     return true
-    //   } else {
-    //     return false
-    //   }
-    // },
   },
   methods: {
     getMovie() {
@@ -171,43 +163,41 @@ export default {
     }
   }
 
-.content-box {
-  margin: 56px;
+  .content-box {
+    margin: 56px;
 
-  .movie-box {
-    display: flex;
+    .movie-box {
+      display: flex;
 
-    .movie-title {
-      font-size: 2rem;
-      font-weight: 600;
-    }
-  
-    .poster-img {
-      width: 200px;
-      height: auto;
-    }
-  
-    .detail-box {
-      margin-left: 24px;
-  
-      .details {
-        display: flex;
-  
-        .detail {
-          margin-right: 5px;
+      .movie-title {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+    
+      .poster-img {
+        width: 200px;
+        height: auto;
+      }
+    
+      .detail-box {
+        margin-left: 24px;
+    
+        .details {
+          display: flex;
+    
+          .detail {
+            margin-right: 5px;
+          }
         }
       }
     }
-  }
 
-  .overview-box {
-    margin-top: 20px;
+    .overview-box {
+      margin-top: 20px;
 
-    p {
-      margin: 0;
+      p {
+        margin: 0;
+      }
     }
   }
-}
-
-  
 </style>

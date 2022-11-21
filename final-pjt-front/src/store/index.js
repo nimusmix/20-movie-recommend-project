@@ -37,6 +37,7 @@ export default new Vuex.Store({
     username: null,
     token: null,
     loginUser: null,
+    similarUsers: [],
     API_URL:'http://127.0.0.1:8000'
   },
 
@@ -58,6 +59,9 @@ export default new Vuex.Store({
     },
     GET_LOGIN_USER(state, user) {
       state.loginUser = user
+    },
+    GET_SIMILAR(state, similarUsers) {
+      state.similarUsers = similarUsers
     },
     // 회원가입 && 로그인
     SAVE_USER(state, user) {
@@ -103,7 +107,7 @@ export default new Vuex.Store({
         method: 'get',
         url: `${context.state.API_URL}/api/v2/reviews/`,
       })
-      .then((res) => {
+        .then((res) => {
           console.log('3 actions의 getReviews 성공!')
           context.commit('GET_REVIEWS', res.data)
         })
@@ -126,6 +130,25 @@ export default new Vuex.Store({
           })
       }
     },
+    getSimilar(context) {
+      axios({
+          method: 'get',
+          url: `${context.state.API_URL}/api/v2/get-similar`,
+          headers: {
+              Authorization: `Token ${context.state.token}`
+          },
+      })
+        .then((res) => {
+          let similarUsers = []
+          for (const user of res.data) {
+            similarUsers.push(user.id)
+          }
+          context.commit('GET_SIMILAR', similarUsers)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     putPreference(context, genre){
       axios({
         method: 'put',
@@ -134,9 +157,8 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.token}`
         },
       })
-      .then((res) => {
+        .then(() => {
           console.log('actions의 putPreference 성공!')
-          console.log(res)
         })
         .catch(() => {
           console.log('actions의 putPreference 실패!')

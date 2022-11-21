@@ -89,7 +89,7 @@ export default {
         })
     },
     goToEdit() {
-      this.$router.push({ name: 'UserEditView', params: { name: 'UserEditView', signUpFlag: 1 } })
+      this.$router.push({ name: 'UserEditView', params: { name: 'UserEditView', signUpFlag: 0 } })
     }
   },
   created() {

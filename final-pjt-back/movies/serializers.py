@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from .models import Movie, Genre
 
 
@@ -19,4 +20,3 @@ class GenreListSerializer(serializers.ModelSerializer):
 class TestSerializer(serializers.Serializer):
     label = serializers.CharField()
     movies = MovieSerializer(many=True, read_only=True)
-

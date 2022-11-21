@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from movies.models import Movie, Genre
 from accounts.models import Preference
 from .serializers import UserSerializer, UserAllSerializer, UserPreferenceDepthSerializer, UserPreferenceSerializer, UserImgSerializer
-from .serializers import UserOttSerializer
+from .serializers import UserOttSerializer, CollectedUserSerializer
 
 # Create your views here.
 @api_view(['GET'])
@@ -105,6 +105,7 @@ def otts(request):
     serializer = UserOttSerializer(user)
     return Response(serializer.data)
 
+
 @api_view(['PUT'])
 def edit_otts(request, ott_pk):
     user = get_object_or_404(get_user_model(), username=request.user)
@@ -121,4 +122,13 @@ def edit_profile_img(request):
     serializer = UserImgSerializer(request.user, data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save()
+        return Response(serializer.data)
+    
+
+@api_view(['GET'])
+def collected_users(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+
+    if request.method == 'GET':
+        serializer = CollectedUserSerializer(movie)
         return Response(serializer.data)
