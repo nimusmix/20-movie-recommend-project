@@ -15,3 +15,8 @@ class GenreListSerializer(serializers.ModelSerializer):
         model = Genre
         fields = '__all__'
 
+
+class TestSerializer(serializers.Serializer):
+    label = serializers.CharField()
+    movies = MovieSerializer(many=True, read_only=True)
+
