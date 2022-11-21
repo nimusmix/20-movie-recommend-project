@@ -17,24 +17,25 @@ class ReviewSerializer(serializers.ModelSerializer):
     
     def get_last_time(self, obj):
         ## 어웨어와 네이브 타입 주의!!
+        ## 속성이 days와 seconds존재, hours... 없음!!
         time = datetime.now(timezone.utc) - obj.created_at
-        str_time = str(time)
-        hour, minute, second = str_time.split(':')
-        second = second.split('.')[0]
-        hour = int(hour)
-        minute = int(minute)
-        second = int(second)
         result = ''
-        if hour > 24:
-            result = f'{hour//24}일 전'
-        elif hour >= 1:
-            result = f'{hour}시간 전'
-        elif minute >= 1:
-            result = f'{minute}분 전'
-        else:
-            result = f'{second}초 전'
-        return result
+        days = time.days
+        hours = time.seconds // 3600
+        minutes = time.seconds // 60
+        seconds = time.seconds % 60
 
+        if time.days >= 30:
+            result = f'{days // 31}달 전'
+        elif time.days >= 1:
+            result = f'{days}일 전'
+        elif hours >= 1:
+            result = f'{hours}시간 전'
+        elif minutes >= 1:
+            result = f'{minutes}분 전'
+        else:
+            result = f'{seconds}초 전'
+        return result
 
 class MovieReviewSerializer(serializers.ModelSerializer):
     review_set = ReviewSerializer(many=True, read_only=True)
