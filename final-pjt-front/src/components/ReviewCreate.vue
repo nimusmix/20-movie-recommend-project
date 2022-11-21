@@ -12,7 +12,7 @@
         </div>
         <div class="d-flex align-items-center">
           <div class="d-flex algin-items-center"><input id="checkbox" type="checkbox" v-model="is_spoiler">&nbsp;&nbsp;스포일러 포함</div>&nbsp;&nbsp;
-          <input type="submit" id="submit" class="main-button selected">
+          <input type="submit" id="submit" class="main-button selected" style="color: white;">
         </div>
       </div>
     </form>

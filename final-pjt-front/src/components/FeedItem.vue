@@ -11,7 +11,7 @@
 
         <div>
           <span v-if="!isSpoiler">{{ review.content }}</span>
-          <span v-else style="background-color:aqua;cursor: pointer;" @click="switchIsSpoiler">스포일러방지!</span>
+          <span v-else class="spoiler-button" @click="switchIsSpoiler">스포일러가 포함된 리뷰입니다.</span>
         </div>
         
         <div style="display:inline-block">
@@ -56,5 +56,12 @@ export default {
 </script>
 
 <style>
-
+  .spoiler-button {
+    position: relative;
+    z-index: 0;
+    padding: 4px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+  }
 </style>

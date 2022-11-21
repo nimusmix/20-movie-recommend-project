@@ -225,7 +225,7 @@
 
   .main-button {
     padding: 0.2rem 1rem;
-    color:var(--primary-color);
+    color: var(--primary-color);
     border: 1px solid var(--primary-color);
     background: none;
     border-radius: 30px;
