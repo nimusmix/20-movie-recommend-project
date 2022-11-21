@@ -99,9 +99,30 @@ def make_preferences(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['PUT'])
-def edit_otts(request, ott_pk):
-    pass
+@api_view(['GET','PUT'])
+def otts(request):
+    user = get_object_or_404(get_user_model(), username=request.user)
+
+    if request.method == 'GET':
+        serializer = UserOttSerializer(user)
+        return Response(serializer.data)
+
+    if request.method == 'PUT':
+        # ott_list = request.data
+        # print(ott_list)
+        if user.using_otts.filter(pk=97).exists():
+            user.using_otts.remove(97)
+        else:
+            user.using_otts.add(97)
+        serializer = UserOttSerializer(user)
+        return Response(serializer.data)
+    # print(user.using_otts.values())
+    # daa = 
+    # print(request.data)
+
+
+    # serializer = UserSerializer(user)
+    # return Response(serializer.data)
 
 
 @api_view(['PUT'])

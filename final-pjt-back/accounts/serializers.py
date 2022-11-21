@@ -43,10 +43,11 @@ class UserPreferenceDepthSerializer(serializers.ModelSerializer):
 
 # 유저 Ott 조사, 다수 사용
 class UserOttSerializer(serializers.ModelSerializer):
-
+    # name = serializers.CharField(source='movie.title', read_only=True)
     class Meta:
-        model = Ott
-        fields = '__all__'
+        model = get_user_model()
+        fields = ['using_otts',]
+        # depth = 2
         # read_only_fields = ('user', 'genre')
 
 
