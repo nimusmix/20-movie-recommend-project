@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 
 from movies.models import Movie, Genre
 from accounts.models import Preference
-from .serializers import UserSerializer, UserAllSerializer, UserPreferenceDepthSerializer, UserPreferenceSerializer
+from .serializers import UserSerializer, UserAllSerializer, UserPreferenceDepthSerializer, UserPreferenceSerializer, UserImgSerializer
 from .serializers import UserOttSerializer
 
 # Create your views here.
@@ -99,12 +99,14 @@ def make_preferences(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-# 선호 정보를 전부 출력
-# 선호도 관계조사
-# 아직안쓰임
-@api_view(['GET'])
-def perferences_list(request):
-    preferences = get_list_or_404(Preference)
-    if request.method == 'GET':
-        serializer = UserPreferenceSerializer(preferences, many=True)
+@api_view(['PUT'])
+def edit_otts(request, ott_pk):
+    pass
+
+
+@api_view(['PUT'])
+def edit_profile_img(request):
+    serializer = UserImgSerializer(request.user, data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save()
         return Response(serializer.data)

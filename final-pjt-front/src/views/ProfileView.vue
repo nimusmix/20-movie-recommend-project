@@ -1,5 +1,7 @@
 <template>
   <div>
+    <img v-if="profileUser?.profile_img" :src="`http://127.0.0.1:8000${profileUser?.profile_img}`">
+    <img v-else src="@/assets/basic.png" alt="">
     <h1 class="h1">@{{ profileUser?.username }}</h1>
     <div>
       <div v-if="loginUser.username !== profileUser?.username" @click="follow">

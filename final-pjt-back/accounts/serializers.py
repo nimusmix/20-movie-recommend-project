@@ -48,3 +48,11 @@ class UserOttSerializer(serializers.ModelSerializer):
         model = Ott
         fields = '__all__'
         # read_only_fields = ('user', 'genre')
+
+
+class UserImgSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = ['profile_img',]
+        # read_only_fields = ('username', 'followings', )

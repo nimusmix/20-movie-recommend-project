@@ -1,4 +1,3 @@
-
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 # Authentication Decorators
@@ -42,7 +41,6 @@ def review_detail(request, review_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
-
 
 
 @api_view(['POST'])

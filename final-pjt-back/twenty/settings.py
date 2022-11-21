@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'movies',
     'community',
 
+    'imagekit',
+    
     'rest_framework',
 
     # CORS policy
@@ -181,3 +183,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = '/media/'
