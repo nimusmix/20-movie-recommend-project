@@ -468,4 +468,17 @@ output.b-rating{
 .space {
   height: 56px;
 }
+
+.profile-img-box {
+  width: 140px;
+  height: 140px;
+  border-radius: 70%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
 </style>

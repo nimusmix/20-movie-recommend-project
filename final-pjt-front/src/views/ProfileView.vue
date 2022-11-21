@@ -1,26 +1,26 @@
 <template>
   <div>
-    <img v-if="profileUser?.profile_img" :src="`http://127.0.0.1:8000${profileUser?.profile_img}`">
-    <img v-else src="@/assets/basic.png" alt="">
-    <h1 class="h1">@{{ profileUser?.username }}</h1>
-    <div>
-      <div v-if="loginUser.username !== profileUser?.username" @click="follow">
-        <button id="followBtn" v-if="isFollowing">언팔로우</button>
-        <button id="followBtn" v-else>팔로우</button>
+    <div class="head-box">
+      <div class="profile-img-box">
+        <img v-if="profileUser?.profile_img" :src="`http://127.0.0.1:8000${profileUser?.profile_img}`">
+        <img v-else src="@/assets/basic.png" alt="">
       </div>
-      <router-link
-        v-else
-        :to="{ name: 'UserEditView', params: { name: 'UserEditView', signUpFlag: 1 } }"
-        >
-          회원정보수정
-        </router-link>
+      <div class="detail-box">
+        <div class="user-and-button">
+          <h1 class="h1 m-0">@{{ profileUser?.username }}</h1>
+          <div v-if="loginUser.username !== profileUser?.username" @click="follow">
+            <button id="followBtn" class="main-button selected" v-if="isFollowing">언팔로우</button>
+            <button id="followBtn" class="main-button selected" v-else>팔로우</button>
+          </div>
+          <button v-else class="main-button selected" @click="goToEdit">회원정보수정</button>
+        </div>
+        <div class="follow-info">
+          <div>팔로워 &nbsp;<b>{{ profileUser?.followers.length }}</b></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          <div>팔로잉 &nbsp;<b>{{ profileUser?.followings.length }}</b></div>
+        </div>
+      </div>
     </div>
-    <div class="d-flex">
-      <div>팔로워 &nbsp;<b>{{ profileUser?.followers.length }}</b></div>
-      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-      <div>팔로잉 &nbsp;<b>{{ profileUser?.followings.length }}</b></div>
-    </div>
-
     <div class="space"></div>
     <CollectionList :collection="profileUser?.collection"/>
     <div class="space"></div>
@@ -87,6 +87,9 @@ export default {
           console.log(err)
         })
     },
+    goToEdit() {
+      this.$router.push({ name: 'UserEditView', params: { name: 'UserEditView', signUpFlag: 1 } })
+    }
   },
   created() {
     this.getProfileUser()
@@ -94,6 +97,28 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  .head-box {
+    display: flex;
+    align-items: center;
+
+    .detail-box{
+      display: flex;
+      flex-direction: column;
+      margin-left: 0.8rem;
+
+      .user-and-button {
+        width: 400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .follow-info {
+        display: flex;
+        margin-top: 0.4rem;
+      }
+    }
+  }
 
 </style>
