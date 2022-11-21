@@ -13,6 +13,16 @@
         {{ perference.genre_name }}
       </button>
     </div>
+    {{ otts }}
+    <div class="button-list">
+      <button
+        v-for="ott in otts" :key="ott.id"
+         :class="[{'selected': ott.like}, 'main-button']" 
+          @click="isSelectedOtt(ott)"> 
+          {{ ott.name }}
+      </button>
+    </div>
+    
 
     <div v-if="this.$route.params.signUpFlag === '1'">
       <form @submit.prevent="editInfo('HomeView', false)">
@@ -31,6 +41,8 @@
         <button>수정하기</button>
       </form>
     </div>
+
+    <!-- <button @click="editOtt">장르 1</button> -->
   </div>
 </template>
 
@@ -42,11 +54,37 @@ export default {
   data() {
     return {
         perferences: null,
+        otts: null,
         img: null,
     }
   },
   methods: {
-  // 선호 장르를 받아온다.
+    //  선호 오티티 가져오기
+    getOtts() {
+      this.otts = this.$store.state.otts
+      this.otts.forEach((ott)=>ott['like'] = false)
+      axios({
+        method: 'get',
+        url: `${this.$store.state.API_URL}/api/v3/accounts/otts/`,
+        headers: {
+            Authorization: `Token ${this.$store.state.token}`
+        },
+      })
+        .then((res) => {
+          console.log('otts 성공!')
+          this.otts.forEach((ott)=>{
+            if(res.data.using_otts.indexOf(ott.id)){
+              ott.like = true
+            }
+          })
+          console.log(this.otts)
+        })
+        .catch((err) => {
+          console.log('otts 실패!')
+          console.log(err)
+        })
+    },
+    // 선호 장르를 받아온다.
     getPerferences() {
       axios({
         method: 'get',
@@ -107,9 +145,27 @@ export default {
           })
       }
     },
-    // editOtts() {
-      
-    // },
+    editOtts(){
+      // const data_dict = {
+        
+      // }
+      // axios({
+      //   method: 'put',
+      //   url: `${this.$store.state.API_URL}/api/v3/accounts/otts/`,
+      //   data: {
+      //       'like': perference.like,
+      //   },
+      //   headers: {
+      //       Authorization: `Token ${this.$store.state.token}`
+      //   },
+      // })
+      //   // .then(() => {
+      //   //   console.log(`${perference.genre} editPreferences 성공!`)
+      //   // })
+      //   .catch((err) => {
+      //     console.log(err)
+      //   })
+    },
     // 회원 정보 수정
     editInfo(nextPage, is_axios) {
         // 1은 회원가입 후를 
@@ -132,6 +188,10 @@ export default {
       const idx = this.perferences.indexOf(perference)
       this.perferences[idx].like = !this.perferences[idx].like
     },
+    isSelectedOtt(ott) {
+      const idx = this.otts.indexOf(ott)
+      this.otts[idx].like = !this.otts[idx].like
+    },
   },
   computed:{
     username() {
@@ -140,6 +200,8 @@ export default {
   },
   created() {
     this.getPerferences()
+    this.getOtts()
+    
   },
 }
 </script>
