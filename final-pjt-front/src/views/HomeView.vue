@@ -1,6 +1,6 @@
 <template>
-  <div class="h1">
-    <h1>홈</h1>
+  <div class="router-view-padding">
+    <h1 class="h1">홈</h1>
     <HomeRecommend/>
     <HomeFeed/>
   </div>

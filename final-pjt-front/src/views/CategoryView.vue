@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="router-view-padding">
     <h1 class="h1">카테고리</h1>
     <div class="button-list">
       <button
@@ -21,7 +21,7 @@
       </button>
     </div>
 
-    <p>{{ filteredMovies.length }}개의 영화가 있습니다.</p>
+    <p class="movie-count">{{ filteredMovies.length }}개의 영화가 있습니다.</p>
     <div class="row row-cols-1 row-cols-md-4 row-cols-xl-6 g-4">
       <article 
         v-for="movie in filteredMovies"
@@ -133,4 +133,8 @@ export default {
 </script>
 
 <style>
+  .movie-count {
+    margin-top: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
 </style>

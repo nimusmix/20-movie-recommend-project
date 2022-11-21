@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="router-view-padding">
     <h1 class="h1">피드</h1>
     <article v-for="review in reviews" :key="review.id">
       <FeedItem :review="review"/>

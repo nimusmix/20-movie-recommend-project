@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="router-view-padding">
     <h1 class="h1">추천영화</h1>
     <div v-for="recommendObject in recommendBaseList" :key="recommendObject.name">
       <button @click="getRecommend(recommendObject)">{{ recommendObject.name }}</button>
@@ -8,7 +8,7 @@
       <div>
         {{ recommendObject.label }}
       </div>
-      <div class="row row-cols-1 row-cols-md-4 g-4">
+      <div class="row row-cols-1 row-cols-md-4 row-cols-xl-6 g-4">
         <article 
           v-for="movie in recommendObject.data"
           :key="movie.id"

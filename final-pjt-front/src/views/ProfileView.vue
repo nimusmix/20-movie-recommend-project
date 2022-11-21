@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="router-view-padding">
     <div class="head-box">
       <div class="profile-img-box">
         <img v-if="profileUser?.profile_img" :src="`http://127.0.0.1:8000${profileUser?.profile_img}`">

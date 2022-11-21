@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="router-view-padding">
     <h1 class="h1">회원정보수정</h1>
     <div>
       <input type="file" @change="changeImg" ref="profileImg">

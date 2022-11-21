@@ -4,7 +4,11 @@
     <div id="color-mode" >
       <nav id="col-nav">
         <div id="nav-logo" class="logo t-d-none cusor-pointer" @click="goToHome">20.</div>
-        <router-link :to="{ name: 'ProfileView', params: { username: username } }">{{ username }}</router-link>
+        <div class="profile-img-box cusor-pointer">
+          <img v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`" @click="goToProfile">
+          <img v-else src="@/assets/basic.png" @click="goToProfile">
+        </div>
+        <router-link :to="{ name: 'ProfileView', params: { username: loginUser.username } }">{{ loginUser.username }}</router-link>
         <div v-if="isLogin">
           <button @click="logout">로그아웃</button>
         </div>
@@ -74,18 +78,18 @@
       isLogin() {
         return this.$store.getters.isLogin
       },
-      username() {
-        return this.$store.state.username
+      loginUser() {
+        return this.$store.state.loginUser
       }
     },
     methods: {
       logout() {
         this.$store.commit('LOGOUT')
       },
-      changeClass(){
-        if (this.mainclass != 'dark'){
+      changeClass() {
+        if (this.mainclass != 'dark') {
           this.mainclass='dark'
-        }else{
+        } else {
           this.mainclass='light'
         }
       },
@@ -101,10 +105,14 @@
       goToHome() {
         this.$router.push({ name: 'HomeView' })
           .catch(() => {})
+      },
+      goToProfile() {
+        this.$router.push({ name: 'ProfileView', params: { username: this.loginUser.username } })
+        .catch(() => {})
       }
     },
     updated() {
-      this.$store.dispatch('getLoginUser')
+      // this.$store.dispatch('getLoginUser')
       this.$store.dispatch('getGenres')
       this.$store.dispatch('getMovies')
       this.$store.dispatch('getReviews')
@@ -202,6 +210,7 @@
   #app .h1 {
     font-size: $lg-font-size;
     font-weight: $lg-font-weight;
+    margin-bottom: 24px;
   }
 
   #app .h3 {
@@ -360,15 +369,17 @@
 
   //라우터 뷰 전역설정
   #router-view{
-    margin-left:$nav-width;
-    // padding-top: 48px;
-    // padding-left: 80px;
+    margin-left: $nav-width;
     min-height: 100vh;
   }
 
   @function w_to_h() {
         
   }
+
+  .router-view-padding {
+      padding: 56px 56px 56px 56px;
+    }
 
   // 영화카드
   .movie-card {
@@ -398,6 +409,10 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      .movie-card-detail {
+        margin: 0px;
       }
     }
   }
