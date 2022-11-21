@@ -3,7 +3,7 @@
     
     <div id="color-mode" >
       <nav id="col-nav">
-        <a id="nav-logo" class="logo t-d-none cusor-pointer">20.</a>
+        <div id="nav-logo" class="logo t-d-none cusor-pointer" @click="goToHome">20.</div>
         <router-link :to="{ name: 'ProfileView', params: { username: username } }">{{ username }}</router-link>
         <div v-if="isLogin">
           <button @click="logout">로그아웃</button>
@@ -96,6 +96,10 @@
       },
       goToLink(routerLink) {
         this.$router.push({ name: routerLink })
+          .catch(() => {})
+      },
+      goToHome() {
+        this.$router.push({ name: 'HomeView' })
           .catch(() => {})
       }
     },
@@ -199,22 +203,26 @@
     font-size: $lg-font-size;
     font-weight: $lg-font-weight;
   }
+
   #app .h3 {
     font-size: $movie-h3-font;
     font-weight: $lg-font-weight;
+    margin-bottom: 0.8rem;
   }
+
   #app .h3 a{
     font-size: $movie-h3-font;
     font-weight: $lg-font-weight;
   }
 
 // button 스타일
-  .button-list{
-    .main-button{
+  .button-list {
+    .main-button {
       margin-right: 0.5rem;
       margin-bottom: 0.5rem;
     }
   }
+
   .main-button {
     padding: 0.2rem 1rem;
     color:var(--primary-color);
@@ -222,18 +230,16 @@
     background: none;
     border-radius: 30px;
     transition: $trans-global-fast;//$trans-global;
-    &.selected{
+
+    &.selected {
       background-color: var(--primary-color);
       color:var(--button-live-text-color);
     }
-    &:hover{
+    &:hover {
       background-color: var(--primary-color);
       color:var(--button-live-text-color);
     }
   }
-
-
-
 
 
 // 전역 스타일
@@ -246,23 +252,26 @@
     font-size: $main-font-size;
     font-weight: $main-font-weight;
   }
+
   //텍스트 데코레이션
   .t-d-none{
     text-decoration: none;
   }
+
   // 커서 스타일
   .cusor-pointer{
-    cursor:pointer;
+    cursor: pointer;
   }
+
   // 로고
-  .logo{
+  .logo {
     font-family: $logo-font;
     font-weight: 600;
     font-size: 3rem;
   }
 
 // 네비 스타일
-  $nav-width:240px;
+  $nav-width: 240px;
   #col-nav {
     min-width: $nav-width;
     position: fixed;
@@ -270,52 +279,59 @@
     overflow: auto;
     transition:$trans-global;
   }
+
   nav {
     $main-nav-padding-left:42px;
     background-color: var(--bg-color);
+
     svg {
       stroke: var(--disable-color);
     }
     
     #nav-ul{
-      
       margin: 0px;
       padding: 0px;
-      li{
-        
+      li {
         height: 56px;
         border-right: 5px solid var(--bg-color);
-        svg{
+        transition:$trans-global-fast;
+
+        svg {
           margin-right: 16px;
         }
+      }
+
+      li:hover {
+        background-color: var(--primary-color-10);
+        border-right: 5px solid var(--primary-color);
         transition:$trans-global-fast;
       }
-      li:hover{
-       background-color: var(--primary-color-10);
-       border-right: 5px solid var(--primary-color);
-       transition:$trans-global-fast;
-      }
+
       a {
         padding-left: $main-nav-padding-left;
         display: inline-block;
         vertical-align: middle;
         color: var(--disable-color);
         text-decoration: none;
-        
       }
-      li:hover a{
+
+      li:hover a {
         color: var(--primary-color);
+
         svg {
           stroke: var(--primary-color);
         }
       }
+
       a.router-link-exact-active {
         color: var(--primary-color);
+
         svg {
           stroke: var(--primary-color);
         }
       }
     }
+
     #nav-logo {
       color: var(--text-color);
       display: block;
@@ -324,161 +340,177 @@
       margin-top: 40px;
       margin-bottom: 40px;
     }
+
     .li-inner-box{
       width:100%;
       height:100%;
       position: relative;
     }
+
     .li-inner-box a{
       position: absolute;top: 50%;
       transform: translate(0%,-50%) /* 자식요소에 translate 값 주기*/
     }
+
     .v-a-middle{
       display: inline-block;
       vertical-align: middle;
     }
   }
 
-//라우터 뷰 전역설정
-#router-view{
-  margin-left:$nav-width;
-  // padding-top: 48px;
-  // padding-left: 80px;
-  min-height: 100vh;
-}
+  //라우터 뷰 전역설정
+  #router-view{
+    margin-left:$nav-width;
+    // padding-top: 48px;
+    // padding-left: 80px;
+    min-height: 100vh;
+  }
 
-@function w_to_h() {
-      
-}
+  @function w_to_h() {
+        
+  }
 
-// 영화카드
-.movie-card {
-  display: block;
+  // 영화카드
+  .movie-card {
+    display: block;
 
-  a {
-    color:var(--text-color);
-    img {
-      width: 100%;
-      aspect-ratio: 3.5 / 5;
-      object-fit: cover;
-      border-radius: $border-radius-8;
-    }
-    h3 {
-      margin: 0.4rem 0px 0px 0px;
-    }
     a {
-      font-size: $main-font-size;
-    }
-    .movie-card-title {
-      margin-top: 0.8rem;
-      margin-bottom: 0.4rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-}
+      color: var(--text-color);
 
-// 피드 아이템
-.feed-item {
-  display: flex;
-  border: none;
-  width: 500px;
-  height: 148px;
-  background: var(--bg-color);
-  box-shadow: 4px 0px 20px var(--feed-shadow);
-  border-radius: $border-radius-8;
-  padding: 0rem 0rem;
-  margin-bottom: 0.8rem;
+      img {
+        width: 100%;
+        aspect-ratio: 3.5 / 5;
+        object-fit: cover;
+        border-radius: $border-radius-8;
+      }
 
-  img {
-    display: inline-block;
-    height: inherit;
-    aspect-ratio: 3.5 / 5;
-    // object-fit: cover;
-    // overflow: hidden;
-  }
-  .feed-item-contents{
-    display: inline-block;
-    width: 392px;
-    padding: 1rem 1rem;
-  }
-  .feed-item-name{
-    display:inline-block;
-  }
-  .feed-item-lasttime{
-    display:inline-block;
-    color: var(--disable-color);
-  }
-}
-// 리뷰 만들 때
-#REVIEW_CREATE {
-      border: 1px solid var(--text-color);
-      padding: 1rem 1.5rem ;
-      background: var(--bg-color);
-      border-radius: 8px;
-      border-color: var(--primary-color);
-      box-shadow: 0px 0px 10px 0px var(--primary-color-15);
-      .logo{
-        display: inline-block;
+      h3 {
+        margin: 0.4rem 0px 0px 0px;
       }
-      input{
-        color: var(--disable-color);
-        background-color: none;
-        border: none;
+
+      a {
+        font-size: $main-font-size;
       }
-}
-// 별
-output.b-rating{
-      margin: 0px;
-      padding: 0px;
-      height: 0px;
+
+      .movie-card-title {
+        margin-top: 0.8rem;
+        margin-bottom: 0.4rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  // 피드 아이템
+  .feed-item {
+    display: flex;
+    border: none;
+    width: 500px;
+    height: 148px;
+    background: var(--bg-color);
+    box-shadow: 4px 0px 20px var(--feed-shadow);
+    border-radius: $border-radius-8;
+    padding: 0rem 0rem;
+    margin-bottom: 0.8rem;
+
+    img {
+      display: inline-block;
+      height: inherit;
+      aspect-ratio: 3.5 / 5;
+      // object-fit: cover;
+      // overflow: hidden;
+    }
+
+    .feed-item-contents {
+      display: inline-block;
+      width: 392px;
+      padding: 1rem 1rem;
+    }
+
+    .feed-item-name {
+      display:inline-block;
+    }
+
+    .feed-item-lasttime {
+      display:inline-block;
+      color: var(--disable-color);
+    }
+  }
+
+  // 리뷰 만들 때
+  #REVIEW_CREATE {
+    border: 1px solid var(--text-color);
+    padding: 1rem 1.5rem ;
+    background: var(--bg-color);
+    border-radius: 8px;
+    border-color: var(--primary-color);
+    box-shadow: 0px 0px 10px 0px var(--primary-color-15);
+
+    .logo {
+      display: inline-block;
+    }
+
+    input {
+      color: var(--disable-color);
+      background-color: none;
       border: none;
     }
-    
-  .star-rating{
+  }
+  // 별
+  output.b-rating {
+    margin: 0px;
+    padding: 0px;
+    height: 0px;
+    border: none;
+  }
+      
+  .star-rating {
     background-color: none;
-    .b-rating-star{
+
+    .b-rating-star {
       margin: 0px;
       padding: 4px;
     }
-    .b-rating-icon{
+
+    .b-rating-icon {
       color: var(--primary-color);
       margin: 0px;
       padding: 0px;
-      svg{
+
+      svg {
         min-width:1px;
       }
     }
   }
 
-.user-input {
-  margin: 10px 0px;
-  text-align: center;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
-}
-
-.err-msg {
-  color: var(--danger-color);
-}
-
-.space {
-  height: 56px;
-}
-
-.profile-img-box {
-  width: 140px;
-  height: 140px;
-  border-radius: 70%;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .user-input {
+    margin: 10px 0px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
   }
-}
+
+  .err-msg {
+    color: var(--danger-color);
+  }
+
+  .space {
+    height: 56px;
+  }
+
+  .profile-img-box {
+    width: 140px;
+    height: 140px;
+    border-radius: 70%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 </style>
