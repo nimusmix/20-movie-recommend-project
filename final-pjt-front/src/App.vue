@@ -347,50 +347,68 @@
   min-height: 100vh;
 }
 
-@function w_to_h(){
+@function w_to_h() {
       
 }
 
 // 영화카드
-.movie-card{
-  a{
+.movie-card {
+  display: block;
+
+  a {
     color:var(--text-color);
     img {
       width: 100%;
-      aspect-ratio: 3 / 5;
+      aspect-ratio: 3.5 / 5;
       object-fit: cover;
       border-radius: $border-radius-8;
     }
-    h3{
+    h3 {
       margin: 0.4rem 0px 0px 0px;
     }
-    a{
+    a {
       font-size: $main-font-size;
+    }
+    .movie-card-title {
+      margin-top: 0.8rem;
+      margin-bottom: 0.4rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
 
 // 피드 아이템
-.feed-item{
+.feed-item {
+  display: flex;
   border: none;
+  width: 500px;
+  height: 148px;
   background: var(--bg-color);
   box-shadow: 4px 0px 20px var(--feed-shadow);
   border-radius: $border-radius-8;
   padding: 0rem 0rem;
+  margin-bottom: 0.8rem;
+
   img {
-    display:inline-block;
-    height: 100px;
+    display: inline-block;
+    height: inherit;
+    aspect-ratio: 3.5 / 5;
+    // object-fit: cover;
+    // overflow: hidden;
   }
   .feed-item-contents{
-    display:inline-block;
+    display: inline-block;
+    width: 392px;
     padding: 1rem 1rem;
   }
   .feed-item-name{
     display:inline-block;
   }
   .feed-item-lasttime{
-    float: right;
     display:inline-block;
+    color: var(--disable-color);
   }
 }
 // 리뷰 만들 때

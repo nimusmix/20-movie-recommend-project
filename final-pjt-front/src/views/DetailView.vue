@@ -94,7 +94,7 @@ export default {
             }
           })
 
-          const imgUrl = 'https://image.tmdb.org/t/p/w500/'
+          const imgUrl = 'https://image.tmdb.org/t/p/original/'
           this.backdropUrl = imgUrl + this.movie.backdrop_path
           this.posterUrl = imgUrl + this.movie.poster_path
 

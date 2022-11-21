@@ -1,19 +1,20 @@
 <template>
-  <div style="width:500px">
+  <div style="width: 500px;">
     <h3 class="h3">리뷰 남기기</h3>
     <form id="REVIEW_CREATE" @submit.prevent="createReview">
       <!-- <label for="content">내용 : </label> -->
-      <div class="logo">{{ content.length }}.</div>
-      <!-- <div>{{ length_warning }}</div>                         확인 -->
+      <div class="logo">{{ content.length }}.</div>&nbsp;&nbsp;
       <input id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @input="test($event.target.value)"><br>
-      
-      <div style="display:inline-block">
-        <b-form-rating class="star-rating" size="lg" v-model="value"></b-form-rating> 
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div style="display: inline-block;">
+          <b-form-rating class="star-rating" size="lg" v-model="value"></b-form-rating> 
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="d-flex algin-items-center"><input id="checkbox" type="checkbox" v-model="is_spoiler">&nbsp;&nbsp;스포일러 포함</div>&nbsp;&nbsp;
+          <input type="submit" id="submit" class="main-button selected">
+        </div>
       </div>
-      <!-- show-value -->
-      <input id="checkbox" type="checkbox" v-model="is_spoiler"> 스포일러 포함
-      
-      <input type="submit" id="submit">
     </form>
   </div>
 </template>
@@ -120,6 +121,8 @@ export default {
 </script>
 
 <style lang="scss">
-    
+  #content {
+    outline: none;
+  }
     
 </style>

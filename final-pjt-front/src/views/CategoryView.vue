@@ -22,7 +22,7 @@
     </div>
 
     <p>{{ filteredMovies.length }}개의 영화가 있습니다.</p>
-    <div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="row row-cols-1 row-cols-md-4 row-cols-xl-6 g-4">
       <article 
         v-for="movie in filteredMovies"
         :key="movie.id"

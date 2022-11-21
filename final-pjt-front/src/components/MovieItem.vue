@@ -3,8 +3,9 @@
       <a class="t-d-none" @click.prevent="putPreference()" >
         <img :src="`https://image.tmdb.org/t/p/original/${ movie.poster_path }`" 
         class="card-img-top" alt="...">
-        <h5>{{ movie.title }}</h5>
-        <p><span>평균 별 </span>{{ movie.vote_average }}</p>
+        <h5 class="movie-card-title">{{ movie.title }}</h5>
+        <div class="movie-card-detail">{{ movie?.release_date.substring(0, 4) }}</div>
+        <p class="movie-card-detail"><span>평균 별 </span>{{ movie.vote_average }}</p>
       </a>
     </div>
   </template>
