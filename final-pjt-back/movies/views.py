@@ -1,3 +1,6 @@
+from collections import defaultdict
+from operator import itemgetter
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -15,6 +18,8 @@ from .serializers import MovieSerializer, GenreListSerializer
 from .models import Movie, Genre
 from community.models import Review
 from accounts.models import Preference
+
+User = get_user_model()
 
 
 @api_view(['GET', 'POST'])
@@ -88,7 +93,7 @@ def recommend_latent_model(request):
             result_movies_score[movie.pk] = movie_score
 
     # 본 영화 제외하기
-    reviews = get_list_or_404(Review, user=user)
+    reviews = get_list_or_404(Review, user=request.user)
     for review in reviews:
         result_movies_score[review.movie.pk] = 0
     result_movies_score = list(result_movies_score.items())
@@ -114,4 +119,36 @@ def recommend_latent_model(request):
 # 유사 사용자 기반 알고리즘
 @api_view(['GET'])
 def recommend_similar_user(request):
-    pass
+    all_information = []
+    not_yet_list = []
+
+    # 로그인한 유저가 리뷰 남긴 영화의 id
+    my_review_ids = list(Review.objects.filter(user_id=request.user.id).values_list('movie_id', flat=True))
+
+    # 모든 유저의 id
+    user_ids = list(User.objects.values_list('id', flat=True))
+
+    for user_id in user_ids:
+        score = 0
+        not_yet = []
+
+        user_review_ids = list(Review.objects.filter(user_id=user_id).values_list('movie_id', flat=True))
+        for user_review_id in user_review_ids:
+            if user_review_id in my_review_ids:
+                score += 1
+            else:
+                not_yet.append(user_review_id)
+
+        all_information.append((score, user_id, not_yet))
+
+    all_information = sorted(all_information, reverse=True)[:10]
+
+    not_yet_score_dict = defaultdict(int)
+    not_yet_list = list(map(list, zip(*all_information)))[2]
+    for not_yet in not_yet_list:
+        for movie_id in not_yet:
+            not_yet_score_dict[movie_id] += 1
+
+    print(not_yet_score_dict)
+    not_yet_score_dict = sorted(not_yet_score_dict.items(), reverse=True, key=itemgetter(1))[:10]
+    print(not_yet_score_dict)
