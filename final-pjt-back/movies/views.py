@@ -192,3 +192,12 @@ def recommend_preference_genre(request):
     # Json 추출
     serializer = TestSerializer(result, many=True)
     return Response(serializer.data)
+
+
+# 선호 OTT 추출
+@api_view(['GET'])
+def recommend_use_ott(request, username):
+    user = get_object_or_404(User, username=username)
+    print('-----------------------------------------')
+    print(user.using_otts.values())
+    print('-----------------------------------------')
