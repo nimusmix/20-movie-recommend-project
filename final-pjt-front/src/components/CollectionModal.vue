@@ -38,13 +38,14 @@ export default {
   }
 
   .modal-card {
-    position: relative;
+    /* position: relative; */
+    position: absolute;
     z-index: 1;
-    min-width: 100%;
+    min-width: 700px;
     min-height: 500px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
-    opacity: 1;
     background-color: white;
     border: 1px red solid;
   }

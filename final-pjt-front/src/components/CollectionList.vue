@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex">
       <h3 class="h3">내 컬렉션</h3>
-      <div @click="openModal">더보기</div>
+      <div class="more" @click="openModal">더보기</div>
     </div>
     <div v-if="isModalViewed">
       <CollectionModal
@@ -59,6 +59,11 @@ export default {
 </script>
 
 <style>
+  .more {
+    margin-left: 2rem;
+    color: var(--primary-color);
+  }
+
   .collection-modal {
     position: absolute;
   }

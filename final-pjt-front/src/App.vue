@@ -3,14 +3,20 @@
 
       <nav id="col-nav">
         <div id="nav-logo" class="logo t-d-none cusor-pointer" @click="goToHome">20.</div>
-        <div class="profile-img-box cusor-pointer">
-          <img v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`" @click="goToProfile">
-          <img v-else src="@/assets/basic.png" @click="goToProfile">
+
+        <div id="nav-profile-box">
+          <div id="nav-profile-img-box" class="cusor-pointer">
+            <img v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`" @click="goToProfile">
+            <img v-else src="@/assets/basic.png" @click="goToProfile">
+          </div>
+          <div style="height: 0.4rem;"></div>
+          <router-link :to="{ name: 'ProfileView', params: { username: loginUser?.username } }">{{ loginUser?.username }}</router-link>
         </div>
-        <router-link :to="{ name: 'ProfileView', params: { username: loginUser?.username } }">{{ loginUser?.username }}</router-link>
+
         <div v-if="isLogin">
           <button @click="logout">로그아웃</button>
         </div>
+
         <ul id="nav-ul">
           <div v-if="!isLogin">
             <li
@@ -524,8 +530,6 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     color: var(--danger-color);
   }
 
-  
-
   .profile-img-box {
     width: 140px;
     height: 140px;
@@ -536,6 +540,26 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+
+  #nav-profile-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    #nav-profile-img-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 70%;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 </style>

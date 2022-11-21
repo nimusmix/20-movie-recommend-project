@@ -8,6 +8,7 @@
       <div class="detail-box">
         <div class="user-and-button">
           <h1 class="h1 m-0">@{{ profileUser?.username }}</h1>
+          <div class="space"></div>
           <div v-if="loginUser.username !== profileUser?.username" @click="follow">
             <button id="followBtn" class="main-button selected" v-if="isFollowing">언팔로우</button>
             <button id="followBtn" class="main-button selected" v-else>팔로우</button>
@@ -108,15 +109,17 @@ export default {
       margin-left: 0.8rem;
 
       .user-and-button {
-        width: 400px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .space {
+          width: 5.2rem;
+        }
       }
 
       .follow-info {
         display: flex;
-        margin-top: 0.4rem;
       }
     }
   }

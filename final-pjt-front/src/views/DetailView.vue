@@ -8,7 +8,7 @@
       <div class="movie-box">
         <img :src="posterUrl" class="poster-img">
         <div class="detail-box">
-          <h1 class="h1">{{ movie?.title }}</h1>
+          <div class="movie-title">{{ movie?.title }}</div>
           <div class="details">
             <div class="detail">{{ movie?.release_date.substring(0, 4) }}</div>
             <p class="detail">·</p>
@@ -176,6 +176,11 @@ export default {
 
   .movie-box {
     display: flex;
+
+    .movie-title {
+      font-size: 2rem;
+      font-weight: 600;
+    }
   
     .poster-img {
       width: 200px;
