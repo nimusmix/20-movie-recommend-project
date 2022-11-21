@@ -77,7 +77,6 @@ def recommend_latent_model(request):
 
     # 영화와 비교하기
     movies = get_list_or_404(Movie)
-    print('--------------------')
     
     result_movie_scores = defaultdict(int)
     for movie in movies:  # movie 하나를 구해서
