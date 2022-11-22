@@ -35,7 +35,7 @@ def get_movies():
 
     # ott별 검색
     for key, value in provider_ids.items():
-        for page_num in range(1,5):
+        for page_num in range(1,30):
             params['with_watch_providers'] = value   # 제공사 바꾸기
             params['page'] = page_num
             maked_url = make_url(URL, params)        # ott url 제공
