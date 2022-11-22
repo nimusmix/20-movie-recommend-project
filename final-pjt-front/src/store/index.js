@@ -41,6 +41,12 @@ export default new Vuex.Store({
     API_URL:'http://127.0.0.1:8000',
     width: 0,
     height: 0,
+    
+    // recommend
+    recommendSimilar: [],
+    recommendLatent: [],
+    recommendPreference: {},
+    top1List: [],
   },
 
   getters: {
@@ -79,7 +85,16 @@ export default new Vuex.Store({
     GET_WINDOWS(state){
       state.width = window.innerWidth;
       state.height = window.innerHeight;
-    }
+    },
+    GET_RECOMMEND(state, data) {
+      if (data.name === 'similar') {
+        state.recommendSimilar = data.data
+      } else if (data.name === 'latent') {
+        state.recommendLatent = data.data
+      } else {
+        state.recommendPreference[data.name] = data.data
+      }
+    },
   },
   actions: {
     getGenres(context) {
@@ -155,7 +170,7 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    putPreference(context, genre){
+    putPreference(context, genre) {
       axios({
         method: 'put',
         url: `${context.state.API_URL}/api/v3/accounts/edit-perferences-score/${genre}/`,
@@ -168,6 +183,38 @@ export default new Vuex.Store({
         })
         .catch(() => {
           console.log('actions의 putPreference 실패!')
+        })
+    },
+    getRecommend(context, recommendObject) {
+      const {name, url} = recommendObject
+
+      axios({
+        method: 'get',
+        url: `${context.state.API_URL}/${url}/`,
+        headers: {
+            Authorization: `Token ${context.state.token}`
+        },
+      })
+        .then((res) => {
+          if (name === 'preference') {
+            for (const data of res.data) {
+              const temp = {
+                name: data.label,
+                data: data.movies
+              }
+              context.commit('GET_RECOMMEND', temp)
+            }
+          } else {
+            const temp = {
+              name: name,
+              data: res.data
+            }
+            context.commit('GET_RECOMMEND', temp)
+          }
+        })
+        .catch((err) => {
+          console.log(`getRecommend ${name} 실패!`)
+          console.log(err)
         })
     },
     // 윈도우 크기 설정

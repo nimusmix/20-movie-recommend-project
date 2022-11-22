@@ -34,7 +34,7 @@
         v-for="ott in otts" :key="ott?.id"
          :class="[{'selected': ott?.like}, 'main-button']" 
           @click="isSelectedOtt(ott)"> 
-          {{ ott?.name }}
+          {{ ottList[`${ott?.name}`] }}
       </button>
     </div>
     
@@ -63,13 +63,19 @@ export default {
         perferences: null,
         otts: null,
         img: null,
+        ottList: {
+          watcha: '왓챠',
+          waave: '웨이브',
+          disney: '디즈니',
+          netflix: '넷플릭스',
+        },
     }
   },
   methods: {
     //  선호 오티티 가져오기
     getOtts() {
       this.otts = this.$store.state.otts
-      this.otts.forEach((ott)=>ott['like'] = false)
+      this.otts.forEach((ott) => ott['like'] = false)
       axios({
         method: 'get',
         url: `${this.$store.state.API_URL}/api/v3/accounts/otts/`,
@@ -80,14 +86,13 @@ export default {
         .then((res) => {
           console.log('otts 성공!')
           //this.otts를 돌면서, 안에 있는지 파악해서 바꿔준다.
-          res.data.using_otts.forEach((ott_django)=>{
-            this.otts.forEach((ott, index)=>{
-              if(ott_django === ott.id){
+          res.data.using_otts.forEach((ott_django) => {
+            this.otts.forEach((ott, index) => {
+              if (ott_django === ott.id) {
                 this.otts[index].like = true
               }
             })
           })
-          console.log(this.otts)
         })
         .catch((err) => {
           console.log('otts 실패!')
@@ -106,7 +111,6 @@ export default {
         .then((res) => {
           console.log('1 actions의 editInfo 성공!')
           this.perferences = res.data
-          console.log(res.data)
         })
         .catch((err) => {
           console.log('actions의 editInfo 실패!')
