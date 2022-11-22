@@ -458,14 +458,9 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
   }
   //가로스크롤
   .row-scroll::-webkit-scrollbar {
-    width: 10px;  /* 스크롤바의 너비 */
+    width: 0px;  /* 스크롤바의 너비 */
     height: 5px;
   }
-  .row-scroll::-webkit-scrollbar:hover {
-    width: 0px;  /* 스크롤바의 너비 */
-    height: 0px;
-  }
-
   .row-scroll::-webkit-scrollbar-thumb {
       height: 5%; /* 스크롤바의 길이 */
       width: 5%; /* 스크롤바의 길이 */
@@ -474,7 +469,7 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
   }
 
   .row-scroll::-webkit-scrollbar-track {
-      background: var(--primary-color-10);  /*스크롤바 뒷 배경 색상*/
+      background: none;  /*스크롤바 뒷 배경 색상*/
       border-radius: 10px;
   }
 
@@ -490,8 +485,9 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     color: var(--bg-color);
     background-color: var(--text-color-80);
     transition: left 0.1s, right 0.1s, width 0.5s, height 0.4s, border-radius 0.5s, background-color 0.5s, transform 0.5s, border-color 0.5s, color 0.5s, box-shadow 0.5s;
+    box-shadow: $shadow-default;
     &.r-s-b-left{
-      left: 10px; 
+      left: -16px; 
       &:hover{
         background: linear-gradient(90deg, var(--text-color), var(--text-color-0));
         left: 0px;
@@ -504,7 +500,7 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     }
     
     &.r-s-b-right{
-      right: 10px;
+      right: -16px;
       &:hover{
         background: linear-gradient(180deg, var(--text-color), var(--text-color-0));
         height: 100%;
