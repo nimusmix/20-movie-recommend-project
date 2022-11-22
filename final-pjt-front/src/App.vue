@@ -5,9 +5,9 @@
         <div id="nav-logo" class="logo t-d-none cusor-pointer" @click="goToHome">20.</div>
 
         <div id="nav-profile-box">
-          <div id="nav-profile-img-box" class="cusor-pointer">
-            <img v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`" @click="goToProfile">
-            <img v-else src="@/assets/basic.png" @click="goToProfile">
+          <div id="nav-profile-img-box" class="cusor-pointer inner-shadow">
+            <img class="img-circle-80" v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`" @click="goToProfile">
+            <img class="img-circle-80" v-else src="@/assets/basic.png" @click="goToProfile">
           </div>
           <div style="height: 0.4rem;"></div>
           <router-link :to="{ name: 'ProfileView', params: { username: loginUser?.username } }">{{ loginUser?.username }}</router-link>
@@ -163,7 +163,7 @@
 
     //전역설정 컬러
     --bg-color:#FFF;
-    --bg-router-color:#FFFAFA;
+    --bg-router-color:#fbf6f7;
     --disable-color:#5F5F5F;
     --text-color:#000;
     --text-color-80:rgba(0, 0, 0, 0.8);
@@ -243,12 +243,13 @@
     border-radius: 50%;
     border: 1px solid var(--img-border);
   }
-
+  
   .img-circle-100 {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     border: 1px solid var(--img-border);
+    
   }
 
   .img-circle-ott {
@@ -261,8 +262,11 @@
   .cicle-lr{
     border-radius: 32px;
   }
+  .inner-shadow{
+    box-shadow: inset 4px 4px 15px rgba(0, 0, 0, 0.05);
+  }
 
-
+  // 전역설정
   #app .h1 {
     font-size: $lg-font-size;
     font-weight: $lg-font-weight;
@@ -509,7 +513,7 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     &.r-s-b-right{
       right: -16px;
       &:hover{
-        background: linear-gradient(180deg, var(--text-color), var(--text-color-0));
+        background: linear-gradient(270deg, var(--text-color), var(--text-color-0));
         height: 100%;
         width: 200px;
         right: 0px;
@@ -573,10 +577,14 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
       display: inline-block;
       height: inherit;
       aspect-ratio: 3.5 / 5;
+      border-top-left-radius: $border-radius-8;
+      border-bottom-left-radius: $border-radius-8;
       // object-fit: cover;
       // overflow: hidden;
     }
-
+    .feed-nospo{
+      color: var(--text-color-80)
+    }
     .feed-item-contents {
       display: inline-block;
       width: 392px;
@@ -592,6 +600,7 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
       color: var(--disable-color);
     }
   }
+  
 
   // 리뷰 만들 때
   #REVIEW_CREATE {
