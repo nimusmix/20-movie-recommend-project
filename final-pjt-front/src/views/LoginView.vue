@@ -52,6 +52,7 @@ export default {
         })
         .then(() => {
           this.$store.dispatch('getLoginUser')
+          this.$router.push({ name: 'HomeView' })
         })
         .catch(() => {
           this.errMsg = '입력한 정보를 확인해주세요.'

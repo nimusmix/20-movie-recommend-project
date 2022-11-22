@@ -154,9 +154,9 @@ export default {
             Authorization: `Token ${this.$store.state.token}`
         },
       })
-        // .then(() => {
-        //   console.log(`${perference.genre} editPreferences 성공!`)
-        // })
+        .then(() => {
+          console.log(`${perference.genre} editPreferences 성공!`)
+        })
         .catch((err) => {
           console.log(err)
         })

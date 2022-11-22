@@ -82,7 +82,6 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch('getSimilar')
     this.filtering('all')
   },
 }

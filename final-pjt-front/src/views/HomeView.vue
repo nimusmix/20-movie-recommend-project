@@ -1,7 +1,7 @@
 <template>
   <div class="router-view-padding">
     <h1 class="h1">홈</h1>
-    {{ recommendMovie.title }}
+    {{ recommendMovie?.title }}
     <HomeRecommend/>
     <HomeFeed/>
   </div>
@@ -38,6 +38,9 @@ export default {
     }
   },
   computed: {
+    loginUser() {
+      return this.$store.state.loginUser
+    },
     recommendList() {
       let tmpList = []
       tmpList.push(this.$store.state.recommendSimilar[0])
@@ -45,7 +48,7 @@ export default {
       tmpList.push(this.$store.state.recommendLatent[0])
       tmpList.push(this.$store.state.recommendLatent[1])
       return tmpList
-    }
+    },
   },
   methods: {
     getRecommendMovie() {
@@ -58,6 +61,8 @@ export default {
       this.$store.dispatch('getRecommend', recommendObj)
     }
     this.getRecommendMovie()
+    this.$store.dispatch('getSimilar')
+    this.$store.dispatch('getLoginUser')
   }
 }
 </script>

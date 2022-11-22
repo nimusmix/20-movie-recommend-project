@@ -15,12 +15,12 @@
 export default {
   name: 'LandingView',
   methods: {
-    getMovies() {
-      this.$store.dispatch('getMovies')
-    },
-    getGenres() {
-      this.$store.dispatch('getGenres')
-    },
+    // getMovies() {
+    //   this.$store.dispatch('getMovies')
+    // },
+    // getGenres() {
+    //   this.$store.dispatch('getGenres')
+    // },
   },
   computed: {
     isLogin() {
@@ -28,8 +28,8 @@ export default {
     }
   },
   created() {
-    this.getMovies()
-    this.getGenres()
+    // this.getMovies()
+    // this.getGenres()
   }
 }
 </script>
