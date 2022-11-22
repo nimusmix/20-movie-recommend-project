@@ -237,16 +237,23 @@
     border-radius: 50%;
   }
 
-  .img-circle-80{
+  .img-circle-80 {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     border: 1px solid var(--img-border);
   }
 
-  .img-circle-100{
+  .img-circle-100 {
     width: 100px;
     height: 100px;
+    border-radius: 50%;
+    border: 1px solid var(--img-border);
+  }
+
+  .img-circle-ott {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     border: 1px solid var(--img-border);
   }

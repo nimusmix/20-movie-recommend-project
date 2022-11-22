@@ -46,13 +46,12 @@ export default new Vuex.Store({
     recommendSimilar: [],
     recommendLatent: [],
     recommendPreference: {},
-    top1List: [],
   },
 
   getters: {
     isLogin(state) {
       return state.token ? true : false
-    }
+    },
   },
 
   mutations: {
@@ -94,6 +93,9 @@ export default new Vuex.Store({
       } else {
         state.recommendPreference[data.name] = data.data
       }
+    },
+    SET_RECOMMEND_PREFERENCE(state) {
+      state.recommendPreference = {}
     },
   },
   actions: {
@@ -186,6 +188,7 @@ export default new Vuex.Store({
         })
     },
     getRecommend(context, recommendObject) {
+      context.commit('SET_RECOMMEND_PREFERENCE')
       const {name, url} = recommendObject
 
       axios({
