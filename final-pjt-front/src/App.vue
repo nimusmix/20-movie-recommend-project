@@ -49,21 +49,19 @@
               </router-link>
             </div>
           </li>
+          {{ width }} 
+          {{ height }}
         </ul>
         <button @click="changeClass">변경하기</button>
 
       </nav>
       <router-view id="router-view"/>
-      {{ width }} 
-      {{ height }}
   </div>
 </template>
 <script>
   export default {
     data(){
       return{
-        width:0,
-        height:0,
         mainclass:'light',
         loginLinks: {
           'LoginView': '로그인',
@@ -84,6 +82,12 @@
       },
       loginUser() {
         return this.$store.state.loginUser
+      },
+      width(){
+        return this.$store.state.width
+      },
+      height(){
+        return this.$store.state.height
       }
     },
     methods: {
@@ -97,11 +101,7 @@
           this.mainclass='light'
         }
       },
-      handleResize() {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
-        console.log(this.width);
-      },
+      
       goToLink(routerLink) {
         this.$router.push({ name: routerLink })
           .catch(() => {})
@@ -113,6 +113,10 @@
       goToProfile() {
         this.$router.push({ name: 'ProfileView', params: { username: this.loginUser.username } })
         .catch(() => {})
+      },
+      handleResize(){
+        this.$store.dispatch('getWindowSize')
+        // console.log('test')
       }
     },
     created() {
@@ -123,9 +127,12 @@
       this.$store.dispatch('getGenres')
       this.$store.dispatch('getMovies')
       this.$store.dispatch('getReviews')
+      this.$store.dispatch('getWindowSize')
+      window.addEventListener('resize', this.handleResize);
+      // console.log(window.innerHeight)
+      // console.log(window.innerWidth)
     },
     mounted(){ 
-      window.addEventListener('resize', this.handleResize);
     },
   }
 
@@ -591,6 +598,31 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+    }
+  }
+  // 프로필
+  .head-box {
+    display: flex;
+    align-items: center;
+
+    .detail-box{
+      display: flex;
+      flex-direction: column;
+      margin-left: 2rem;
+
+      .user-and-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .space {
+          width: 5.2rem;
+        }
+      }
+
+      .follow-info {
+        display: flex;
       }
     }
   }

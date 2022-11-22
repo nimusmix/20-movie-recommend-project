@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="MODAL">
     <div class="d-flex">
       <h3 class="h3">내 컬렉션</h3>
       <div class="more" @click="openModal">더보기</div>
@@ -7,7 +7,7 @@
     <div v-if="isModalViewed">
       <CollectionModal
         class="collection-modal"
-        :collection="collection"
+        :collections="collection"
         @close-modal="closeModal"
       />
     </div>
