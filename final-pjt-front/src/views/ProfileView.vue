@@ -4,7 +4,6 @@
   <!-- @wheel.prevent
   @touchmove.prevent
   @scroll.prevent> -->
-
     <div class="head-box">
       
       <div class="profile-img-box">
@@ -17,7 +16,7 @@
           <h1 class="h1 m-0">@{{ profileUser?.username }}</h1>
           <div class="space"></div>
           <div v-if="loginUser.username !== profileUser?.username" @click="follow">
-            <button id="followBtn" class="main-button selected" v-if="isFollowing">언팔로우</button>
+            <button id="followBtn" class="main-button selected" v-if="flag">언팔로우</button>
             <button id="followBtn" class="main-button selected" v-else>팔로우</button>
           </div>
           <button v-else class="main-button selected" @click="goToEdit">회원정보수정</button>
@@ -32,7 +31,7 @@
     <div class="space"></div>
     <CollectionList :collection="profileUser?.collection"/>
     <div class="space"></div>
-    <ReviewList/>
+    <ReviewList :profileUser='profileUser'/>
   </div>
 </template>
 
@@ -51,7 +50,7 @@ export default {
   data() {
     return {
       profileUser: null,
-      isFollowing: false,
+      flag: false,
     }
   },
   computed: {
@@ -69,17 +68,13 @@ export default {
         this.profileUser = res.data
       })
       .then(() => {
-        if (this.loginUser.followings.includes(this.profileUser.id)) {
-          this.isFollowing = true
-        }
+        this.isFollowing()
       })
       .catch(() => {
         this.$router.push('/404')
       })
     },
     follow() {
-      this.isFollowing = !this.isFollowing
-
       axios({
         method: 'post',
         url: `${this.$store.state.API_URL}/api/v3/accounts/follow/${this.profileUser.username}/`,
@@ -88,8 +83,10 @@ export default {
         },
       })
         .then(() => {
+          // this.isFollowing = !this.isFollowing
           this.getProfileUser()
-          this.$store.dispatch('getLoginUser')
+          this.isFollowing()
+          // this.$store.dispatch('getLoginUser')
         })
         .catch((err) => {
           console.log(err)
@@ -97,9 +94,17 @@ export default {
     },
     goToEdit() {
       this.$router.push({ name: 'UserEditView', params: { name: 'UserEditView', signUpFlag: 0 } })
+    },
+    isFollowing() {
+      if (this.loginUser.followings.includes(this.profileUser?.id)) {
+        this.flag = true
+      } else {
+        this.flag = false
+      }
     }
   },
   created() {
+    this.$store.dispatch('getLoginUser')
     this.getProfileUser()
   },
 }

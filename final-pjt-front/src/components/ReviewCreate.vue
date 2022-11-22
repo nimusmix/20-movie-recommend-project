@@ -11,7 +11,7 @@
           <b-form-rating class="star-rating" size="lg" v-model="value"></b-form-rating> 
         </div>
         <div class="d-flex align-items-center">
-          <div class="d-flex algin-items-center"><input id="checkbox" type="checkbox" v-model="is_spoiler">&nbsp;&nbsp;스포일러 포함</div>&nbsp;&nbsp;
+          <div class="d-flex algin-items-center"><input id="checkbox" type="checkbox" v-model="isSpoiler">&nbsp;&nbsp;스포일러 포함</div>&nbsp;&nbsp;
           <input type="submit" id="submit" class="main-button selected" style="color: white;">
         </div>
       </div>
@@ -30,35 +30,39 @@ export default {
       value: 3,
       length_warning: false,
       maxlength: 30,
-      is_spoiler: false,
+      isSpoiler: false,
     }
   },
   methods:{
     createReview() {
       const content = this.content.substring(0, 20)
       const value = this.value
+
       if (!content) {
         alert('내용을 입력해주세요')
         return
       }
+
       axios({
         method: 'post',
         url: `${this.$store.state.API_URL}/api/v2/movies/${this.$route.params.pk}/reviews/`,
         data: {
           content: content,
           score: value,
-          is_spoiler: this.is_spoiler,
+          isSpoiler: this.isSpoiler,
         },
         headers: {
           Authorization: `Token ${this.$store.state.token}`
         }
       })
         .then((res) => {
-          axios({                                                          // movie detail 받아오기
+          // movie detail 받아오기
+          axios({
             method: 'get',
             url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.movie}/`
           })
-            .then((res) => {                                               // movie의 vote_count와 vote_avg 수정
+            // movie의 vote_count와 vote_avg 수정
+            .then((res) => {
               const now_sum = res.data.vote_average * res.data.vote_count
               const new_sum = now_sum + this.value
               const new_cnt = res.data.vote_count + 1
@@ -77,8 +81,9 @@ export default {
                 original_title: res.data.original_title,
                 genres: res.data.genres,
                 otts: res.data.otts,
+                key: res.data.key,
               }
-
+              
               axios({
                 method: 'put',
                 url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.id}/`,
@@ -87,32 +92,29 @@ export default {
                   Authorization: `Token ${this.$store.state.token}`
                 },
               })
-
-              location.reload()                      // 페이지 새로고침하는 코드. DetailView에 리뷰 출력 기능 구현 후 리뷰 작성 시 페이지 업데이트 된다면
-          })                                         // 여기서 reload 하지 말고 DetailView updated()로 movie 데이터 업데이트하기
+                .then(() => {
+                  this.$emit('review-created')
+                  this.$store.dispatch('getReviews')
+                })
+            })
+            .catch((err) => console.log(err))
         })
-        .catch((err) => {
-          console.log(err)
-        })
+        .catch((err) => console.log(err))
     },
-    test(testinja){
+    test(testinja) {
       this.content = testinja
       if (this.content.length < 20){
         this.length_warning = false
         this.maxlength = 30
       }
-      else{
+      else {
         this.length_warning = true
         setTimeout(() => {
-          console.log("after")
           this.content = this.content.substring(0, 20)
           console.log(this.content)
         }, 100);
       }
     },
-    test2() {
-      console.log(this.is_spoiler)
-    }
   },
   computed:{
   }

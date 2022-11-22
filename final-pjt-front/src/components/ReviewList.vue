@@ -12,16 +12,18 @@ import FeedItemVue from '@/components/FeedItem.vue'
 
 export default {
   name: 'ReviewList',
+  props: {
+    profileUser: Object,
+  },
   components: {
     FeedItemVue,
   },
   computed:{
     myReviews() {
       const myReviews = this.$store.state.reviews.filter((review) => {
-        if (review.username === this.$store.state.username){
+        if (review.username === this.profileUser?.username){
           return true
         }
-        return false
       })
       return myReviews
     }

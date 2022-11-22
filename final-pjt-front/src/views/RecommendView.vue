@@ -1,6 +1,5 @@
 <template>
   <div class="router-view-padding">
-    
     <h1 class="h1">{{ username }}님과 비슷한 사용자들이 좋아하는 영화입니다.</h1>
     <!-- <div class="row-scroll mb-5">
       <article 
@@ -99,10 +98,24 @@ export default {
     MovieItem
   },
   data(){
-    return{
+    return {
       leftIcon : '<',
       rightIcon : '>',
       genres : [],
+      // recommendBaseList: [
+      //   {
+      //     name: 'similar',
+      //     url: 'api/v1/recommend/similar',
+      //   },
+      //   {
+      //     name: 'latent',
+      //     url: 'api/v1/recommend/latent',
+      //   },
+      //   {
+      //     name: 'preference',
+      //     url: 'api/v1/recommend/preference',
+      //   }
+      // ],
     }
   },
   methods: {
@@ -130,9 +143,9 @@ export default {
     },
     
   },
-  watch: {
-    // keyss() {
-    //   return this.recommendPreference.keys()
+  created() {
+    // for (const recommendObj of this.recommendBaseList) {
+    //   this.$store.dispatch('getRecommend', recommendObj)
     // }
   }
 }

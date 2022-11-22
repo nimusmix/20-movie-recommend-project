@@ -66,7 +66,7 @@
 </template>
 <script>
   export default {
-    data(){
+    data() {
       return{
         mainclass:'light',
         loginList: [
@@ -155,13 +155,14 @@
       }
     },
     created() {
-      this.$store.dispatch('getSimilar')
-    },
-    updated() {
-      // this.$store.dispatch('getLoginUser')
       this.$store.dispatch('getGenres')
       this.$store.dispatch('getMovies')
       this.$store.dispatch('getReviews')
+    },
+    updated() {
+      // this.$store.dispatch('getGenres')
+      // this.$store.dispatch('getMovies')
+      // this.$store.dispatch('getReviews')
       this.$store.dispatch('getWindowSize')
       window.addEventListener('resize', this.handleResize);
       // console.log(window.innerHeight)

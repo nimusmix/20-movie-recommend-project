@@ -117,14 +117,14 @@ export default {
     isSelectedOtt(ott) {
       if (this.selectedOtts.includes(ott.id)) {
         return true
-      } else{
+      } else {
         return false
       }
     },
     isSelectedGenre(genre) {
       if (this.selectedGenres.includes(genre.id)) {
         return true
-      } else{
+      } else {
         return false
       }
     },

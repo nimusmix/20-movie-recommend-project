@@ -4,7 +4,6 @@
     <div v-for="review in reviews" :key="review.id">
       <FeedItem :review="review"/>
     </div>
-    <!-- {{ reviews }} -->
   </div>
 </template>
 
@@ -16,21 +15,9 @@ export default {
   components: {
     FeedItem,
   },  
-  data(){
-    return{
-    }
+  props: {
+    reviews: Array
   },
-  props:{
-    reviews:Array
-  },
-  methods:{
-    getReviews(){
-      
-    }
-  },
-  created(){
-    this.getReviews()
-  }
 }
 </script>
 

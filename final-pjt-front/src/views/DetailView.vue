@@ -28,7 +28,7 @@
       </div>
       
       <div class="space"></div>
-      <ReviewCreate/>
+      <ReviewCreate @review-created="reviewCreated"/>
       <div class="space"></div>
       <MovieReviews :reviews="reviews"/>
       <div class="space"></div>
@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     getMovie() {
+      this.genreList = []
       // 개별 영화정보를 받아오기 위한 axios
       axios({
         method: 'get',
@@ -140,6 +141,10 @@ export default {
           console.log(err)
         })
     },
+
+    reviewCreated() {
+      this.getMovie()
+    }
   },
   created() {
     this.getMovie()

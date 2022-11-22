@@ -74,7 +74,6 @@ export default new Vuex.Store({
     SAVE_USER(state, user) {
       state.username = user.username
       state.token = user.token
-      router.push({ name: 'HomeView' })
     },
     LOGOUT(state) {
       state.username = null
@@ -182,6 +181,7 @@ export default new Vuex.Store({
       })
         .then(() => {
           console.log('actions의 putPreference 성공!')
+          // context.dispatch('getRecommend')
         })
         .catch(() => {
           console.log('actions의 putPreference 실패!')
