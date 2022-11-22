@@ -38,7 +38,9 @@ export default new Vuex.Store({
     token: null,
     loginUser: null,
     similarUsers: [],
-    API_URL:'http://127.0.0.1:8000'
+    API_URL:'http://127.0.0.1:8000',
+    width: 0,
+    height: 0,
   },
 
   getters: {
@@ -74,6 +76,10 @@ export default new Vuex.Store({
       state.token = null
       router.push({ name: 'LandingView' })
     },
+    GET_WINDOWS(state){
+      state.width = window.innerWidth;
+      state.height = window.innerHeight;
+    }
   },
   actions: {
     getGenres(context) {
@@ -163,7 +169,11 @@ export default new Vuex.Store({
         .catch(() => {
           console.log('actions의 putPreference 실패!')
         })
-    }
+    },
+    // 윈도우 크기 설정
+    getWindowSize(context){
+      context.commit('GET_WINDOWS')
+    },
   },
   modules: {
   }

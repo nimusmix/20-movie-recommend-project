@@ -1,11 +1,14 @@
 <template>
   <div class="router-view-padding">
+
     <div class="head-box">
+      
       <div class="profile-img-box">
-        <img v-if="profileUser?.profile_img" :src="`http://127.0.0.1:8000${profileUser?.profile_img}`">
-        <img v-else src="@/assets/basic.png" alt="">
+        <img class="img-circle-100" v-if="profileUser?.profile_img" :src="`http://127.0.0.1:8000${profileUser?.profile_img}`">
+        <img class="img-circle-100" v-else src="@/assets/basic.png" alt="">
       </div>
       <div class="detail-box">
+
         <div class="user-and-button">
           <h1 class="h1 m-0">@{{ profileUser?.username }}</h1>
           <div class="space"></div>
@@ -99,29 +102,6 @@ export default {
 </script>
 
 <style lang="scss">
-  .head-box {
-    display: flex;
-    align-items: center;
-
-    .detail-box{
-      display: flex;
-      flex-direction: column;
-      margin-left: 0.8rem;
-
-      .user-and-button {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .space {
-          width: 5.2rem;
-        }
-      }
-
-      .follow-info {
-        display: flex;
-      }
-    }
-  }
+  
 
 </style>
