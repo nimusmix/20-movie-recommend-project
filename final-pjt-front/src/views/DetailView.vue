@@ -99,8 +99,8 @@ export default {
         .then(() => {
           this.getReviews()
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
+          this.$router.push('/404')
         })
     },
 

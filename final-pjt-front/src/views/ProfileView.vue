@@ -66,8 +66,8 @@ export default {
           this.isFollowing = true
         }
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
+        this.$router.push('/404')
       })
     },
     follow() {
@@ -123,5 +123,4 @@ export default {
       }
     }
   }
-
 </style>

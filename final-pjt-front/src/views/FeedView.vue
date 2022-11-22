@@ -71,7 +71,11 @@ export default {
       return tmp_followings
     },
     similarUsers() {
-      return this.$store.state.similarUsers
+      return this.$store.state.similarUsers.filter((user) => {
+        if (!this.followings.includes(user)) {
+          return true
+        }
+      })
     },
     reviews() {
       return this.$store.state.reviews

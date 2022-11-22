@@ -5,6 +5,7 @@ import LoginView from '@/views/LoginView'
 import SignupView from '@/views/SignupView'
 import UserEditView from '@/views/UserEditView'
 import FeedView from '@/views/FeedView'
+import NotFound404 from '@/views/NotFound404'
 
 Vue.use(VueRouter)
 
@@ -67,6 +68,17 @@ const routes = [
     name: 'DetailView',
     component: () => import('@/views/DetailView'),
   },
+
+  {
+    path: '/404',
+    name: 'NotFound404',
+    component: NotFound404,
+  },
+
+  {
+    path: '*',
+    redirect: '/404',
+  }
 ]
 
 const router = new VueRouter({

@@ -64,9 +64,8 @@ export default {
         .then(() => {
           console.log('[성공] [회원가입] 선호장르 초기화')
         })
-        .catch((err) => {
+        .catch(() => {
           console.log('[실패] [회원가입] 선호장르 초기화')
-          console.log(err)
         })
     },
     signup() {
