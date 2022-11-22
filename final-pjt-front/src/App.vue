@@ -10,25 +10,33 @@
             <img class="img-circle-80" v-else src="@/assets/basic.png" @click="goToProfile">
           </div>
           <div style="height: 0.4rem;"></div>
-          <router-link :to="{ name: 'ProfileView', params: { username: loginUser?.username } }">{{ loginUser?.username }}</router-link>
+          <div v-if="isLogin" style="margin-bottom:30px">
+            <b-dropdown id="dropdown-1" :text="loginUser?.username"  variant="namecolor"  class="m-md-2">
+              <b-dropdown-item @click="goToProfile">내 프로필</b-dropdown-item>
+              <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item @click="changeClass">다크모드</b-dropdown-item>
+            </b-dropdown>
+          </div>
+          <!-- <router-link class="nav-" :to="{ name: 'ProfileView', params: { username: loginUser?.username } }">내 프로필</router-link> -->
         </div>
 
-        <div v-if="isLogin">
+        <!-- <div v-if="isLogin">
           <button @click="logout">로그아웃</button>
-        </div>
+        </div> -->
 
         <ul id="nav-ul">
           <div v-if="!isLogin">
             <li
-              v-for="(routerName, routerLink, index) in loginLinks" :key="index"
+              v-for="loginNav, index in loginList" :key="index"
             >
-              <div class="li-inner-box cusor-pointer" @click="goToLink(routerLink)">
-                <router-link class="nav-item" :to="{ name: routerLink }" >
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div class="li-inner-box cusor-pointer" @click="goToLink(loginNav.routerLink)">
+                <router-link class="nav-item" :to="{ name: loginNav.routerLink }" >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M1.52 16.11H20.48M1.52 6.11H20.48M5.97 16.11V20.46M11 16.11V20.97M15.97 16.11V20.52M5.97 1.11V5.46M11 1.11V5.97M11 6.03V17.03M15.97 1.11V5.52M21 14V8C21 3 19 1 14 1H8C3 1 1 3 1 8V14C1 19 3 21 8 21H14C19 21 21 19 21 14Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                   <div class="v-a-middle">
-                    {{ routerName }}
+                    {{ loginNav.routerName }}
                   </div>
                 </router-link>
               </div>
@@ -36,23 +44,21 @@
           </div>
 
           <li 
-          v-for="(routerName, routerLink, index) in routerLinks" :key="index"
+          v-for="routerNav, index in routerList" :key="index"
           >
-            <div class="li-inner-box cusor-pointer" @click="goToLink(routerLink)">
-              <router-link class="nav-item"  :to="{ name: routerLink }" >
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.52 16.11H20.48M1.52 6.11H20.48M5.97 16.11V20.46M11 16.11V20.97M15.97 16.11V20.52M5.97 1.11V5.46M11 1.11V5.97M11 6.03V17.03M15.97 1.11V5.52M21 14V8C21 3 19 1 14 1H8C3 1 1 3 1 8V14C1 19 3 21 8 21H14C19 21 21 19 21 14Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <div class="li-inner-box cusor-pointer" @click="goToLink(routerNav.routerLink)">
+              <router-link class="nav-item"  :to="{ name: routerNav.routerLink }" >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" >
+                    <path :d="routerNav.path"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 <div class="v-a-middle">
-                  {{ routerName }}
+                  {{ routerNav.routerName }}
                 </div>
               </router-link>
             </div>
           </li>
-          {{ width }} 
-          {{ height }}
         </ul>
-        <button @click="changeClass">변경하기</button>
+        <!-- <button @click="changeClass">변경하기</button> -->
 
       </nav>
       <router-view id="router-view"/>
@@ -63,17 +69,46 @@
     data() {
       return{
         mainclass:'light',
-        loginLinks: {
-          'LoginView': '로그인',
-          'SignupView': '회원가입'
-        },
-        routerLinks: {
-          'LandingView': '랜딩페이지',
-          'HomeView': '홈',
-          'FeedView': '피드',
-          'RecommendView': '추천영화',
-          'CategoryView': '카테고리'
-        },
+        loginList: [
+          {
+            'routerLink':'LoginView',
+            'routerName':'로그인',
+            'path': '',
+          },
+          {
+            'routerLink':'SignupView',
+            'routerName':'회원가입',
+            'path': '',
+          }
+        ]
+        ,
+        routerList: [
+          {
+            'routerLink':'LandingView',
+            'routerName':'랜딩페이지',
+            'path': '',
+          },
+          {
+            'routerLink':'HomeView',
+            'routerName':'홈',
+            'path': 'M11.9998 17.9998V14.9998M10.0698 2.81985L3.13978 8.36985C2.35978 8.98985 1.85978 10.2998 2.02978 11.2798L3.35978 19.2398C3.59978 20.6598 4.95978 21.8098 6.39978 21.8098H17.5998C19.0298 21.8098 20.3998 20.6498 20.6398 19.2398L21.9698 11.2798C22.1298 10.2998 21.6298 8.98985 20.8598 8.36985L13.9298 2.82985C12.8598 1.96985 11.1298 1.96985 10.0698 2.81985V2.81985Z',
+          },
+          {
+            'routerLink':'FeedView',
+            'routerName':'피드',
+            'path': 'M5.5 4V2.25M9.5 4V2.25M13.5 4V2.25M2 12H17.51M17.79 10.47V17.79C17.79 18.9066 17.3464 19.9774 16.5569 20.7669C15.7674 21.5564 14.6966 22 13.58 22H6.21C3.89 22 2 20.11 2 17.79V10.47C2 9.35344 2.44355 8.28261 3.23308 7.49308C4.02261 6.70355 5.09344 6.26 6.21 6.26H13.58C15.9 6.26 17.79 8.15 17.79 10.47V10.47ZM22 13.16C22 15.48 20.11 17.37 17.79 17.37V8.95C18.3429 8.95 18.8903 9.05889 19.4011 9.27047C19.9119 9.48204 20.376 9.79215 20.7669 10.1831C21.1579 10.574 21.468 11.0381 21.6795 11.5489C21.8911 12.0597 22 12.6071 22 13.16V13.16Z',
+          },
+          {
+            'routerLink':'RecommendView',
+            'routerName':'추천영화',
+            'path': 'M2.52 17.11H21.48M2.52 7.11H21.48M6.97 17.11V21.46M12 17.11V21.97M16.97 17.11V21.52M6.97 2.11V6.46M12 2.11V6.97M12 7.03V18.03M16.97 2.11V6.52M22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15Z',
+          },
+          {
+            'routerLink':'CategoryView',
+            'routerName':'카테고리',
+            'path': 'M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10ZM5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22ZM6 10C7.06087 10 8.07828 9.57857 8.82843 8.82843C9.57857 8.07828 10 7.06087 10 6C10 4.93913 9.57857 3.92172 8.82843 3.17157C8.07828 2.42143 7.06087 2 6 2C4.93913 2 3.92172 2.42143 3.17157 3.17157C2.42143 3.92172 2 4.93913 2 6C2 7.06087 2.42143 8.07828 3.17157 8.82843C3.92172 9.57857 4.93913 10 6 10V10ZM18 22C19.0609 22 20.0783 21.5786 20.8284 20.8284C21.5786 20.0783 22 19.0609 22 18C22 16.9391 21.5786 15.9217 20.8284 15.1716C20.0783 14.4214 19.0609 14 18 14C16.9391 14 15.9217 14.4214 15.1716 15.1716C14.4214 15.9217 14 16.9391 14 18C14 19.0609 14.4214 20.0783 15.1716 20.8284C15.9217 21.5786 16.9391 22 18 22Z',
+          },
+        ]
       }
     },
     computed: {
@@ -144,8 +179,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Unna&display=swap');
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
 
-  $logo-font: 'Unna', serif;  // 순위2
-  // $logo-font: 'Manrope', sans-serif;  //순위1
+  // $logo-font: 'Unna', serif;  // 순위2
+  $logo-font: 'Manrope', sans-serif;  //순위1
   $body-font: 'Pretendard Variable';
 
 // 컬러세팅
@@ -178,6 +213,7 @@
 
     //프로필 이미지 외곽선
     --img-border:rgba(0, 0, 0, 0.05);
+    --inner-shadow:rgba(0, 0, 0, 0.05);
   }
 
   #app.dark {
@@ -207,7 +243,8 @@
     --feed-shadow:rgb(255, 255, 255, 0.01);
 
     //프로필 이미지 외곽선
-    --img-border:rgba(255, 255, 255, 0.05);
+    --img-border:rgb(255, 255, 255, 0.3);
+    --inner-shadow:rgb(255, 255, 255, 0.1); 
   }
 // 텍스트 스타일
   // 큰 텍스트 - h1
@@ -216,7 +253,7 @@
 
   // 일반 텍스트 - 기본
   $main-font-size:1.0rem;
-  $main-font-weight:400;
+  $main-font-weight:300;
 
   // 영화카드
   $movie-h3-font: 1.2rem;
@@ -264,7 +301,7 @@
     border-radius: 32px;
   }
   .inner-shadow{
-    box-shadow: inset 4px 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 4px 4px 15px var(--inner-shadow);
   }
 
   // 전역설정
@@ -349,7 +386,8 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
   // 로고
   .logo {
     font-family: $logo-font;
-    font-weight: 600;
+    // font-weight: 600;
+    font-weight: 300;
     font-size: 3rem;
   }
 
@@ -363,7 +401,17 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     transition:$trans-global;
     box-shadow: $shadow-default;
   }
-
+  #dropdown-1{
+    #dropdown-1__BV_toggle_{
+      color: var(--text-color-80);
+    }
+    li:active{
+        background-color: #F16464;
+    }
+    a:active{
+        background-color: #F16464;
+    }
+  }
   nav {
     $main-nav-padding-left:42px;
     background-color: var(--bg-color);
@@ -421,8 +469,8 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
       display: block;
       text-align: center;
       padding: 0px $main-nav-padding-left;
-      margin-top: 40px;
-      margin-bottom: 40px;
+      margin-top: 100px;
+      margin-bottom: 60px;
     }
 
     .li-inner-box{
