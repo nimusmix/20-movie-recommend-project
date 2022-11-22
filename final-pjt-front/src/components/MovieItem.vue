@@ -17,12 +17,12 @@
       movie:Object
     },
     methods:{
-      putPreference(){
+      putPreference() {
         const genres = this.movie.genres
-        for (const genre of genres){
+        for (const genre of genres) {
           this.$store.dispatch('putPreference', genre)
         }
-        this.$router.push({ name: 'DetailView', params: { pk: this.movie.id, movie: this.movie }}) 
+        this.$router.push({ name: 'DetailView', params: { pk: this.movie.id, movie: this.movie }})
       }
     }
   }
