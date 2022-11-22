@@ -21,3 +21,4 @@ class Movie(models.Model):
     poster_path = models.CharField(max_length=200)
     original_language = models.CharField(max_length=100)
     original_title = models.CharField(max_length=100)
+    key = models.CharField(max_length=50)
