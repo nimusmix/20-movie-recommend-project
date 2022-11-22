@@ -1,13 +1,14 @@
 <template>
   <div id="MODAL">
     <div class="d-flex">
-      <h3 class="h3">내 컬렉션</h3>
+      <h3 class="h3">컬렉션</h3>
       <div class="more" @click="openModal">더보기</div>
     </div>
     <div v-if="isModalViewed">
       <CollectionModal
         class="collection-modal"
         :collections="collection"
+        :username="this.$route.params.username"
         @close-modal="closeModal"
       />
     </div>
@@ -64,7 +65,5 @@ export default {
     color: var(--primary-color);
   }
 
-  .collection-modal {
-    position: absolute;
-  }
+
 </style>

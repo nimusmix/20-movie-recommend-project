@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="h3">내 리뷰</h3>
+    <h3 class="h3">리뷰</h3>
     <div v-for="review in myReviews" :key="review.id">
       <FeedItemVue :review="review"/>
     </div>
