@@ -161,10 +161,12 @@ def recommend_similar_user(request):
 @api_view(['GET'])
 def recommend_preference_genre(request):
     # 유저 선호 장르를 전체 불러온다.
-    user_preferences = Preference.objects.filter(user=request.user).order_by('score')
+    user_preferences = Preference.objects.filter(user=request.user).filter(like=True)#.order_by('score')
     # 유저 선호 장르 top 3를 genre.pk 로 가져온다.
+    if len(user_preferences[:3]) < 3 :
+        user_preferences = Preference.objects.filter(user=request.user).order_by('score')
     prefers_top3 = list(user_preferences[:3].values_list('genre', flat=True))
-
+    print(11)
     # 결과 값 form을 세팅
     result = [
         {

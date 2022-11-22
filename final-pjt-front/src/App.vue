@@ -58,6 +58,7 @@
             </div>
           </li>
         </ul>
+        {{ this.$store.state.width }}
         <!-- <button @click="changeClass">변경하기</button> -->
 
       </nav>
@@ -820,4 +821,107 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     justify-content: center;
     margin: 2rem 0px;
   }
+
+
+
+
+.vue-typer {
+  .custom.char {
+    font-family: $body-font;
+  }
+  .custom.char.typed {
+    color: var(--text-color);
+  }
+  .custom.char.selected {
+    color: var(--primary-color);
+  }
+}
+
+.custom.caret {
+  animation: rocking 0.1s ease-in-out 0s infinite;
+
+  &.typing {
+    width: 2px;
+    background-color: var(--primary-color);
+  } 
+  &.selecting {
+    display: inline-block;
+    background-color: var(--primary-color);
+  }
+}
+.is-twenty{
+  .custom.char{
+    text-decoration: line-through;
+  }
+  .lending-logo{
+    // color: var(--primary-color);
+    // text-decoration: line-through;
+  }
+}
+.title-typer{
+  position: fixed;
+  left:10%; 
+  top: 50%;
+  width: 80%;
+  // transform: translate(0%,-50%);
+  color:var(--bg-color);
+  .lending-logo{
+    font-size: 5vw;
+    font-weight:700;
+    font-family: $logo-font;
+  }
+  .vue-typer {
+    .custom.char {
+      font-family: $body-font;
+      font-size: 2vw;
+      font-weight: 400;
+      // text-decoration: line-through;
+    }
+    .custom.char.typed {
+      color: var(--bg-color);
+    }
+    .custom.char.selected {
+      color: var(--primary-color);
+    }
+  }
+  .custom.caret {
+    animation: rocking 0.1s ease-in-out 0s infinite;
+    position:absolute;
+    -webkit-animation: blink 0.5s ease-in-out infinite alternate;
+    -moz-animation: blink 0.5s ease-in-out infinite alternate;
+    animation: blink 0.5s ease-in-out infinite alternate;
+    width: 0.3vw;
+    height: 2.5vw;
+    &.typing {
+      background-color: var(--primary-color);
+    } 
+    &.selecting {
+      display: inline-block;
+      background-color: var(--primary-color);
+    }
+    &.erasing {
+      background-color: var(--primary-color);
+    }
+    &.idle {
+      background-color: var(--primary-color);
+    }
+  }
+  
+}
+
+  
+@-webkit-keyframes blink{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-moz-keyframes blink{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes blink{
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
 </style>
