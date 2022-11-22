@@ -1,5 +1,9 @@
 <template>
-  <div class="router-view-padding">
+  <div class="router-view-padding" >
+    
+  <!-- @wheel.prevent
+  @touchmove.prevent
+  @scroll.prevent> -->
 
     <div class="head-box">
       

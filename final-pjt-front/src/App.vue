@@ -152,6 +152,7 @@
   #app.light {
     //시맨틱 컬러
     --primary-color: #FF715E;
+    --primary-color-50: #ff715e83;
     --primary-color-15: #ff715e60;
     --primary-color-10: #ff715e23;
     --danger-color: #F16464 ;
@@ -179,6 +180,7 @@
   #app.dark {
     //시맨틱 컬러
     --primary-color: #FF715E;
+    --primary-color-50: #ff715e83;
     --primary-color-15: #ff715e6b;
     --primary-color-10: #ff715e4f;
     --danger-color: #F16464 ;
@@ -438,6 +440,38 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
       padding: 56px 56px 56px 56px;
     }
 
+
+  // 홈
+  //가로스크롤 리스트
+  .row-scroll {
+    overflow: auto;
+    white-space: nowrap;
+
+    .row-scroll-item {
+      display: inline-block;
+      width: 200px;
+      margin-right: 20px;
+    }
+  }
+  //가로스크롤
+  .row-scroll::-webkit-scrollbar {
+    width: 10px;  /* 스크롤바의 너비 */
+    height: 5px;
+  }
+
+  .row-scroll::-webkit-scrollbar-thumb {
+      height: 5%; /* 스크롤바의 길이 */
+      width: 5%; /* 스크롤바의 길이 */
+      background: var(--primary-color-15); /* 스크롤바의 색상 */
+      border-radius: 10px;
+  }
+
+  .row-scroll::-webkit-scrollbar-track {
+      background: var(--primary-color-10);  /*스크롤바 뒷 배경 색상*/
+      // margin-top:50px;
+      // margin-bottom:50px;
+      border-radius: 10px;
+  }
   // 영화카드
   .movie-card {
     display: block;
@@ -626,4 +660,6 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
       }
     }
   }
+
+  
 </style>

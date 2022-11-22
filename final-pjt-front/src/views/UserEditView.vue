@@ -19,22 +19,22 @@
 
     <div class="space"></div>
     <h3 class="h3">좋아하는 장르를 선택해주세요.</h3>
-    <div class="button-list">
+    <div class="button-list" v-if="perferences">
       <button
-        v-for="perference in perferences" :key="perference.genre.id"
-        :class="[{'selected': perference.like}, 'main-button']"
+        v-for="perference in perferences" :key="perference?.genre?.id"
+        :class="[{'selected': perference?.like}, 'main-button']"
         @click="isSelectedGenre(perference)">
-        {{ perference.genre_name }}
+        {{ perference?.genre_name }}
       </button>
     </div>
     <div class="space"></div>
     <h3 class="h3">사용 중인 OTT를 골라주세요.</h3>
     <div class="button-list">
       <button
-        v-for="ott in otts" :key="ott.id"
-         :class="[{'selected': ott.like}, 'main-button']" 
+        v-for="ott in otts" :key="ott?.id"
+         :class="[{'selected': ott?.like}, 'main-button']" 
           @click="isSelectedOtt(ott)"> 
-          {{ ott.name }}
+          {{ ott?.name }}
       </button>
     </div>
     
@@ -87,8 +87,6 @@ export default {
               }
             })
           })
-          this.perferences = res.data
-          
           console.log(this.otts)
         })
         .catch((err) => {

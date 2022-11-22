@@ -63,12 +63,14 @@ export default {
       })
         .then(() => {
           console.log('[성공] [회원가입] 선호장르 초기화')
+          this.$router.push({ name: 'UserEditView', params: { signUpFlag: '1' } })
         })
         .catch(() => {
           console.log('[실패] [회원가입] 선호장르 초기화')
         })
     },
     signup() {
+      this.endPreferences = false
       const username = this.username
       const password1 = this.password1
       const password2 = this.password2
@@ -94,9 +96,6 @@ export default {
         .then(() => {
           this.$store.dispatch('getLoginUser')
           this.makePreferences()
-        })
-        .then(() => {
-          this.$router.push({ name: 'UserEditView', params: { signUpFlag: '1' } })
         })
         .catch((err) => {
           console.log('회원가입에 실패했습니다.')
@@ -125,6 +124,14 @@ export default {
       }
     }
   },
+  computed:{
+    // endPreferencesEnding(){
+    //   if (this.endPreferences === true){
+    //     // 
+    //   }
+    //   return this.endPreferences
+    // }
+  }
 
 }
 </script>

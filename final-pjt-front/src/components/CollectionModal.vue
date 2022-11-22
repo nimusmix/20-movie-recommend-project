@@ -30,21 +30,27 @@
       </div>
       <h3 class="h3">{{ profileUser?.username }}님의 컬렉션</h3>
       <!-- {{ collections }} -->
-      <div v-for="collection, index in collections" :key="index">
-        <MovieItemVue :movie="collection" class="modal-movie"/>
-      </div>
+      
+      <div class="row-scroll mb-5">
+          <article 
+            v-for="collection, index in collections" :key="index"
+            class="col row-scroll-item"
+          >
+            <MovieItem :movie="collection" class="modal-movie"/>
+          </article>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import MovieItemVue from '@/components/MovieItem'
+import MovieItem from '@/components/MovieItem'
 
 export default {
   name: 'CollectionModal',
   components: {
-    MovieItemVue
+    MovieItem
   },
   data(){
     return{
@@ -134,44 +140,26 @@ export default {
    -ms-overflow-style: none;
   }
   /* 임의의 영역 생성 */
-  .scrollBar { 
-    width: 200px;
-    height: 200px;
-    overflow-y: scroll;
-    overflow-x: none;
-  }
+
   
   /* 아래의 모든 코드는 영역::코드로 사용 */
-  .modal-card::-webkit-scrollbar {
-    width: 10px;  /* 스크롤바의 너비 */
-  }
 
-  .modal-card::-webkit-scrollbar-thumb {
-      height: 5%; /* 스크롤바의 길이 */
-      background: var(--primary-color); /* 스크롤바의 색상 */
-      border-radius: 10px;
-  }
-
-  .modal-card::-webkit-scrollbar-track {
-      background: var(--primary-color-10);  /*스크롤바 뒷 배경 색상*/
-      margin-top:50px;
-      margin-bottom:50px;
-      border-radius: 10px;
-  }
 
 
   .modal-card {
     /* position: relative; */
-    height: 70%;
+    /* height: 70%; */
     position: fixed;
     width: 70%;
-    top: 15%;
+    /* position: absolute; */
+    top: 50%;
     left: 15%;
+    transform: translate(0%,-50%);
     
     margin-left: auto;
     margin-right: auto;
     z-index: 3;
-    overflow:scroll;
+    /* overflow:scroll; */
     padding: 20px;
     background-color: white;
     /* border: 1px red solid; */

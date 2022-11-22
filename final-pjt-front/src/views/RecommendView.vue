@@ -131,14 +131,5 @@ export default {
 </script>
 
 <style lang="scss">
-  .row-scroll {
-    overflow: auto;
-    white-space: nowrap;
-
-    .row-scroll-item {
-      display: inline-block;
-      width: 200px;
-      margin-right: 20px;
-    }
-  }
+  
 </style>
