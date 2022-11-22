@@ -11,7 +11,7 @@
             <img class="img-circle-100" v-else src="@/assets/basic.png" alt="">
           </div>
           <div class="detail-box">
-            <div class="user-and-button">
+            <div class="user-and-button" >
               <h1 class="h1 m-0">@{{ profileUser?.username }}</h1>
               <div class="space"></div>
               <div v-if="loginUser.username !== profileUser?.username" @click="follow">
@@ -30,16 +30,19 @@
       </div>
       <h3 class="h3">{{ profileUser?.username }}님의 컬렉션</h3>
       <!-- {{ collections }} -->
-      
-      <div class="row-scroll mb-5">
+      <div style="position:relative">
+        <button @click="scrollRight('rowMovies')" class="row-scroll-button r-s-b-left">{{ leftIcon }}</button>
+        <button @click="scrollLeft('rowMovies')" class="row-scroll-button r-s-b-right">{{ rightIcon }}</button>
+        <div class="row-scroll mb-5" :ref="'rowMovies'" >
           <article 
             v-for="collection, index in collections" :key="index"
             class="col row-scroll-item"
-          >
+            >
             <MovieItem :movie="collection" class="modal-movie"/>
           </article>
         </div>
-    </div>
+      </div>
+      </div>
   </div>
 </template>
 
@@ -56,12 +59,22 @@ export default {
     return{
       profileUser: null,
       isFollowing: false,
+      leftIcon : '<',
+      rightIcon : '>',
     }
   },
   props: {
     collections: Array,
   },
   methods: {
+    scrollRight(idx){
+      const move = parseInt(this.$store.state.width / 2)
+      this.$refs[idx].scrollBy({ left: -move, behavior: 'smooth' });
+    },
+    scrollLeft(idx){
+      const move = parseInt(this.$store.state.width / 2)
+      this.$refs[idx].scrollBy({ left: move , behavior: 'smooth' });
+    },
     closeModal() {
       this.$emit('close-modal')
     },
@@ -122,56 +135,5 @@ export default {
 </script>
 
 <style>
-  #MODAL{
-    border-radius: 8px;
-  }
-  .overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0.5;
-    z-index: 2;
-    background-color: black;
-  }
-
-  .modal-card{
-   -ms-overflow-style: none;
-  }
-  /* 임의의 영역 생성 */
-
   
-  /* 아래의 모든 코드는 영역::코드로 사용 */
-
-
-
-  .modal-card {
-    /* position: relative; */
-    /* height: 70%; */
-    position: fixed;
-    width: 70%;
-    /* position: absolute; */
-    top: 50%;
-    left: 15%;
-    transform: translate(0%,-50%);
-    
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 3;
-    /* overflow:scroll; */
-    padding: 20px;
-    background-color: white;
-    /* border: 1px red solid; */
-  }
-
-  .modal-movie{
-    width: 200px;
-  }
-
-  .center-head{
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0px;
-  }
 </style>

@@ -166,6 +166,8 @@
     --bg-router-color:#FFFAFA;
     --disable-color:#5F5F5F;
     --text-color:#000;
+    --text-color-80:rgba(0, 0, 0, 0.8);
+    --text-color-0:#0000;
 
     //버튼 텍스트 컬러
     --button-live-text-color:#FFF;
@@ -194,6 +196,8 @@
     --bg-router-color:#1F1F1F;
     --disable-color:#c8c8c8;
     --text-color:#FFF;
+    --text-color-80:rgba(255, 255, 255, 0.8);
+    --text-color-0:#FFF0;
 
     //버튼 텍스트 컬러
     --button-live-text-color:#FFF;
@@ -446,7 +450,6 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
   .row-scroll {
     overflow: auto;
     white-space: nowrap;
-
     .row-scroll-item {
       display: inline-block;
       width: 200px;
@@ -458,6 +461,10 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     width: 10px;  /* 스크롤바의 너비 */
     height: 5px;
   }
+  .row-scroll::-webkit-scrollbar:hover {
+    width: 0px;  /* 스크롤바의 너비 */
+    height: 0px;
+  }
 
   .row-scroll::-webkit-scrollbar-thumb {
       height: 5%; /* 스크롤바의 길이 */
@@ -468,10 +475,49 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
 
   .row-scroll::-webkit-scrollbar-track {
       background: var(--primary-color-10);  /*스크롤바 뒷 배경 색상*/
-      // margin-top:50px;
-      // margin-bottom:50px;
       border-radius: 10px;
   }
+
+  .row-scroll-button{
+    position:absolute;
+    border: none;
+    height: 80px;
+    width: 80px;
+    font-weight: 900;
+    top:50%;
+    transform: translate(0%,-50%);
+    border-radius: 50%;
+    color: var(--bg-color);
+    background-color: var(--text-color-80);
+    transition: left 0.1s, right 0.1s, width 0.5s, height 0.4s, border-radius 0.5s, background-color 0.5s, transform 0.5s, border-color 0.5s, color 0.5s, box-shadow 0.5s;
+    &.r-s-b-left{
+      left: 10px; 
+      &:hover{
+        background: linear-gradient(90deg, var(--text-color), var(--text-color-0));
+        left: 0px;
+        height: 100%;
+        width: 200px;
+        border-radius: 0%;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+      }
+    }
+    
+    &.r-s-b-right{
+      right: 10px;
+      &:hover{
+        background: linear-gradient(180deg, var(--text-color), var(--text-color-0));
+        height: 100%;
+        width: 200px;
+        right: 0px;
+        border-radius: 0%;
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+      }
+    }
+  }
+
+
   // 영화카드
   .movie-card {
     display: block;
@@ -661,5 +707,57 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     }
   }
 
+  //모달
+  #MODAL{
+    border-radius: 8px;
+  }
+  .overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+    z-index: 2;
+    background-color: black;
+  }
+
+  .modal-card{
+   -ms-overflow-style: none;
+  }
+  /* 임의의 영역 생성 */
+
   
+  /* 아래의 모든 코드는 영역::코드로 사용 */
+
+
+
+  .modal-card {
+    /* position: relative; */
+    /* height: 70%; */
+    position: fixed;
+    width: 70%;
+    /* position: absolute; */
+    top: 50%;
+    left: 15%;
+    transform: translate(0%,-50%);
+    
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 3;
+    /* overflow:scroll; */
+    padding: 20px;
+    background-color: white;
+    /* border: 1px red solid; */
+  }
+
+  .modal-movie{
+    width: 200px;
+  }
+
+  .center-head{
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0px;
+  }
 </style>
