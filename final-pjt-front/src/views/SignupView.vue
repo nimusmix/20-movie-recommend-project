@@ -92,9 +92,11 @@ export default {
           this.$store.commit('SAVE_USER', user)
         })
         .then(() => {
-          this.makePreferences()
           this.$store.dispatch('getLoginUser')
-          this.$router.push({ name: 'UserEditView', params: { signUpFlag: 1 } })
+          this.makePreferences()
+        })
+        .then(() => {
+          this.$router.push({ name: 'UserEditView', params: { signUpFlag: '1' } })
         })
         .catch((err) => {
           console.log('회원가입에 실패했습니다.')

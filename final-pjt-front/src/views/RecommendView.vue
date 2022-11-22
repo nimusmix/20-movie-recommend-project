@@ -1,65 +1,59 @@
 <template>
   <div class="router-view-padding">
-    <h1 class="h1">추천영화</h1>
-    <!-- <div v-for="recommendObject in recommendBaseList" :key="recommendObject.name">
-      <button @click="getRecommend(recommendObject)">{{ recommendObject.name }}</button>
-    </div> -->
 
-    <!-- 유사 사용자 -->
-    <div v-for="recommendObject in recommendSimilar" :key="recommendObject.name">
-      <div>{{ recommendObject.label }}</div>
-      <div class="row-scroll">
-        <article 
-          v-for="movie in recommendObject.data"
-          :key="movie.id"
-          class="col row-scroll-item"
-        >
-          <MovieItem :movie="movie"/>
-        </article>
+    <div v-if="this.recommendSimilar && this.recommendLatent && this.recommendPreference">
+      <!-- 유사 사용자 -->
+      <div v-for="recommendObject in recommendSimilar" :key="recommendObject.name">
+        <h1 class="h1">{{ recommendObject.label }}</h1>
+        <div class="row-scroll mb-5">
+          <article 
+            v-for="movie in recommendObject.data"
+            :key="movie.id"
+            class="col row-scroll-item"
+          >
+            <MovieItem :movie="movie"/>
+          </article>
+        </div>
+      </div>
+
+      <!-- 잠재 모델 -->
+      <div v-for="recommendObject in recommendLatent" :key="recommendObject.name">
+        <h1 class="h1">{{ recommendObject.label }}</h1>
+        <div class="row-scroll mb-5">
+          <article 
+            v-for="movie in recommendObject.data"
+            :key="movie.id"
+            class="col row-scroll-item"
+          >
+            <MovieItem :movie="movie"/>
+          </article>
+        </div>
+      </div>
+
+      <!-- 선호 장르 -->
+      <div v-for="recommendObject in recommendPreference" :key="recommendObject.name">
+        <h1 class="h1">{{ recommendObject.label }}</h1>
+        <div class="row-scroll mb-5">
+          <article 
+            v-for="movie in recommendObject.data"
+            :key="movie.id"
+            class="col row-scroll-item"
+          >
+            <MovieItem :movie="movie"/>
+          </article>
+        </div>
       </div>
     </div>
-
-    <!-- 잠재 모델 -->
-    <div v-for="recommendObject in recommendLatent" :key="recommendObject.name">
-      <div>{{ recommendObject.label }}</div>
-      <div class="row-scroll">
-        <article 
-          v-for="movie in recommendObject.data"
-          :key="movie.id"
-          class="col row-scroll-item"
-        >
-          <MovieItem :movie="movie"/>
-        </article>
-      </div>
-    </div>
-
-    <!-- 선호 장르 -->
-    <div v-for="recommendObject in recommendPreference" :key="recommendObject.name">
-      <div>{{ recommendObject.label }}</div>
-      <div class="row-scroll">
-        <article 
-          v-for="movie in recommendObject.data"
-          :key="movie.id"
-          class="col row-scroll-item"
-        >
-          <MovieItem :movie="movie"/>
-        </article>
-      </div>
-    </div>
-
-    <RecommendList/>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import RecommendList from '@/components/RecommendList'
 import MovieItem from '@/components/MovieItem'
 
 export default {
   name: 'RecommendView',
   components: {
-    RecommendList,
     MovieItem
   },
   data() {
@@ -72,7 +66,7 @@ export default {
         },
         {
           name: 'latent',
-          label: '사용자의 장르기반 잠재모델 추천',
+          label: '사용자의 장르 기반 잠재 모델 추천',
           url: 'api/v1/recommend/latent',
         },
         {
