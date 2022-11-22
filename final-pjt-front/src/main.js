@@ -3,10 +3,12 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
+import VueTyperPlugin from 'vue-typer'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
+Vue.use(VueTyperPlugin)
 
 Vue.config.productionTip = false
 

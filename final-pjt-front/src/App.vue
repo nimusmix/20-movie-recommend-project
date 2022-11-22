@@ -178,8 +178,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Unna&display=swap');
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
 
-  $logo-font: 'Unna', serif;  // 순위2
-  // $logo-font: 'Manrope', sans-serif;  //순위1
+  // $logo-font: 'Unna', serif;  // 순위2
+  $logo-font: 'Manrope', sans-serif;  //순위1
   $body-font: 'Pretendard Variable';
 
 // 컬러세팅
@@ -385,7 +385,8 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
   // 로고
   .logo {
     font-family: $logo-font;
-    font-weight: 600;
+    // font-weight: 600;
+    font-weight: 300;
     font-size: 3rem;
   }
 
