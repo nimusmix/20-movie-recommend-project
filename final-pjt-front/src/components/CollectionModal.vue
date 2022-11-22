@@ -4,6 +4,7 @@
     
     </div>
     <div id="MODAL" class="modal-card">
+
       <div class="center-head">
         <div class="head-box">
           <div class="profile-img-box">
@@ -29,15 +30,16 @@
         </div>
       </div>
       <h3 class="h3">{{ profileUser?.username }}님의 컬렉션</h3>
-      <!-- {{ collections }} -->
+
       <div style="position:relative">
         <button @click="scrollRight('rowMovies')" class="row-scroll-button r-s-b-left">{{ leftIcon }}</button>
         <button @click="scrollLeft('rowMovies')" class="row-scroll-button r-s-b-right">{{ rightIcon }}</button>
         <div class="row-scroll mb-5" :ref="'rowMovies'" >
           <article 
-            v-for="collection, index in collections" :key="index"
+            v-for="collection, index in profileUser?.collection" :key="index"
             class="col row-scroll-item"
             >
+            
             <MovieItem :movie="collection" class="modal-movie"/>
           </article>
         </div>
@@ -63,8 +65,8 @@ export default {
       rightIcon : '>',
     }
   },
-  props: {
-    collections: Array,
+  props:{
+    username: String,
   },
   methods: {
     scrollRight(idx){
@@ -81,10 +83,11 @@ export default {
     getProfileUser() {
       axios({
         method: 'get',
-        url: `${this.$store.state.API_URL}/api/v3/accounts/${this.$route.params.username}/`,
+        url: `${this.$store.state.API_URL}/api/v3/accounts/${this.username}/`,
       })
       .then((res) => {
         this.profileUser = res.data
+        console.log(this.profileUser)
       })
       .then(() => {
         if (this.loginUser.followings.includes(this.profileUser.id)) {

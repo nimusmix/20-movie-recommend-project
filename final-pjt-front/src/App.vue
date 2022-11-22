@@ -704,6 +704,10 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
   }
 
   //모달
+  .collection-modal {
+    position: absolute;
+  }
+  
   #MODAL{
     border-radius: 8px;
   }
@@ -721,11 +725,6 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
   .modal-card{
    -ms-overflow-style: none;
   }
-  /* 임의의 영역 생성 */
-
-  
-  /* 아래의 모든 코드는 영역::코드로 사용 */
-
 
 
   .modal-card {
