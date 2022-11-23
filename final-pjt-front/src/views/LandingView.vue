@@ -1,32 +1,38 @@
 <template>
-  <div class="router-view-padding">
+  <div class="router-view-padding" @mousemove="mouseMove" >
     <h1 class="h1">LandingView</h1>
 
     <div class="fullscreen z-1">
     </div>
     <!-- 99Qykqxqddc -->
     <iframe frameborder="0" class="fullscreen z-2"
-    :src="`https://www.youtube.com/embed/toGEheu4eq4?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=1&disablekb=1&fs=0&modestbranding=1&playsinline=1&vq=hd1080`"
-    allow="autoplay; encrypted-media" 
-    allowfullscreen>
-  </iframe>
+    
+      :src="`https://www.youtube.com/embed/toGEheu4eq4?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=1&disablekb=1&fs=0&modestbranding=1&playsinline=1&vq=hd1080`"
+      allow="autoplay; encrypted-media" 
+      allowfullscreen>
+    </iframe>
 
-  <div style="z-index:9; background-color: aqua;">
-    <div v-if="isLogin">
-      <router-link :to="{ name: 'HomeView' }">들어가기</router-link>
+  <div class="sub-fullscreen" :style="xyCss" >
+    <router-link :to="{ name: 'HomeView' }">
+      <div class="landing-cursor" style="">
+        <div class="landing-text">들어가기</div>
+      </div>
+    </router-link>
+    <!-- <div v-if="isLogin">
+      들어가기</router-link>
     </div>
     <div v-else>
       <router-link :to="{ name: 'LoginView' }">로그인</router-link> | 
       <router-link :to="{ name: 'SignupView' }">회원가입</router-link>
-    </div>
+    </div> -->
   </div>
   
   <!-- :repeat='0' = 횟수 -->
-    <div frameborder="0" @mousemove="mouseMove" class="fullscreen z-3">
+    <div frameborder="0" class="fullscreen z-3">
       <div :class="isTwenty">
       </div>
     </div>
-    <div frameborder="0" @mousemove="mouseMove" class="fullscreen z-4">
+    <div frameborder="0" class="fullscreen z-4">
       <div :class="isTwenty">
         <div class="lending-logo">{{ numbering }}.</div>
         <vue-typer
@@ -56,6 +62,8 @@ export default {
   name: 'LandingView',
   data() {
     return {
+      landingX:0,
+      landingY:0,
       test:null,
       numbering:0,
       mainText:[
@@ -65,6 +73,7 @@ export default {
         '클릭하여 시작하세요.',
       ],
       isTwenty:"title-typer",
+      xyCss:'',
     }
   },
   components:{
@@ -72,7 +81,7 @@ export default {
   computed: {
     isLogin() {
       return this.$store.getters.isLogin
-    }
+    },
   },
   methods:{
     onTyped(e){
@@ -87,10 +96,17 @@ export default {
         }
       },
       mouseMove(event){
-        console.log("pageX: ",event.pageX, 
-        "pageY: ", event.pageY, 
-        "clientX: ", event.clientX, 
-        "clientY:", event.clientY)
+        this.landingX = event.clientX 
+        this.landingY = event.clientY
+        this.xyCss = `z-index:9; width:200px; height:100px; top:${this.landingY}px; left:${this.landingX}px;  `
+        //`background-position: px px;`
+        
+        console.log(
+          "pageX: ",event.pageX, 
+          "pageY: ", event.pageY, 
+          // "clientX: ", 
+          // "clientY:", 
+        )
       }
   },
 }
@@ -112,6 +128,34 @@ export default {
   }
   &z-1{
     z-index: 1;
+  }
+}
+.sub-fullscreen{
+  cursor: pointer;
+  width:100vw; height:100vh; position: fixed; ;
+}
+.landing-cursor{
+  border-radius:50%;
+  position: relative;
+  width:100px;
+  height:100px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.492); 
+  z-index: 15;
+  transform: translate(-50%,-50%);
+  
+  a:hover{
+    text-decoration: none;
+  }
+  .landing-text{
+    
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color:#FFF;
+    font-size: 16px;
   }
 }
 
