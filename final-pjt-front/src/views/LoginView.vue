@@ -10,7 +10,7 @@
       <input type="password" id="password" class="user-input" v-model="password">
 
       <p v-if="errMsg" class="err-msg">{{ errMsg }}</p><br>
-      <input type="submit" class="main-button selected" value="로그인">
+      <input type="submit" class="main-button selected mb-1" value="로그인">
       <router-link style="margin-top:4px" class="sign-up" :to="{ name: 'SignupView' }">회원가입</router-link>
     </form>
   </div>

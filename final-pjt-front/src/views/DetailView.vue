@@ -148,8 +148,7 @@ export default {
           Authorization: `Token ${this.$store.state.token}`
         },
       })
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           this.$store.dispatch('getLoginUser')
           if (this.isCollected) {
             alert('내 컬렉션에 추가했습니다.')

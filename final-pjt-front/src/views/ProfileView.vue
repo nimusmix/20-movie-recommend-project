@@ -65,8 +65,6 @@ export default {
         url: `${this.$store.state.API_URL}/api/v3/accounts/${this.$route.params.username}/`,
       })
       .then((res) => {
-        console.log('getProfileUser')
-        console.log(res)
         this.profileUser = res.data
         
       })

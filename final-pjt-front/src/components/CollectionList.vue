@@ -12,13 +12,14 @@
         @close-modal="closeModal"
       />
     </div>
-    <div class="row row-cols-1 row-cols-md-4 row-cols-xl-6 g-4">
+    <div v-if="cuttedCollection?.length" class="row row-cols-1 row-cols-md-4 row-cols-xl-6 g-4">
       <MovieItem
         v-for="movie in cuttedCollection"
         :key="movie.id"
         :movie="movie"
       />
     </div>
+    <div v-else>아직 담은 영화가 없습니다.</div>
   </div>
 </template>
 
@@ -45,7 +46,7 @@ export default {
       return this.$store.state.movies
     },
     cuttedCollection() {
-      return this.collection?.slice(0, 4)
+      return this.collection?.slice(0, 5)
     }
   },
   methods: {
