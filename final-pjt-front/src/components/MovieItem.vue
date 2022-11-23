@@ -1,13 +1,13 @@
 <template>
   <div class="movie-card">
-    <div class="logos">
-      <img src="@/assets/watcha.jpg" class="img-circle-ott" v-if="servingOtts.includes(97)">
-      <img src="@/assets/waave.png" class="img-circle-ott" v-if="servingOtts.includes(356)">
-      <img src="@/assets/disney.jpg" class="img-circle-ott" v-if="servingOtts.includes(337)">
-      <img src="@/assets/netflix.png" class="img-circle-ott" v-if="servingOtts.includes(8)">
-    </div>
     <a class="t-d-none" @click.prevent="putPreference()">
-      <div>
+      <div  style="position:relative">
+        <div class="logos">
+          <img src="@/assets/watcha.jpg" class="img-circle-ott" v-if="servingOtts.includes(97)">
+          <img src="@/assets/waave.png" class="img-circle-ott" v-if="servingOtts.includes(356)">
+          <img src="@/assets/disney.jpg" class="img-circle-ott" v-if="servingOtts.includes(337)">
+          <img src="@/assets/netflix.png" class="img-circle-ott" v-if="servingOtts.includes(8)">
+        </div>
         <img :src="`https://image.tmdb.org/t/p/original/${ movie.poster_path }`" 
         class="card-img-top" alt="...">
       </div>
@@ -42,15 +42,5 @@
 </script>
   
 <style lang="scss">
-  .logos {
-    position: absolute;
-    z-index: 3;
-    margin: 5px;
-    // margin-left: auto;
-    // margin-right: auto;
-
-    img {
-      margin: 1.2px;
-    }
-  }
+  
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="router-view-padding">
-    <h1 class="h1">{{ username }}님과 비슷한 사용자들이 좋아하는 영화입니다.</h1>
+    <h1 class="h1"  v-if="recommendSimilar.length">{{ username }}님과 비슷한 사용자들이 좋아하는 영화입니다.</h1>
 
-    <div style="position:relative">
+    <div style="position:relative" v-if="recommendSimilar.length">
       <button @click="scrollRight('recommendSimilar')" class="row-scroll-button r-s-b-left">
         <svg stroke="#FFF" fill="none" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.9998 12.0001V14.6701C17.9998 17.9801 15.6498 19.3401 12.7798 17.6801L10.4698 16.3401L8.15982 15.0001C5.28982 13.3401 5.28982 10.6301 8.15982 8.97005L10.4698 7.63005L12.7798 6.29005C15.6498 4.66005 17.9998 6.01005 17.9998 9.33005V12.0001Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -130,8 +130,6 @@ export default {
   },
   data(){
     return {
-      leftIcon : '<',
-      rightIcon : '>',
       genres : [],
     }
   },

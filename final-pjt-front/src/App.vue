@@ -525,7 +525,7 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
   //가로스크롤
   .row-scroll::-webkit-scrollbar {
     width: 0px;  /* 스크롤바의 너비 */
-    height: 5px;
+    height: 0px;
   }
   .row-scroll::-webkit-scrollbar-thumb {
       height: 5%; /* 스크롤바의 길이 */
@@ -553,6 +553,7 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
     background-color: var(--text-color-30);
     transition: left 0.1s, right 0.1s, width 0.5s, height 0.4s, border-radius 0.5s, background-color 0.5s, transform 0.5s, border-color 0.5s, color 0.5s, box-shadow 0.5s;
     box-shadow: $shadow-default;
+    z-index: 11;
     &.r-s-b-left{
       left: -16px; 
       &:hover{
@@ -588,14 +589,26 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
     transition: $trans-global-fast;
     padding:8px;
     cursor: pointer;
+    .logos {
+      position: absolute;
+      z-index: 3;
+      margin: 5px;
+      // margin-left: auto;
+      // margin-right: auto;
+      img {
+        margin: 1.2px;
+        box-shadow:$shadow-hover;
+        
+      }
+    }
     &:hover{
       box-shadow:$shadow-hover;
       background-color: var(--bg-color);
     }
     a {
       color: var(--text-color);
-
-      img {
+      
+      .card-img-top {
         width: 100%;
         aspect-ratio: 3.5 / 5;
         object-fit: cover;
