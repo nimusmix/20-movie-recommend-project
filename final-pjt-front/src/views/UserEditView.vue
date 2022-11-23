@@ -40,18 +40,22 @@
       </button>
     </div>
     
-
-    <div v-if="this.$route.params.signUpFlag === '1'">
-      <form @submit.prevent="editInfo('HomeView')">
-        <button>가입완료</button>
-      </form>
+    <div class="space"></div>
+    <div class="cusor-pointer">
+    <div v-if="this.$route.params.signUpFlag === '1'"  @click="editInfo('HomeView')">
+      <h2 class="h2" style="color:#FF715E;">가입완료
+      <svg style="display:inline-block; color:#FF715E; text-decoration:underline;" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M8.91016 19.9201L15.4302 13.4001C16.2002 12.6301 16.2002 11.3701 15.4302 10.6001L8.91016 4.08008" stroke="#FF715E" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg></h2>
     </div>
 
-    <div v-else>
-      <form @submit.prevent="editInfo('ProfileView')">
-        <button>수정하기</button>
-      </form>
+    <div v-else @click="editInfo('ProfileView')">
+      <h2 class="h2" style="color:#FF715E; text-decoration:underline;">수정하기
+      <svg style="display:inline-block" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M8.91016 19.9201L15.4302 13.4001C16.2002 12.6301 16.2002 11.3701 15.4302 10.6001L8.91016 4.08008" stroke="#FF715E" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg></h2>
     </div>
+  </div>
   </div>
 </template>
 

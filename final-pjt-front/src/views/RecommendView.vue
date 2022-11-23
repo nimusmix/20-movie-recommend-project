@@ -1,6 +1,7 @@
 <template>
   <div class="router-view-padding">
-    <h1 class="h1"  v-if="recommendSimilar.length">{{ username }}님과 비슷한 사용자들이 좋아하는 영화입니다.</h1>
+    {{ recommendSimilar }}
+    <h2 class="h2"  v-if="recommendSimilar.length">{{ username }}님<span>과</span> 비슷한 사용자들이 <span>좋아하는 영화입니다</span>.</h2>
 
     <div style="position:relative" v-if="recommendSimilar.length">
       <button @click="scrollRight('recommendSimilar')" class="row-scroll-button r-s-b-left">
@@ -25,9 +26,10 @@
     </div>
 
     <!-- 잠재 모델 -->
-    <h1 class="h1">{{ username }}님이 좋아할 만한 영화입니다.</h1>
 
-    <div style="position:relative">
+    <h2 class="h2" v-if="recommendLatent.length">{{ username }}님<span>을 분석하여 </span>추천<span>하는 영화입니다</span>.</h2>
+
+    <div style="position:relative" v-if="recommendLatent.length">
       <button @click="scrollRight('recommendLatent')" class="row-scroll-button r-s-b-left">
         <svg stroke="#FFF" fill="none" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.9998 12.0001V14.6701C17.9998 17.9801 15.6498 19.3401 12.7798 17.6801L10.4698 16.3401L8.15982 15.0001C5.28982 13.3401 5.28982 10.6301 8.15982 8.97005L10.4698 7.63005L12.7798 6.29005C15.6498 4.66005 17.9998 6.01005 17.9998 9.33005V12.0001Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -50,8 +52,8 @@
     </div>
 
     <!-- 선호 장르 -->
-    <h1 class="h1">{{ Object.keys(recommendPreference)[0] }}</h1>
-    <div style="position:relative">
+    <h2 class="h2">{{ Object.keys(recommendPreference)[0] }}</h2>
+    <div style="position:relative" v-if="recommendPreference[Object.keys(recommendPreference)[0]]">
       <button @click="scrollRight(`'prefer1'${0}`)" class="row-scroll-button r-s-b-left">
         <svg stroke="#FFF" fill="none" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.9998 12.0001V14.6701C17.9998 17.9801 15.6498 19.3401 12.7798 17.6801L10.4698 16.3401L8.15982 15.0001C5.28982 13.3401 5.28982 10.6301 8.15982 8.97005L10.4698 7.63005L12.7798 6.29005C15.6498 4.66005 17.9998 6.01005 17.9998 9.33005V12.0001Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -72,8 +74,8 @@
         </article>
       </div>
     </div>
-    <h1 class="h1">{{ Object.keys(recommendPreference)[1] }}</h1>
-    <div style="position:relative">
+    <h2 class="h2">{{ Object.keys(recommendPreference)[1] }}</h2>
+    <div style="position:relative" v-if="recommendPreference[Object.keys(recommendPreference)[1]]">
       <button @click="scrollRight(`'prefer1'${1}`)" class="row-scroll-button r-s-b-left">
         <svg stroke="#FFF" fill="none" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.9998 12.0001V14.6701C17.9998 17.9801 15.6498 19.3401 12.7798 17.6801L10.4698 16.3401L8.15982 15.0001C5.28982 13.3401 5.28982 10.6301 8.15982 8.97005L10.4698 7.63005L12.7798 6.29005C15.6498 4.66005 17.9998 6.01005 17.9998 9.33005V12.0001Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -94,8 +96,8 @@
         </article>
       </div>
     </div>
-    <h1 class="h1">{{ Object.keys(recommendPreference)[2] }}</h1>
-    <div style="position:relative">
+    <h2 class="h2">{{ Object.keys(recommendPreference)[2] }}</h2>
+    <div style="position:relative" v-if="recommendPreference[Object.keys(recommendPreference)[2]]">
       <button @click="scrollRight(`'prefer1'${2}`)" class="row-scroll-button r-s-b-left">
         <svg stroke="#FFF" fill="none" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.9998 12.0001V14.6701C17.9998 17.9801 15.6498 19.3401 12.7798 17.6801L10.4698 16.3401L8.15982 15.0001C5.28982 13.3401 5.28982 10.6301 8.15982 8.97005L10.4698 7.63005L12.7798 6.29005C15.6498 4.66005 17.9998 6.01005 17.9998 9.33005V12.0001Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -131,6 +133,20 @@ export default {
   data(){
     return {
       genres : [],
+      recommendBaseList: [
+        {
+          name: 'similar',
+          url: 'api/v1/recommend/similar',
+        },
+        {
+          name: 'latent',
+          url: 'api/v1/recommend/latent',
+        },
+        {
+          name: 'preference',
+          url: 'api/v1/recommend/preference',
+        }
+      ],
     }
   },
   methods: {
@@ -159,9 +175,9 @@ export default {
     
   },
   created() {
-    // for (const recommendObj of this.recommendBaseList) {
-    //   this.$store.dispatch('getRecommend', recommendObj)
-    // }
+    for (const recommendObj of this.recommendBaseList) {
+      this.$store.dispatch('getRecommend', recommendObj)
+    }
   }
 }
 </script>
