@@ -52,8 +52,10 @@ export default new Vuex.Store({
     isLogin(state) {
       return state.token ? true : false
     },
+    recent2Reviews(state) {
+      return state.reviews.splice(0,2)
+    }
   },
-
   mutations: {
     GET_GENRES(state, genres) {
       state.genres = genres
@@ -225,6 +227,4 @@ export default new Vuex.Store({
       context.commit('GET_WINDOWS')
     },
   },
-  modules: {
-  }
 })
