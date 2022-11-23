@@ -6,7 +6,7 @@
 
     <div class="content-box">
       <div class="movie-box">
-        <img :src="posterUrl" class="poster-img">
+        <img style="border-radius:8px" :src="posterUrl" class="poster-img">
         <div class="detail-box">
           <div class="movie-title">{{ movie?.title }}</div>
           <div class="details">
@@ -14,14 +14,31 @@
             <p class="detail">·</p>
             <div class="detail" v-for="genre in this.genreList" :key="genre.id">{{ genre }}</div>
           </div>
-          <div>평균 별 {{ movie?.vote_average }}</div>
-          <div>
-            <button id="collectBtn" @click="collect" v-if="isCollected">내 콜렉션에서 제외하기</button>
-            <button id="collectBtn" @click="collect" v-else>내 컬렉션에 추가하기</button>
+          <div style="font-weight:500">평균 별 {{ movie?.vote_average }}</div>
+          <div class="collection-button">
+            <div class="selected collection-in" id="collectBtn" @click="collect" v-if="isCollected">
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.8198 2H7.17982C5.04982 2 3.31982 3.74 3.31982 5.86V19.95C3.31982 21.75 4.60982 22.51 6.18982 21.64L11.0698 18.93C11.5898 18.64 12.4298 18.64 12.9398 18.93L17.8198 21.64C19.3998 22.52 20.6898 21.76 20.6898 19.95V5.86C20.6798 3.74 18.9498 2 16.8198 2Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9.58984 11L11.0898 12.5L15.0898 8.5"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              
+            </svg>
+            <span>
+              내 컬렉션
+                </span>
+            </div>
+            <div class="collection-out" id="collectBtn" @click="collect" v-else>
+            <svg  width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.8198 2H7.17982C5.04982 2 3.31982 3.74 3.31982 5.86V19.95C3.31982 21.75 4.60982 22.51 6.18982 21.64L11.0698 18.93C11.5898 18.64 12.4298 18.64 12.9398 18.93L17.8198 21.64C19.3998 22.52 20.6898 21.76 20.6898 19.95V5.86C20.6798 3.74 18.9498 2 16.8198 2Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14.5 10.65H9.5M12 8.20996V13.21"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+                <span>
+                  내 컬렉션에 추가하기
+                </span>
+            </div>
           </div>
         </div>
       </div>
-      
+      <div class="space"></div>      
       <div class="overview-box">
         <h3 class="h3">줄거리</h3>
         <p>{{ movie?.overview }}</p>
@@ -198,8 +215,7 @@ export default {
     }
 
     .overview-box {
-      margin-top: 20px;
-
+      
       p {
         margin: 0;
       }

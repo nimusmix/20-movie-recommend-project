@@ -4,12 +4,22 @@
 
     <div class="fullscreen z-1">
     </div>
+    <!-- 99Qykqxqddc -->
     <iframe frameborder="0" class="fullscreen z-2"
-    :src="`https://www.youtube.com/embed/99Qykqxqddc?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=1&disablekb=1&fs=0&modestbranding=1&playsinline=1&vq=hd1080`"
+    :src="`https://www.youtube.com/embed/toGEheu4eq4?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=1&disablekb=1&fs=0&modestbranding=1&playsinline=1&vq=hd1080`"
     allow="autoplay; encrypted-media" 
     allowfullscreen>
   </iframe>
-  
+
+  <div style="z-index:9; background-color: aqua;">
+    <div v-if="isLogin">
+      <router-link :to="{ name: 'HomeView' }">들어가기</router-link>
+    </div>
+    <div v-else>
+      <router-link :to="{ name: 'LoginView' }">로그인</router-link> | 
+      <router-link :to="{ name: 'SignupView' }">회원가입</router-link>
+    </div>
+  </div>
   
   <!-- :repeat='0' = 횟수 -->
     <div frameborder="0" @mousemove="mouseMove" class="fullscreen z-3">
@@ -36,15 +46,7 @@
         ></vue-typer>
       </div>
     </div>
-
-    <div v-if="isLogin">
-      <router-link :to="{ name: 'HomeView' }">들어가기</router-link>
-    </div>
     
-    <div v-else>
-      <router-link :to="{ name: 'LoginView' }">로그인</router-link> | 
-      <router-link :to="{ name: 'SignupView' }">회원가입</router-link>
-    </div>
   </div>
 </template>
 

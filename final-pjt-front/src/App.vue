@@ -58,7 +58,7 @@
             </div>
           </li>
         </ul>
-        {{ this.$store.state.width }}
+        <!-- {{ this.$store.state.width }} -->
         <!-- <button @click="changeClass">변경하기</button> -->
 
       </nav>
@@ -204,6 +204,7 @@
     --disable-color:#5F5F5F;
     --text-color:#000;
     --text-color-80:rgba(0, 0, 0, 0.8);
+    --text-color-30:rgba(0, 0, 0, 0.3);
     --text-color-0:#0000;
 
     //버튼 텍스트 컬러
@@ -211,6 +212,7 @@
 
     //피드 및 네비 그림자
     --feed-shadow:rgba(0, 0, 0, 0.03);
+    --feed-hover-shadow:rgba(0, 0, 0, 0.202);
 
     //프로필 이미지 외곽선
     --img-border:rgba(0, 0, 0, 0.05);
@@ -235,6 +237,7 @@
     --disable-color:#c8c8c8;
     --text-color:#FFF;
     --text-color-80:rgba(255, 255, 255, 0.8);
+    --text-color-30:rgba(225, 225, 225, 0.19);
     --text-color-0:#FFF0;
 
     //버튼 텍스트 컬러
@@ -242,6 +245,7 @@
     
     //피드 그림자
     --feed-shadow:rgb(255, 255, 255, 0.01);
+    --feed-hover-shadow:rgba(255, 255, 255, 0.3);
 
     //프로필 이미지 외곽선
     --img-border:rgb(255, 255, 255, 0.3);
@@ -329,7 +333,9 @@
   }
 // 그림자 스타일
 $shadow-default: 4px 0px 20px var(--feed-shadow);
+$shadow-hover: 4px 0px 20px var(--feed-hover-shadow);
 $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
+$shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
 
 // button 스타일
   .button-list {
@@ -352,7 +358,7 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
       color:var(--button-live-text-color);
     }
     &:hover {
-      box-shadow: $shadow-primary;
+      box-shadow: $shadow-focus;
       transition: $trans-global-fast;
       // background-color: var(--primary-color-15);
       // color:var(--button-live-text-color);
@@ -539,12 +545,13 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     border: none;
     height: 80px;
     width: 80px;
+    padding: 20px;
     font-weight: 900;
     top:50%;
     transform: translate(0%,-50%);
     border-radius: 50%;
     color: var(--bg-color);
-    background-color: var(--text-color-80);
+    background-color: var(--text-color-30);
     transition: left 0.1s, right 0.1s, width 0.5s, height 0.4s, border-radius 0.5s, background-color 0.5s, transform 0.5s, border-color 0.5s, color 0.5s, box-shadow 0.5s;
     box-shadow: $shadow-default;
     &.r-s-b-left{
@@ -578,7 +585,14 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
   // 영화카드
   .movie-card {
     display: block;
-
+    border-radius: 8px;
+    transition: $trans-global-fast;
+    padding:8px;
+    cursor: pointer;
+    &:hover{
+      box-shadow:$shadow-hover;
+      background-color: var(--bg-color);
+    }
     a {
       color: var(--text-color);
 
@@ -654,13 +668,23 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
 
   // 리뷰 만들 때
   #REVIEW_CREATE {
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--primary-color-10);
     padding: 1rem 1.5rem ;
     background: var(--bg-color);
     border-radius: 8px;
-    border-color: var(--primary-color);
+    // border-color: ;
     box-shadow: $shadow-primary;
 
+    transition: 0.1s;
+    &:hover{
+      border: 1px solid var(--primary-color-50);
+      box-shadow: $shadow-focus;
+    }
+    &:focus-within{
+      border: 1px solid var(--primary-color-50);
+      box-shadow: $shadow-focus;
+    }
+    
     .logo {
       display: inline-block;
     }
@@ -784,7 +808,7 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
     top: 0;
     left: 0;
     opacity: 0.5;
-    z-index: 2;
+    z-index: 10;
     background-color: black;
   }
 
@@ -794,22 +818,16 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
 
 
   .modal-card {
-    /* position: relative; */
-    /* height: 70%; */
     position: fixed;
     width: 70%;
-    /* position: absolute; */
     top: 50%;
     left: 15%;
     transform: translate(0%,-50%);
-    
     margin-left: auto;
     margin-right: auto;
-    z-index: 3;
-    /* overflow:scroll; */
+    z-index: 11;
     padding: 20px;
     background-color: white;
-    /* border: 1px red solid; */
   }
 
   .modal-movie{
@@ -923,5 +941,25 @@ $shadow-primary: 0px 0px 10px 0px var(--primary-color-15);
 @keyframes blink{
   0% {opacity: 0;}
   100% {opacity: 1;}
+}
+
+.collection-button{
+  margin-top:20px;
+  cursor: pointer;
+  border: none;
+  background-color: none;
+  font-weight: 500;
+  color:var(--primary-color);
+  .collection-in{
+    stroke:var(--button-live-text-color) ;
+    fill:var(--primary-color);
+  }
+  .collection-out{
+    stroke:var(--primary-color) ;
+    fill:none;
+  }
+  span{
+    vertical-align: middle;
+  }
 }
 </style>
