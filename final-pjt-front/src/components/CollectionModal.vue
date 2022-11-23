@@ -19,7 +19,6 @@
                 <button id="followBtn" class="main-button selected" v-if="isFollowing">언팔로우</button>
                 <button id="followBtn" class="main-button selected" v-else>팔로우</button>
               </div>
-              <button v-else class="main-button selected" @click="goToEdit">회원정보수정</button>
             </div>
             <div class="follow-info">
               <div>팔로워 &nbsp;<b>{{ profileUser?.followers.length }}</b></div>
@@ -42,13 +41,12 @@
               <path d="M6 12.0002V9.33017C6 6.02017 8.35 4.66017 11.22 6.32017L13.53 7.66017L15.84 9.00017C18.71 10.6602 18.71 13.3702 15.84 15.0302L13.53 16.3702L11.22 17.7102C8.35 19.3402 6 17.9902 6 14.6702V12.0002Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
-        <div class="row-scroll mb-5" :ref="'rowMovies'" >
+        <div class="row-scroll mb-5" :ref="'rowMovies'">
           <article 
-            v-for="collection, index in profileUser?.collection" :key="index"
+            v-for="movie, index in profileUser?.collection" :key="index"
             class="col row-scroll-item"
-            >
-            
-            <MovieItem :movie="collection" class="modal-movie"/>
+          > 
+            <MovieItem :movie="movie" class="modal-movie"/>
           </article>
         </div>
       </div>

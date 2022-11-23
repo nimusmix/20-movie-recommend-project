@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="mainclass">
 
-      <nav id="col-nav">
+      <nav id="col-nav" v-if="isLogin">
         <div id="nav-logo" class="logo t-d-none cusor-pointer" @click="goToHome">20.</div>
 
         <div id="nav-profile-box">
@@ -15,14 +15,11 @@
               <b-dropdown-item @click="goToProfile">내 프로필</b-dropdown-item>
               <b-dropdown-item @click="logout">로그아웃</b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item @click="changeClass">다크모드</b-dropdown-item>
+              <b-dropdown-item @click="changeClass" v-if="this.mainclass === 'light'">다크모드</b-dropdown-item>
+              <b-dropdown-item @click="changeClass" v-else>라이트모드</b-dropdown-item>
             </b-dropdown>
           </div>
         </div>
-
-        <!-- <div v-if="isLogin">
-          <button @click="logout">로그아웃</button>
-        </div> -->
 
         <ul id="nav-ul">
           <div v-if="!isLogin">
@@ -57,15 +54,13 @@
             </div>
           </li>
         </div>
-        </ul>
-        
-        <!-- {{ this.$store.state.width }} -->
-        <!-- <button @click="changeClass">변경하기</button> -->
-
-      </nav>
-      <router-view id="router-view"/>
+      </ul>
+    </nav>
+    <!-- <router-view id="router-view"/> -->
+    <router-view :id="isLogin ? 'router-view' : 'router-view-user'"/>
   </div>
 </template>
+
 <script>
   export default {
     data() {
@@ -512,6 +507,10 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
     min-height: 100vh;
   }
 
+  #router-view-user{
+    min-height: 100vh;
+  }
+
   @function w_to_h() {
         
   }
@@ -861,7 +860,6 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
     justify-content: center;
     margin: 2rem 0px;
   }
-
 
 
 

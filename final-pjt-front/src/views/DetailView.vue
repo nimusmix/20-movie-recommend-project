@@ -109,11 +109,6 @@ export default {
           this.backdropUrl = imgUrl + this.movie.backdrop_path
           this.posterUrl = imgUrl + this.movie.poster_path
 
-          if (this.loginUser.collection.includes(this.movie?.id)) {
-            this.isCollected = true
-          } else {
-            this.isCollected = false
-          }
           this.checkCollect()
         })
         .then(() => {
@@ -161,7 +156,6 @@ export default {
         })
     },
     checkCollect(){
-      console.log(this.$store.state.loginUser.collection)
       this.$store.state.loginUser.collection.forEach(collect=>{
         if (collect.id === this.movie.id){
           this.isCollected = true

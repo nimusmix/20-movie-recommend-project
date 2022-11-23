@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import store from '@/store/index.js'
 import LandingView from '@/views/LandingView'
 import LoginView from '@/views/LoginView'
 import SignupView from '@/views/SignupView'
@@ -67,7 +69,6 @@ const routes = [
     path: '/movies/:pk',
     name: 'DetailView',
     component: () => import('@/views/DetailView'),
-    props: true
   },
 
   {
@@ -86,6 +87,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const isLogin = store.getters.isLogin
+  const allowAllPages = ['LandingView', 'LoginView', 'SignupView']
+  const isAuthRequired = !allowAllPages.includes(to.name)
+
+  if (!isLogin && isAuthRequired) {
+    next({ name: 'LoginView' })
+  } else {
+    next()
+  }
 })
 
 export default router

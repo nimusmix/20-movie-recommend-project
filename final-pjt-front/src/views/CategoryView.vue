@@ -63,7 +63,7 @@ export default {
     },
     genres() {
       return this.$store.state.genres
-    },
+    }, 
     filteredMovies() {
       return this.$store.state.movies.filter(this.movieFilter)
     }
@@ -133,8 +133,13 @@ export default {
 </script>
 
 <style>
+  /* .button-list {
+    display: flex;
+    flex-wrap: wrap;
+  } */
+
   .movie-count {
     margin-top: 0.8rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
   }
 </style>

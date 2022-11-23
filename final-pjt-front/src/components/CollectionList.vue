@@ -7,7 +7,6 @@
     <div v-if="isModalViewed">
       <CollectionModal
         class="collection-modal"
-        :collections="collection"
         :username="this.$route.params.username"
         @close-modal="closeModal"
       />

@@ -59,8 +59,6 @@ export default {
       })
         .then((res) => {
           // movie detail 받아오기
-          console.log(this.isSpoiler)
-          console.log(res)
           axios({
             method: 'get',
             url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.movie}/`
@@ -96,11 +94,10 @@ export default {
                   Authorization: `Token ${this.$store.state.token}`
                 },
               })
-                .then((res) => {
-                  console.log(res)
+                .then(() => {
                   this.$emit('review-created')
                   this.$store.dispatch('getReviews')
-                  this.isStart=false
+                  this.isStart = false
                   this.content = '리뷰를 입력해주세요.'
                 })
             })

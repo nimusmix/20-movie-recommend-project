@@ -28,9 +28,15 @@
       putPreference() {
         const genres = this.movie.genres
         for (const genre of genres) {
-          this.$store.dispatch('putPreference', genre)
+          if (isNaN(genre)) {
+            this.$store.dispatch('putPreference', genre.id)
+            console.log('isNaN', this.movie)
+          } else {
+            this.$store.dispatch('putPreference', genre)
+            console.log('숫자', this.movie)
+          }
         }
-        this.$router.push({ name: 'DetailView', params: { pk: this.movie.id, movie: this.movie } })
+        this.$router.push({ name: 'DetailView', params: { pk: this.movie.id } })
       },
     },
     computed: {

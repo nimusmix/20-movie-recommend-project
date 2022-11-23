@@ -1,7 +1,6 @@
 <template>
   <div class="router-view-padding">
-    {{ recommendSimilar }}
-    <h2 class="h2"  v-if="recommendSimilar.length">{{ username }}님<span>과</span> 비슷한 사용자들이 <span>좋아하는 영화입니다</span>.</h2>
+    <h2 class="h2" v-if="recommendSimilar.length">{{ username }}님<span>과</span> 비슷한 사용자들이 <span>좋아하는 영화입니다</span>.</h2>
 
     <div style="position:relative" v-if="recommendSimilar.length">
       <button @click="scrollRight('recommendSimilar')" class="row-scroll-button r-s-b-left">

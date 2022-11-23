@@ -64,7 +64,6 @@ def movie_reviews(request, movie_pk):
     
     if request.method == 'GET':
         serializer = MovieReviewSerializer(movie)
-        print(serializer.data)
         return Response(serializer.data)
 
 

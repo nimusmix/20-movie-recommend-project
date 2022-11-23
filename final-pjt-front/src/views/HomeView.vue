@@ -6,7 +6,6 @@
       allow="autoplay; encrypted-media"
       allowfullscreen></iframe>
 
-      <!-- <div></div> -->
       <div v-if="recommendMovie" class="home-video-text cusor-pointer" @click="goToDetail(recommendMovie)">
         <div style="height: 80px;"></div>
         <div class="d-flex">
@@ -20,15 +19,15 @@
       </div>
     </div>
     
-    <div class="content-box">
-      <div class="review-box">
+    <div class="home-content-box">
+      <div class="home-review-box">
         <h3 class="box-title">최근 20 리뷰</h3>
           <article v-for="review in recent2Reviews" :key="review.id">
             <FeedItem :review="review" style="width: 480px;"/>
           </article>
       </div>
 
-      <div class="movie-box">
+      <div class="home-movie-box">
         <h3 class="box-title">내가 좋아할 만한 영화</h3>
         <div class="d-flex">
           <article v-for="movie in cuttedList" :key="movie.id">
@@ -150,7 +149,7 @@ export default {
     }
   }
 
-  .content-box {
+  .home-content-box {
     display: flex;
     padding: 56px;
 
@@ -160,11 +159,11 @@ export default {
       margin-bottom: 1rem;
     }
 
-    .review-box {
+    .home-review-box {
       display: inline-block;
     }
 
-    .movie-box {
+    .home-movie-box {
       display: inline-block;
       margin-left: 56px;
     }
