@@ -16,7 +16,7 @@
         </div>
         
         <!-- 별점 -->
-        <div style="position:absolute; bottom: 0px;">
+        <div style="position:absolute; width: 120px; bottom: 0px;">
           <div v-for="idx of 5" :key="idx" style="display:inline-block; margin-right: 4px;">
             <div v-if="idx <= review.score">
               <svg  viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="star fill" xmlns="http://www.w3.org/2000/svg" fill="#FF715E" class="bi-star-fill b-icon bi">

@@ -1,9 +1,12 @@
 <template>
   <div>
     <h3 class="h3">리뷰목록</h3>
-    <div v-for="review in reviews" :key="review.id">
-      <FeedItem :review="review"/>
+    <div v-if="reviews?.length">
+      <div v-for="review in reviews" :key="review.id">
+        <FeedItem :review="review"/>
+      </div>
     </div>
+    <div v-else>작성된 리뷰가 없습니다.</div>
   </div>
 </template>
 

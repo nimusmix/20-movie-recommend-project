@@ -1,8 +1,8 @@
 <template>
   <div id="MODAL">
     <div class="d-flex">
-      <h3 class="h3">컬렉션</h3>
-      <div class="more" @click="openModal">더보기</div>
+      <h3 class="h3">{{ this.$route.params.username }}님의 컬렉션</h3>
+      <div class="more cusor-pointer" @click="openModal">더보기</div>
     </div>
     <div v-if="isModalViewed">
       <CollectionModal

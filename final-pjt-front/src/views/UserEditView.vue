@@ -36,7 +36,7 @@
         v-for="ott in otts" :key="ott?.id"
          :class="[{'selected': ott?.like}, 'main-button']" 
           @click="isSelectedOtt(ott)"> 
-          {{ ottList[`${ott?.name}`] }}
+          {{ ott.kor }}
       </button>
     </div>
     
@@ -63,21 +63,39 @@ export default {
   data() {
     return {
         perferences: null,
-        otts: null,
+        // otts: null,
+        otts: [
+          {
+            id: 97,
+            name: 'watcha',
+            kor: '왓챠',
+            like: false,
+          },
+          {
+            id: 356,
+            name: 'waave',
+            kor: '웨이브',
+            like: false,
+          },
+          {
+            id: 337,
+            name: 'disney',
+            kor: '디즈니',
+            like: false,
+          },
+          {
+            id: 8,
+            name: 'netflix',
+            kor: '넷플릭스',
+            like: false,
+          },    
+        ],
         img: null,
-        ottList: {
-          watcha: '왓챠',
-          waave: '웨이브',
-          disney: '디즈니',
-          netflix: '넷플릭스',
-        },
     }
   },
   methods: {
     //  선호 오티티 가져오기
     getOtts() {
-      this.otts = this.$store.state.otts
-      this.otts.forEach((ott) => ott['like'] = false)
       axios({
         method: 'get',
         url: `${this.$store.state.API_URL}/api/v3/accounts/otts/`,
