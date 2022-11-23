@@ -18,7 +18,6 @@
               <b-dropdown-item @click="changeClass">다크모드</b-dropdown-item>
             </b-dropdown>
           </div>
-          <!-- <router-link class="nav-" :to="{ name: 'ProfileView', params: { username: loginUser?.username } }">내 프로필</router-link> -->
         </div>
 
         <!-- <div v-if="isLogin">
@@ -826,7 +825,7 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
     margin-left: auto;
     margin-right: auto;
     z-index: 11;
-    padding: 20px;
+    padding: 40px;
     background-color: white;
   }
 
@@ -871,10 +870,10 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
   .custom.char{
     text-decoration: line-through;
   }
-  .lending-logo{
+  // .lending-logo{
     // color: var(--primary-color);
     // text-decoration: line-through;
-  }
+  // }
 }
 .title-typer{
   position: fixed;

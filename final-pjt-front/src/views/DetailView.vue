@@ -186,7 +186,7 @@ export default {
   }
 
   .content-box {
-    margin: 56px;
+    padding: 56px;
 
     .movie-box {
       display: flex;

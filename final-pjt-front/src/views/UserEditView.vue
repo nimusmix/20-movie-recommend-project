@@ -3,8 +3,9 @@
     <h1 class="h1" v-if="this.$route.params.signUpFlag === '1'">선택 정보 입력</h1>
     <h1 class="h1" v-else>회원정보수정</h1>
     <div class="space"></div>
-      
+
     <h3 class="h3">내 프로필 사진</h3>
+    <div class="img-select-box">
       <div>
         <img class="img-circle-80" v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`">
         <img class="img-circle-80" v-else src="@/assets/basic.png" >
@@ -15,6 +16,7 @@
           <input type="file" class="file-input cicle-lr" id="inputGroupFile02" accept="image/*" @change="changeImg" ref="profileImg">
         </label>
       </div>
+    </div>
       
 
     <div class="space"></div>
@@ -133,8 +135,7 @@ export default {
           'Content-Type': 'multipart/form-data',
         },
       })
-        .then((res) => {
-          console.log(res.data)
+        .then(() => {
           this.$store.dispatch('getLoginUser')
         })
         .catch((err) => {
@@ -214,23 +215,28 @@ export default {
 </script>
 
 <style lang="scss">
+  .img-select-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90px;
+  }
 
-.box-file-input label{
-  display:inline-block;
-  background: none;
-  background-color: var(--primary-color);
-  color:var(--button-live-text-color);
-  padding:0px 15px;
-  line-height:35px;
-  cursor:pointer;
-}
+  .box-file-input label{
+    display:inline-block;
+    background: none;
+    background-color: var(--primary-color);
+    color:var(--button-live-text-color);
+    padding:0px 15px;
+    line-height:35px;
+    cursor:pointer;
+  }
 
-.box-file-input label:after{
-  content:"사진 변경";
-}
+  .box-file-input label:after{
+    content:"사진 변경";
+  }
 
-.box-file-input .file-input{
-  display:none;
-}
-
+  .box-file-input .file-input{
+    display:none;
+  }
 </style>

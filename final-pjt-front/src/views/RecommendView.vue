@@ -1,15 +1,6 @@
 <template>
   <div class="router-view-padding">
     <h1 class="h1">{{ username }}님과 비슷한 사용자들이 좋아하는 영화입니다.</h1>
-    <!-- <div class="row-scroll mb-5">
-      <article 
-        v-for="movie in recommendSimilar"
-        :key="movie.id"
-        class="col row-scroll-item"
-      >
-        <MovieItem :movie="movie"/>
-      </article>
-    </div> -->
 
     <div style="position:relative">
       <button @click="scrollRight('recommendSimilar')" class="row-scroll-button r-s-b-left">
@@ -142,20 +133,6 @@ export default {
       leftIcon : '<',
       rightIcon : '>',
       genres : [],
-      // recommendBaseList: [
-      //   {
-      //     name: 'similar',
-      //     url: 'api/v1/recommend/similar',
-      //   },
-      //   {
-      //     name: 'latent',
-      //     url: 'api/v1/recommend/latent',
-      //   },
-      //   {
-      //     name: 'preference',
-      //     url: 'api/v1/recommend/preference',
-      //   }
-      // ],
     }
   },
   methods: {

@@ -53,7 +53,7 @@ export default new Vuex.Store({
       return state.token ? true : false
     },
     recent2Reviews(state) {
-      return state.reviews.splice(0,2)
+      return state.reviews.splice(0, 2)
     }
   },
   mutations: {
@@ -163,10 +163,9 @@ export default new Vuex.Store({
           },
       })
         .then((res) => {
-          let similarUsers = []
-          for (const user of res.data) {
-            similarUsers.push(user.id)
-          }
+          const similarUsers = res.data.map((user) => {
+            return user.id
+          })
           context.commit('GET_SIMILAR', similarUsers)
         })
         .catch((err) => {

@@ -104,8 +104,9 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('getLoginUser')
+    this.$store.dispatch('getReviews')
     this.getProfileUser()
+    this.$store.dispatch('getLoginUser')
   },
 }
 </script>

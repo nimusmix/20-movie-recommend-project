@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <h3 class="h3">{{ profileUser?.username }}님의 컬렉션</h3>
+      <h3 class="h3">&nbsp;&nbsp;{{ profileUser?.username }}님의 컬렉션</h3>
 
       <div style="position:relative">
         <button @click="scrollRight('rowMovies')" class="row-scroll-button r-s-b-left">
@@ -95,7 +95,6 @@ export default {
       })
       .then((res) => {
         this.profileUser = res.data
-        console.log(this.profileUser)
       })
       .then(() => {
         if (this.loginUser.followings.includes(this.profileUser.id)) {
