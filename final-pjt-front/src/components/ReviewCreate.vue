@@ -3,15 +3,16 @@
     <h3 class="h3">리뷰 남기기</h3>
     <form id="REVIEW_CREATE" @submit.prevent="createReview">
       <!-- <label for="content">내용 : </label> -->
-      <div class="logo">{{ content.length }}.</div>&nbsp;&nbsp;
-      <input id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @input="test($event.target.value)"><br>
+      <div class="logo" style="position:absolute">{{ content.length }}.</div>
+      <div style="width:2rem; height:2.2rem;"></div>
+      <input style="margin-left:4rem; width: 400px;" type="text" id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @click="isStartMethod"  @input="test($event.target.value)"><br>
 
       <div class="d-flex justify-content-between align-items-center">
         <div style="display: inline-block;">
           <b-form-rating class="star-rating" size="lg" v-model="value"></b-form-rating> 
         </div>
         <div class="d-flex align-items-center">
-          <div class="d-flex algin-items-center"><input id="checkbox" type="checkbox" v-model="isSpoiler">&nbsp;&nbsp;스포일러 포함</div>&nbsp;&nbsp;
+          <div class="d-flex algin-items-center"><input id="checkbox" type="checkbox" v-model="isSpoiler" >&nbsp;&nbsp;스포일러 포함</div>&nbsp;&nbsp;
           <input type="submit" id="submit" class="main-button selected" style="color: white;">
         </div>
       </div>
@@ -26,11 +27,12 @@ export default {
   name: 'ReviewCreate',
   data(){
     return{
-      content:'내용을 입력해주세요',
+      content:'리뷰를 입력해주세요.',
       value: 3,
       length_warning: false,
       maxlength: 30,
       isSpoiler: false,
+      isStart: false,
     }
   },
   methods:{
@@ -49,7 +51,7 @@ export default {
         data: {
           content: content,
           score: value,
-          isSpoiler: this.isSpoiler,
+          is_spoiler: this.isSpoiler,
         },
         headers: {
           Authorization: `Token ${this.$store.state.token}`
@@ -57,6 +59,8 @@ export default {
       })
         .then((res) => {
           // movie detail 받아오기
+          console.log(this.isSpoiler)
+          console.log(res)
           axios({
             method: 'get',
             url: `${this.$store.state.API_URL}/api/v1/movies/${res.data.movie}/`
@@ -92,9 +96,12 @@ export default {
                   Authorization: `Token ${this.$store.state.token}`
                 },
               })
-                .then(() => {
+                .then((res) => {
+                  console.log(res)
                   this.$emit('review-created')
                   this.$store.dispatch('getReviews')
+                  this.isStart=false
+                  this.content = '리뷰를 입력해주세요.'
                 })
             })
             .catch((err) => console.log(err))
@@ -115,6 +122,12 @@ export default {
         }, 100);
       }
     },
+    isStartMethod(){
+      if(this.isStart===false){
+        this.isStart=true
+        this.content = ''
+      }
+    }
   },
   computed:{
   }
