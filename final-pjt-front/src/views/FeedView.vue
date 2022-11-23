@@ -2,9 +2,9 @@
   <div class="router-view-padding">
     <h1 class="h1">피드</h1>
     <div class="d-flex">
-      <div class="feed-menu" @click="filtering('all')">모두</div>
-      <div class="feed-menu" @click="filtering('follow')">팔로잉</div>
-      <div class="feed-menu" @click="filtering('similar')">나와 비슷한 사람</div>
+      <div :class="['feed-menu', {'select-feed':selectFeed==='all'}]" @click="filtering('all')">모두</div>
+      <div :class="['feed-menu', {'select-feed':selectFeed==='follow'}]" @click="filtering('follow')">팔로잉</div>
+      <div :class="['feed-menu', {'select-feed':selectFeed==='similar'}]" @click="filtering('similar')">나와 비슷한 사람</div>
     </div>
     <article v-for="review in filteredReviews" :key="review.id">
       <FeedItem :review="review"/>
@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       filteredReviews: [],
+      selectFeed:3,
     }
   },
   methods: {
@@ -43,6 +44,7 @@ export default {
       }
     },
     filtering(name) {
+      this.selectFeed = name
       switch(name) {
         case 'all': {
           this.filteredReviews = this.reviews.filter(this.allFilter)
@@ -94,5 +96,8 @@ export default {
     font-size: 1.2rem;
     font-weight: 400;
     cursor: pointer;
+  }
+  .select-feed{
+    font-weight: 700;
   }
 </style>
