@@ -316,6 +316,14 @@
     font-weight: $lg-font-weight;
     margin-bottom: 24px;
   }
+  #app .h2 {
+    font-size: 1.6rem;
+    font-weight: $lg-font-weight;
+    margin-bottom: 0.8rem;
+    span{
+      font-weight: 400;
+    }
+  }
 
   #app .h3 {
     font-size: $movie-h3-font;
