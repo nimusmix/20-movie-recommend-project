@@ -6,9 +6,17 @@
       allow="autoplay; encrypted-media"
       allowfullscreen></iframe>
 
-      <div class="home-video-text">
-        <div class="home-video-title">{{ recommendMovie?.title }}</div>
-        <p style="font-size: 1rem; font-weight: 300;">{{ loginUser.username }}님을 위한 추천 영화</p>
+      <!-- <div></div> -->
+      <div v-if="recommendMovie" class="home-video-text cusor-pointer" @click="goToDetail(recommendMovie)">
+        <div style="height: 80px;"></div>
+        <div class="d-flex">
+          <div style="width: 100px;"></div>
+          <div class="home-video-title">{{ recommendMovie?.title }}</div>
+        </div>
+        <div class="d-flex">
+          <div style="width: 100px;"></div>
+          <div style="font-size: 1rem; font-weight: 300;">{{ loginUser.username }}님을 위한 추천 영화</div>
+        </div>
       </div>
     </div>
     
@@ -19,10 +27,14 @@
             <FeedItem :review="review" style="width: 480px;"/>
           </article>
       </div>
-      <div style="width: 48px;"></div>
+
       <div class="movie-box">
-        <h3 class="box-title">나와 비슷한 사용자들이 좋아하는 영화</h3>
-        
+        <h3 class="box-title">내가 좋아할 만한 영화</h3>
+        <div class="d-flex">
+          <article v-for="movie in cuttedList" :key="movie.id">
+            <MovieItem :movie="movie" style="width: 200px;"/>
+          </article>
+        </div>
       </div>
     </div>
   </div>
@@ -31,11 +43,13 @@
 <script>
 import _ from 'lodash'
 import FeedItem from '@/components/FeedItem'
+import MovieItem from '@/components/MovieItem'
 
 export default {
   name: 'HomeView',
   components: {
     FeedItem,
+    MovieItem,
   },
   data() {
     return {
@@ -73,9 +87,12 @@ export default {
         tmpList.push(this.$store.state.recommendLatent[0])
       }
       if (this.$store.state.recommendLatent[1]) {
-        tmpList.push(this.$store.state.recommendLatent[0])
+        tmpList.push(this.$store.state.recommendLatent[1])
       }
       return tmpList
+    },
+    cuttedList() {
+      return this.recommendList.slice(0, 3)
     },
     recent2Reviews() {
       return this.$store.getters.recent2Reviews
@@ -89,6 +106,9 @@ export default {
       const recommendMovie = _.sample(this.recommendList)
       this.recommendMovie = recommendMovie
     },
+    goToDetail(movie) {
+      this.$router.push({ name: 'DetailView', params: { pk: movie.id, movie: movie } })
+    }
   },
   created() {
     for (const recommendObj of this.recommendBaseList) {
@@ -104,24 +124,22 @@ export default {
 <style lang="scss">
   .home-video-box {
     // position: relative;
+    z-index: 8;
     width: 100%;
 
     .home-video {
       position: relative;
       width: 100%;
       height: 500px;
-      // width: 140vw;
-      // height: 100vh;
-      // margin-top: -50vh;
       background-color:rgba(0, 0, 0, 0.287); 
     }
 
     .home-video-text {
       position: absolute;
       z-index: 10;
-      width: auto;
-      margin-top: -440px;
-      margin-left: 80px;
+      width: 100%;
+      height: 500px;
+      margin-top: -508px;
       color: white;
       font-weight: 200;
 
@@ -148,7 +166,7 @@ export default {
 
     .movie-box {
       display: inline-block;
+      margin-left: 56px;
     }
   }
-
 </style>

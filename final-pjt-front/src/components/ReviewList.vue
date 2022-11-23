@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="h3">리뷰</h3>
+    <h3 class="h3">{{ this.$route.params.username }}님의 리뷰</h3>
     <div v-for="review in myReviews" :key="review.id">
       <FeedItemVue :review="review"/>
     </div>

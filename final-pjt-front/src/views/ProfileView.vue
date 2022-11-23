@@ -103,10 +103,17 @@ export default {
       }
     }
   },
+  watch: {
+    '$route' (to, from) {
+      if (to !== from) {
+        this.getProfileUser()
+      }
+    }
+  },
   created() {
     this.$store.dispatch('getReviews')
-    this.getProfileUser()
     this.$store.dispatch('getLoginUser')
+    this.getProfileUser()
   },
 }
 </script>

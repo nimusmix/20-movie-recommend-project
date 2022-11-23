@@ -38,6 +38,7 @@
           </div>
         </div>
       </div>
+
       <div class="space"></div>      
       <div class="overview-box">
         <h3 class="h3">줄거리</h3>
@@ -186,10 +187,12 @@ export default {
   }
 
   .content-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     padding: 56px;
 
     .movie-box {
-      display: flex;
 
       .movie-title {
         font-size: 2rem;
@@ -202,6 +205,7 @@ export default {
       }
     
       .detail-box {
+        display: inline-block;
         margin-left: 24px;
     
         .details {
@@ -215,7 +219,7 @@ export default {
     }
 
     .overview-box {
-      
+
       p {
         margin: 0;
       }
