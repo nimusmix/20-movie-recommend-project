@@ -62,10 +62,19 @@ export default {
     },
     recommendList() {
       let tmpList = []
-      tmpList.push(this.$store.state.recommendSimilar[0])
-      tmpList.push(this.$store.state.recommendSimilar[1])
-      tmpList.push(this.$store.state.recommendLatent[0])
-      tmpList.push(this.$store.state.recommendLatent[1])
+
+      if (this.$store.state.recommendSimilar[0]) {
+        tmpList.push(this.$store.state.recommendSimilar[0])
+      }
+      if (this.$store.state.recommendSimilar[1]) {
+        tmpList.push(this.$store.state.recommendSimilar[1])
+      }
+      if (this.$store.state.recommendLatent[0]) {
+        tmpList.push(this.$store.state.recommendLatent[0])
+      }
+      if (this.$store.state.recommendLatent[1]) {
+        tmpList.push(this.$store.state.recommendLatent[0])
+      }
       return tmpList
     },
     recent2Reviews() {
