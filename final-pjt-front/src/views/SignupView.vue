@@ -30,7 +30,7 @@
       <label for="password2">비밀번호를 한 번 더 입력해주세요.</label>
       <input type="password" id="password2" class="user-input" v-model="password2" @input="passwordConfirmation">
       <p class="err-msg" v-if="password2State">{{ password2State }}</p><br>
-      <input type="submit" class="main-button selected" value="회원가입">
+      <input type="submit" class="main-button selected" value="가입하기">
     </form>
   </div>
 </template>

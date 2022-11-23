@@ -16,8 +16,8 @@
           <h1 class="h1 m-0">@{{ profileUser?.username }}</h1>
           <div class="space"></div>
           <div v-if="loginUser.username !== profileUser?.username" @click="follow">
-            <button id="followBtn" class="main-button selected" v-if="flag">언팔로우</button>
-            <button id="followBtn" class="main-button selected" v-else>팔로우</button>
+            <button v-if="flag===true" id="followBtn" class="main-button selected" >팔로우 중</button>
+            <button  v-else id="followBtn" class="main-button">팔로우하기</button>
           </div>
           <button v-else class="main-button selected" @click="goToEdit">회원정보수정</button>
         </div>
@@ -65,13 +65,16 @@ export default {
         url: `${this.$store.state.API_URL}/api/v3/accounts/${this.$route.params.username}/`,
       })
       .then((res) => {
+        console.log('getProfileUser')
+        console.log(res)
         this.profileUser = res.data
+        
       })
       .then(() => {
         this.isFollowing()
       })
       .catch(() => {
-        this.$router.push('/404')
+        // this.$router.push('/404')
       })
     },
     follow() {
@@ -82,11 +85,12 @@ export default {
           Authorization: `Token ${this.$store.state.token}`
         },
       })
-        .then(() => {
-          // this.isFollowing = !this.isFollowing
+        .then((res) => {
+          console.log('followend')
+          console.log(res)
+          this.$store.dispatch('getLoginUser')
           this.getProfileUser()
-          this.isFollowing()
-          // this.$store.dispatch('getLoginUser')
+          // this.isFollowing = !this.isFollowing
         })
         .catch((err) => {
           console.log(err)
@@ -96,11 +100,13 @@ export default {
       this.$router.push({ name: 'UserEditView', params: { name: 'UserEditView', signUpFlag: 0 } })
     },
     isFollowing() {
-      if (this.loginUser.followings.includes(this.profileUser?.id)) {
-        this.flag = true
-      } else {
-        this.flag = false
-      }
+      this.flag = false
+      
+      this.profileUser.followers.forEach((following)=>{
+          if (following.username===this.loginUser.username){
+            this.flag = true
+          }
+      })
     }
   },
   watch: {

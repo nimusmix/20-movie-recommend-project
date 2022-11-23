@@ -13,7 +13,12 @@
     </iframe>
 
   <div class="sub-fullscreen" :style="xyCss" >
-    <router-link :to="{ name: 'HomeView' }">
+    <router-link v-if="isLogin"  :to="{ name: 'HomeView' }">
+      <div class="landing-cursor" style="">
+        <div class="landing-text">들어가기</div>
+      </div>
+    </router-link>
+    <router-link v-else  :to="{ name: 'LoginView' }">
       <div class="landing-cursor" style="">
         <div class="landing-text">들어가기</div>
       </div>

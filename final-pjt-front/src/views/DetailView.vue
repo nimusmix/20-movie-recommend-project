@@ -114,6 +114,7 @@ export default {
           } else {
             this.isCollected = false
           }
+          this.checkCollect()
         })
         .then(() => {
           this.getReviews()
@@ -147,7 +148,8 @@ export default {
           Authorization: `Token ${this.$store.state.token}`
         },
       })
-        .then(() => {
+        .then((res) => {
+          console.log(res)
           this.$store.dispatch('getLoginUser')
           if (this.isCollected) {
             alert('내 컬렉션에 추가했습니다.')
@@ -159,7 +161,14 @@ export default {
           console.log(err)
         })
     },
-
+    checkCollect(){
+      console.log(this.$store.state.loginUser.collection)
+      this.$store.state.loginUser.collection.forEach(collect=>{
+        if (collect.id === this.movie.id){
+          this.isCollected = true
+        }
+      })
+    },
     reviewCreated() {
       this.getMovie()
     }
@@ -167,6 +176,10 @@ export default {
   created() {
     this.getMovie()
   },
+  mounted(){
+    
+    
+  }
 }
 </script>
 

@@ -11,6 +11,7 @@
 
       <p v-if="errMsg" class="err-msg">{{ errMsg }}</p><br>
       <input type="submit" class="main-button selected" value="로그인">
+      <router-link style="margin-top:4px" class="sign-up" :to="{ name: 'SignupView' }">회원가입</router-link>
     </form>
   </div>
 </template>
@@ -80,5 +81,8 @@ export default {
       align-items: center;
       margin-top: 20px;
     }
+  }
+  .sign-up{
+    color: var(--disable-color);
   }
 </style>
