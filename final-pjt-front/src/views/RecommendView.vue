@@ -2,7 +2,6 @@
   <div class="router-view-padding">
     <h1 class="h1"  v-if="recommendSimilar.length">{{ username }}님과 비슷한 사용자들이 좋아하는 영화입니다.</h1>
 
-
     <div style="position:relative" v-if="recommendSimilar.length">
       <button @click="scrollRight('recommendSimilar')" class="row-scroll-button r-s-b-left">
         <svg stroke="#FFF" fill="none" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -132,20 +131,6 @@ export default {
   data(){
     return {
       genres : [],
-      // recommendBaseList: [
-      //   {
-      //     name: 'similar',
-      //     url: 'api/v1/recommend/similar',
-      //   },
-      //   {
-      //     name: 'latent',
-      //     url: 'api/v1/recommend/latent',
-      //   },
-      //   {
-      //     name: 'preference',
-      //     url: 'api/v1/recommend/preference',
-      //   }
-      // ],
     }
   },
   methods: {

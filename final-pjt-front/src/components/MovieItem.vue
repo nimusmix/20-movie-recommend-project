@@ -15,7 +15,6 @@
       <div class="movie-card-detail">{{ movie?.release_date.substring(0, 4) }}</div>
       <p class="movie-card-detail"><span>평균 별 </span>{{ movie.vote_average }}</p>
     </a>
-
   </div>
 </template>
   

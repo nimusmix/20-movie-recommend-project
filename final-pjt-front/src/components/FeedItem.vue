@@ -7,7 +7,7 @@
     <div class="feed-item-contents d-flex justify-content-between">
       <div style="position:relative">
         
-        <div class="feed-item-name cusor-pointer" @click="goToProfile(`${review.username}`)">{{ review.username }}</div>
+        <div class="feed-item-name cusor-pointer" @click="goToProfile(`${review.username}`)">@{{ review.username }}</div>
         <div class="cusor-pointer mt-2" @click="pushMovie"><b>{{ review.movie_title }}</b></div>
 
         <div style="margin-top:4px; margin-bottom: 0px;">
