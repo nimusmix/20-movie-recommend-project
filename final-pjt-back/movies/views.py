@@ -73,8 +73,8 @@ def recommend_latent_model(request):
         all_score += score[user_preference.genre.pk]
     
     # 백분율 환산 -> 일단 패스(유의미한지 체크)
-    for genre in genres:         
-        score[genre.pk] = score[genre.pk] * 100 // all_score
+    # for genre in genres:         
+    #     score[genre.pk] = score[genre.pk] * 100 // all_score
 
     # 영화와 비교하기
     movies = get_list_or_404(Movie)
