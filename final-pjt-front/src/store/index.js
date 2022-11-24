@@ -41,7 +41,8 @@ export default new Vuex.Store({
     API_URL:'http://127.0.0.1:8000',
     width: 0,
     height: 0,
-    
+    selectedOtts: [],
+    selectedGenres: [],
     // recommend
     recommendSimilar: [],
     recommendLatent: [],
@@ -98,6 +99,10 @@ export default new Vuex.Store({
     SET_RECOMMEND_PREFERENCE(state) {
       state.recommendPreference = {}
     },
+    SAVE_CATEGORY(state, data){
+      state.selectedOtts = data.selectedOtts
+      state.selectedGenres = data.selectedGenres
+    }
   },
   actions: {
     getGenres(context) {

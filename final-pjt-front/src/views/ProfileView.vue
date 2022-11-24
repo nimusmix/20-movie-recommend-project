@@ -83,9 +83,9 @@ export default {
           Authorization: `Token ${this.$store.state.token}`
         },
       })
-        .then((res) => {
-          console.log('followend')
-          console.log(res)
+        .then(() => {
+          // console.log('followend')
+          // console.log(res)
           this.$store.dispatch('getLoginUser')
           this.getProfileUser()
           // this.isFollowing = !this.isFollowing

@@ -86,6 +86,26 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
+  scrollBehavior(to, from, savedPosition) { 
+    // 디테일뷰에서 카테고리로 이동
+    if(from.name === 'DetailView'){
+      if(to.name === 'CategoryView'){
+        return { x: 0, y: savedPosition.y } 
+      }
+    }
+    // 카테고리에서 디테일로 이동
+    if (from.name === 'CategoryView'){
+      if(to.name != 'DetailView'){
+        const data = {
+          selectedOtts:[],
+          selectedGenres:[],
+        }
+        store.commit('SAVE_CATEGORY', data)
+      }
+    }
+
+    return { x: 0, y: 0 } 
+  },
   routes
 })
 
