@@ -722,14 +722,16 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
     padding: 0px;
     height: 0px;
     border: none;
+    background-color: var(--bg-color);
   }
       
   .star-rating {
-    background-color: none;
+    
 
     .b-rating-star {
       margin: 0px;
       padding: 4px;
+      
     }
 
     .b-rating-icon {
