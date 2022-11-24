@@ -66,35 +66,48 @@ export default {
   name: 'UserEditView',
   data() {
     return {
-        perferences: null,
-        // otts: null,
-        otts: [
-          {
-            id: 97,
-            name: 'watcha',
-            kor: '왓챠',
-            like: false,
-          },
-          {
-            id: 356,
-            name: 'waave',
-            kor: '웨이브',
-            like: false,
-          },
-          {
-            id: 337,
-            name: 'disney',
-            kor: '디즈니',
-            like: false,
-          },
-          {
-            id: 8,
-            name: 'netflix',
-            kor: '넷플릭스',
-            like: false,
-          },    
-        ],
-        img: null,
+      perferences: null,
+      otts: [
+        {
+          id: 97,
+          name: 'watcha',
+          kor: '왓챠',
+          like: false,
+        },
+        {
+          id: 356,
+          name: 'waave',
+          kor: '웨이브',
+          like: false,
+        },
+        {
+          id: 337,
+          name: 'disney',
+          kor: '디즈니',
+          like: false,
+        },
+        {
+          id: 8,
+          name: 'netflix',
+          kor: '넷플릭스',
+          like: false,
+        },    
+      ],
+      img: null,
+      recommendBaseList: [
+        {
+          name: 'similar',
+          url: 'api/v1/recommend/similar',
+        },
+        {
+          name: 'latent',
+          url: 'api/v1/recommend/latent',
+        },
+        {
+          name: 'preference',
+          url: 'api/v1/recommend/preference',
+        }
+      ],
     }
   },
   methods: {
@@ -229,10 +242,10 @@ export default {
   created() {
     this.getPerferences()
     this.getOtts()
+    for (const recommendObj of this.recommendBaseList) {
+      this.$store.dispatch('getRecommend', recommendObj)
+    }
   },
-  mounted(){
-    // this.img = this.$store.state.loginUser.profile_img
-  }
 }
 </script>
 
