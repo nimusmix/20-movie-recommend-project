@@ -1,4 +1,4 @@
-![Group_98](README.assets/Group_98.png)
+![Group_98](./README.assets/Group_98.png)
 
 # 유사 사용자 기반 영화 추천 프로젝트 20.
 
@@ -80,7 +80,7 @@
 
 ![Untitled](asset/Untitled.png)
 
-![Untitled 1](README.assets/Untitled 1.png)
+![Untitled 1](./README.assets/Untitled 1.png)
 
 ### 목표 서비스 요소
 
@@ -114,7 +114,7 @@
 
 ---
 
-![Untitled 2](README.assets/Untitled 2.png)**
+![Untitled 2](./README.assets/Untitled 2.png)**
 
 **받아오는 모델**: Movie, Genre
 
@@ -259,7 +259,7 @@ def recommend_latent_model(request):
 - 내가 좋아할 만한 영화
   
 
-### ![Untitled 3](README.assets/Untitled 3.png)
+### ![Untitled 3](./README.assets/Untitled 3.png)
 
 ### 네비게이션
 
@@ -276,9 +276,9 @@ def recommend_latent_model(request):
 - 팔로잉 보기
 - 나와 비슷한 사람 보기
 - 스포일러 방지 기능
-- ![Untitled 4](README.assets/Untitled 4.png)
+- ![Untitled 4](./README.assets/Untitled 4.png)
 
-![Untitled 5](README.assets/Untitled 5.png)
+![Untitled 5](./README.assets/Untitled 5.png)
 
 ### 추천영화
 
@@ -286,7 +286,7 @@ def recommend_latent_model(request):
 - 잠재 모델 기반 알고리즘 추천
 - 내재 선호장르 기반 추천
 
-![Untitled 6](README.assets/Untitled 6.png)
+![Untitled 6](./README.assets/Untitled 6.png)
 
 ### 카테고리
 
@@ -295,7 +295,7 @@ def recommend_latent_model(request):
 - OTT overlay
 - row-scroll movie card
 
-### ![Untitled 7](README.assets/Untitled 7.png)
+### ![Untitled 7](./README.assets/Untitled 7.png)
 
 ### 영화디테일
 
@@ -303,7 +303,7 @@ def recommend_latent_model(request):
 - 다른 사용자의 컬렉션 보기
 - 리뷰 남기기 버튼
 
-![Untitled](README.assets/Untitled 8.png)
+![Untitled](./README.assets/Untitled 8.png)
 
 ## 기타 (느낀 점, 후기 등)
 
@@ -338,4 +338,4 @@ VUE
     - 그 후, serializer로 리스트가 원하는 id만 보내주어서 프론트 측에서 빠르게 찾는 방안 같은 것이다.
 - 버그를 공유하며 진행을 하였지만, 너무 수많은 버그들이 생성되어 전부 기록하지 못하였다. 매우 유효한 버그의 경우 자세히쓰지 못해서 아쉽다..
 
-![Untitled 9](README.assets/Untitled 9.png)
+![Untitled 9](./README.assets/Untitled 9.png)
