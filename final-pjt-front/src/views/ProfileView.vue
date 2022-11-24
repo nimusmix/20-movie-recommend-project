@@ -84,11 +84,8 @@ export default {
         },
       })
         .then(() => {
-          // console.log('followend')
-          // console.log(res)
           this.$store.dispatch('getLoginUser')
           this.getProfileUser()
-          // this.isFollowing = !this.isFollowing
         })
         .catch((err) => {
           console.log(err)
@@ -100,8 +97,8 @@ export default {
     isFollowing() {
       this.flag = false
       
-      this.profileUser.followers.forEach((following)=>{
-          if (following.username===this.loginUser.username){
+      this.profileUser.followers.forEach((following) => {
+          if (following.username === this.loginUser.username){
             this.flag = true
           }
       })

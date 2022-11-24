@@ -17,7 +17,7 @@
               <div class="space"></div>
               <div v-if="loginUser.username !== profileUser?.username" @click="follow">
                 <button id="followBtn" class="main-button selected" v-if="flag">팔로우 중</button>
-                <button id="followBtn" class="main-button selected" v-else>팔로우하기</button>
+                <button id="followBtn" class="main-button" v-else>팔로우하기</button>
               </div>
             </div>
             <div class="follow-info">

@@ -21,7 +21,7 @@
     
     <div class="home-content-box">
       <div class="home-review-box">
-        <h3 class="box-title">최근 20 리뷰</h3>
+        <h3 class="box-title">최근 20. 리뷰</h3>
           <article v-for="review in recent2Reviews" :key="review.id">
             <FeedItem :review="review" style="width: 480px;"/>
           </article>

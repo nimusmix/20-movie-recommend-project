@@ -8,7 +8,7 @@
       <div style="position:relative">
         
         <div class="feed-item-name cusor-pointer" @click="goToProfile(`${review.username}`)">@{{ review.username }}</div>
-        <div class="cusor-pointer mt-2" @click="pushMovie"><b>{{ review.movie_title }}</b></div>
+        <div class="cusor-pointer mt-2" style="font-weight: 500" @click="pushMovie">{{ review.movie_title }}</div>
 
         <div style="margin-top:4px; margin-bottom: 0px;">
           <span v-if="!isSpoiler" class="feed-nospo">{{ review.content }}</span>
