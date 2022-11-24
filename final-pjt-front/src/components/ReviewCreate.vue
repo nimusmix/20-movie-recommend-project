@@ -5,7 +5,7 @@
       <!-- <label for="content">내용 : </label> -->
       <div class="logo" style="position:absolute">{{ content.length }}.</div>
       <div style="width:2rem; height:2.2rem;"></div>
-      <input style="margin-left:4rem; width: 400px;" type="text" id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @click="isStartMethod"  @input="test($event.target.value)"><br>
+      <input class="review-input" style="margin-left:4rem; width: 400px;" type="text" id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @click="isStartMethod"  @input="test($event.target.value)"><br>
 
       <div class="d-flex justify-content-between align-items-center">
         <div style="display: inline-block;">
@@ -13,7 +13,7 @@
         </div>
         <div class="d-flex align-items-center">
           <div class="d-flex algin-items-center"><input id="checkbox" type="checkbox" v-model="isSpoiler" >&nbsp;&nbsp;스포일러 포함</div>&nbsp;&nbsp;
-          <input type="submit" id="submit" class="main-button selected" style="color: white;">
+          <input type="submit" id="submit" class="main-button selected" style="background-color:#FF715E">
         </div>
       </div>
     </form>
@@ -40,7 +40,7 @@ export default {
       const content = this.content.substring(0, 20)
       const value = this.value
 
-      if (!content) {
+      if (!content || content==="리뷰를 입력해주세요.") {
         alert('내용을 입력해주세요')
         return
       }

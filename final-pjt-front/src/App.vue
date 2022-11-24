@@ -372,6 +372,29 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
     }
   }
 
+  .r-main-button {
+    padding: 0.2rem 1rem;
+    border-radius: 30px;
+    transition: $trans-global-very-fast;//$trans-global;
+    background-color: var(--primary-color);
+    color:var(--button-live-text-color);
+    border: 1px solid var(--primary-color);
+    
+    &.selected {
+      background: none;
+      color: var(--primary-color);
+    }
+    &:hover {
+      box-shadow: $shadow-focus;
+      transition: $trans-global-fast;
+      // background-color: var(--primary-color-15);
+      // color:var(--button-live-text-color);
+    }
+    &:active{
+      background: none;
+    }
+  }
+
 
 // 전역 스타일
   #app {
@@ -710,7 +733,7 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
       display: inline-block;
     }
 
-    input {
+    .review-input {
       color: var(--disable-color);
       background-color: var(--bg-color);
       border: none;
@@ -852,7 +875,10 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
     margin-right: auto;
     z-index: 11;
     padding: 40px;
-    background-color: white;
+    background-color: var(--bg-router-color);
+    .main-button{
+      background-color: var(--primary-color);
+    }
   }
 
   .modal-movie{
