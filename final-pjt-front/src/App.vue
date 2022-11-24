@@ -6,7 +6,7 @@
 
         <div id="nav-profile-box">
           <div id="nav-profile-img-box" class="cusor-pointer inner-shadow">
-            <img class="img-circle-80" v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`" @click="goToProfile">
+            <img class="img-circle-80" v-if="loginUser?.profile_img" :src="`${$store.state.API_URL}${loginUser?.profile_img}`" @click="goToProfile">
             <img class="img-circle-80" v-else src="@/assets/basic.png" @click="goToProfile">
           </div>
           <div style="height: 0.4rem;"></div>
@@ -712,7 +712,7 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
 
     input {
       color: var(--disable-color);
-      background-color: none;
+      background-color: var(--bg-color);
       border: none;
     }
   }

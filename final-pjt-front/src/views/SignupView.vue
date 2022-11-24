@@ -38,7 +38,6 @@
 <script>
 import axios from 'axios'
 
-const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'SignupView',
@@ -79,7 +78,7 @@ export default {
 
       axios({
         method: 'post',
-        url: `${API_URL}/accounts/signup/`,
+        url: `${this.API_URL}/accounts/signup/`,
         data: {
           username,
           password1,
@@ -125,12 +124,9 @@ export default {
     }
   },
   computed:{
-    // endPreferencesEnding(){
-    //   if (this.endPreferences === true){
-    //     // 
-    //   }
-    //   return this.endPreferences
-    // }
+    API_URL(){
+      return this.$store.state.API_URL
+    }
   }
 
 }

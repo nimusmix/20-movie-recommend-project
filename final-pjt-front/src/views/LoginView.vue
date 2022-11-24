@@ -19,7 +19,6 @@
 <script>
 import axios from 'axios'
 
-const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'LoginView',
@@ -38,7 +37,7 @@ export default {
 
       axios({
         method: 'post',
-        url: `${API_URL}/accounts/login/`,
+        url: `${this.API_URL}/accounts/login/`,
         data: {
           username,
           password,
@@ -59,6 +58,11 @@ export default {
           this.errMsg = '입력한 정보를 확인해주세요.'
         })
     },
+  },
+  computed:{
+    API_URL(){
+      return this.$store.state.API_URL
+    }
   }
 }
 </script>
