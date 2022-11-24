@@ -136,7 +136,7 @@ export default {
     .home-video-text {
       position: absolute;
       z-index: 10;
-      width: 100%;
+      width: 1100px;
       height: 500px;
       margin-top: -508px;
       color: white;
