@@ -22,16 +22,15 @@ from accounts.models import Preference
 User = get_user_model()
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 # @permission_classes([IsAuthenticated])
 def movie_list(request):
-    if request.method == 'GET':
-        movies = get_list_or_404(Movie)
-        serializer = MovieSerializer(movies, many=True)
-        return Response(serializer.data)
+    movies = get_list_or_404(Movie)
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
 
 
-@api_view(['GET', 'DELETE', 'PUT'])
+@api_view(['GET', 'PUT'])
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
 
@@ -43,16 +42,15 @@ def movie_detail(request, movie_pk):
         serializer = MovieSerializer(movie, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])
 # @permission_classes([IsAuthenticated])
 def genre_list(request):
-    if request.method == 'GET':
-        genres = get_list_or_404(Genre)
-        serializer = GenreListSerializer(genres, many=True)
-        return Response(serializer.data)
+    genres = get_list_or_404(Genre)
+    serializer = GenreListSerializer(genres, many=True)
+    return Response(serializer.data)
 
 
 # 잠재 모델 기반 추천 알고리즘
@@ -197,12 +195,3 @@ def recommend_preference_genre(request):
     # Json 추출
     serializer = TestSerializer(result, many=True)
     return Response(serializer.data)
-
-
-# 선호 OTT 추출
-@api_view(['GET'])
-def recommend_use_ott(request, username):
-    user = get_object_or_404(User, username=username)
-    print('-----------------------------------------')
-    print(user.using_otts.values())
-    print('-----------------------------------------')

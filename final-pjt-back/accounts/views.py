@@ -14,9 +14,8 @@ from .serializers import UserOttSerializer, CollectedUserSerializer
 def user_detail(request, username):
     user = get_object_or_404(get_user_model(), username=username)
 
-    if request.method == 'GET':
-        serializer = UserAllSerializer(user)
-        return Response(serializer.data)
+    serializer = UserAllSerializer(user)
+    return Response(serializer.data)
 
 
 @api_view(['POST'])
@@ -30,7 +29,7 @@ def user_follow(request, username):
             target.followers.add(request.user)
 
     serializer = UserAllSerializer(target)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['POST'])
@@ -44,7 +43,7 @@ def user_collect(request, movie_pk):
         user.collection.add(target)
         
     serializer = UserSerializer(user)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # 개인 선호장르 정보를 출력
@@ -66,7 +65,7 @@ def edit_perferences_score(request, genre_pk):
     preference.save()
 
     serializer = UserPreferenceSerializer(preference)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # 장르별 선호여부
@@ -79,7 +78,7 @@ def edit_perferences_like(request, genre_pk):
     preference.save()
 
     serializer = UserPreferenceSerializer(preference)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # 회원가입 시 장르 전체 생성
@@ -114,7 +113,7 @@ def edit_otts(request, ott_pk):
     else:
         user.using_otts.add(ott_pk)
     serializer = UserOttSerializer(user)
-    return Response(serializer.data)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['PUT'])
@@ -122,7 +121,7 @@ def edit_profile_img(request):
     serializer = UserImgSerializer(request.user, data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 
 @api_view(['GET'])
