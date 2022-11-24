@@ -8,7 +8,7 @@
         class="user-box cusor-pointer" 
         @click="goToModal(`${user.username}`)"
       >
-        <img v-if="user?.profile_img" :src="`${this.store.state.API_URL}${user?.profile_img}`" class="img-circle-100">
+        <img v-if="user?.profile_img" :src="`${$store.state.API_URL}${user?.profile_img}`" class="img-circle-100">
         <img v-else src="@/assets/basic.png" class="img-circle-100">
         <p class="mt-2">{{ user.username }}</p>
       </div>

@@ -3,7 +3,7 @@ import json
 
 
 # with open('final-pjt-back/movies/fixtures/movies.json', 'r', encoding="UTF-8") as json_file:
-with open('all_2.json', 'r', encoding="UTF-8") as json_file:
+with open('finalmovie_0.json', 'r', encoding="UTF-8") as json_file:
     data_json_list = json.load(json_file)
 
 
@@ -45,7 +45,7 @@ for idx, data in enumerate(data_json_list):
         errs.append(data_json_list[idx]['fields']['title'])
     print(data_json_list[idx]['fields']['key'])
 
-file_path = "./allllllll.json" # 주소
+file_path = "./final_youtube_1.json" # 주소
     
 with open(file_path, 'w', encoding="UTF-8") as outfile:
     json.dump(result, outfile, indent=4, ensure_ascii=False)

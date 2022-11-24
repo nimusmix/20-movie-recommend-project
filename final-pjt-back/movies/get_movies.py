@@ -35,7 +35,7 @@ def get_movies():
 
     # ott별 검색
     for key, value in provider_ids.items():
-        for page_num in range(1,30):
+        for page_num in range(1,20):
             params['with_watch_providers'] = value   # 제공사 바꾸기
             params['page'] = page_num
             maked_url = make_url(URL, params)        # ott url 제공
@@ -100,7 +100,7 @@ def get_movies():
     # results = response.get('results')
 
     # json 저장하기
-    file_path = "./all_2.json" # 주소
+    file_path = "./finalmovie_0.json" # 주소
     
     with open(file_path, 'w', encoding="UTF-8") as outfile:
         json.dump(movies, outfile, indent=4, ensure_ascii=False)
