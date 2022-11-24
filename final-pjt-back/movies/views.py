@@ -56,6 +56,7 @@ def genre_list(request):
 # 잠재 모델 기반 추천 알고리즘
 @api_view(['GET'])
 def recommend_latent_model(request):
+    user = get_object_or_404(User, pk=request.user.pk)
     user_preferences = get_list_or_404(Preference, user=request.user)
     # genres = get_list_or_404(Genre)
     score = dict()
@@ -76,7 +77,7 @@ def recommend_latent_model(request):
 
     # 영화와 비교하기
     movies = get_list_or_404(Movie)
-    
+    user_otts = set(user.using_otts.values_list('id', flat=True))
     result_movie_scores = defaultdict(int)
     for movie in movies:  # movie 하나를 구해서
         # 여러 장르를 구한다.
@@ -86,6 +87,9 @@ def recommend_latent_model(request):
         genres_id = list(movie.genres.values_list('id', flat=True))
         for genre_id in genres_id:
             result_movie_scores[movie.pk] += (score[genre_id] * 1000) // genres_len
+        if (user_otts & set(movie.otts.values_list('id', flat=True))):
+            result_movie_scores[movie.pk] += 1000
+        result_movie_scores[movie.pk] += (movie.vote_average * 200)
 
     # 본 영화 제외하기
     # reviews = get_list_or_404(Review, user=request.user)
