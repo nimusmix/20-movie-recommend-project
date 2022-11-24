@@ -3,9 +3,9 @@
     <h3 class="h3">리뷰 남기기</h3>
     <form id="REVIEW_CREATE" @submit.prevent="createReview">
       <!-- <label for="content">내용 : </label> -->
-      <div class="logo" style="position:absolute">{{ content.length }}.</div>
+      <div class="logo" style="position: absolute;">{{ content.length }}.</div>
       <div style="width:2rem; height:2.2rem;"></div>
-      <input class="review-input" style="margin-left:4rem; width: 400px;" type="text" id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @click="isStartMethod"  @input="test($event.target.value)"><br>
+      <input class="review-input" style="margin-left:4.8rem; width: 380px;" type="text" id="content" cols="30" rows="10" :maxlength='maxlength' :value="content" @click="isStartMethod"  @input="test($event.target.value)"><br>
 
       <div class="d-flex justify-content-between align-items-center">
         <div style="display: inline-block;">
@@ -115,7 +115,6 @@ export default {
         this.length_warning = true
         setTimeout(() => {
           this.content = this.content.substring(0, 20)
-          console.log(this.content)
         }, 100);
       }
     },

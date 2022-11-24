@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="h3">리뷰목록</h3>
+    <h3 class="h3">리뷰 목록</h3>
     <div v-if="reviews?.length">
       <div v-for="review in reviews" :key="review.id">
         <FeedItem :review="review"/>
