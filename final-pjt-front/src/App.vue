@@ -823,6 +823,8 @@ $shadow-focus: 0px 0px 10px 2px var(--primary-color-50);
   
   #MODAL{
     border-radius: 8px;
+    transition: $trans-global;
+    background-color: var(--bg-router-color);
   }
   .overlay {
     position: fixed;
