@@ -8,7 +8,7 @@
       <div class="center-head">
         <div class="head-box">
           <div class="profile-img-box">
-            <img class="img-circle-100" v-if="profileUser?.profile_img" :src="`${this.store.state.API_URL}${profileUser?.profile_img}`">
+            <img class="img-circle-100" v-if="profileUser?.profile_img" :src="`${$store.state.API_URL}${profileUser?.profile_img}`">
             <img class="img-circle-100" v-else src="@/assets/basic.png" alt="">
           </div>
           <div class="detail-box">

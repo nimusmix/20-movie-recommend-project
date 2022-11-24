@@ -57,7 +57,7 @@ def genre_list(request):
 @api_view(['GET'])
 def recommend_latent_model(request):
     user_preferences = get_list_or_404(Preference, user=request.user)
-    genres = get_list_or_404(Genre)
+    # genres = get_list_or_404(Genre)
     score = dict()
     all_score = 0
     
