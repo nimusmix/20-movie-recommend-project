@@ -7,7 +7,7 @@
     <h3 class="h3">내 프로필 사진</h3>
     <div class="img-select-box">
       <div>
-        <img class="img-circle-80" v-if="loginUser?.profile_img" :src="`http://127.0.0.1:8000${loginUser?.profile_img}`">
+        <img class="img-circle-80" v-if="loginUser?.profile_img" :src="`${$store.state.API_URL}${loginUser?.profile_img}`">
         <img class="img-circle-80" v-else src="@/assets/basic.png" >
       </div>
       
