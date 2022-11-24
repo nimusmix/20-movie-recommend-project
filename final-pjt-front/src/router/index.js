@@ -92,6 +92,13 @@ const router = new VueRouter({
       if(to.name === 'CategoryView'){
         return { x: 0, y: savedPosition.y } 
       }
+      else{
+        const data = {
+          selectedOtts:[],
+          selectedGenres:[],
+        }
+        store.commit('SAVE_CATEGORY', data)
+      }
     }
     // 카테고리에서 디테일로 이동
     if (from.name === 'CategoryView'){
