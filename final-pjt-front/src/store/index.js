@@ -53,7 +53,7 @@ export default new Vuex.Store({
       return state.token ? true : false
     },
     recent2Reviews(state) {
-      return state.reviews.splice(0, 2)
+      return state.reviews.slice(0, 2)
     }
   },
   mutations: {
@@ -63,8 +63,8 @@ export default new Vuex.Store({
     GET_MOVIES(state, movies) {
       state.movies = movies
     },
-    GET_REVIEWS(state, reivews) {
-      state.reviews = reivews
+    GET_REVIEWS(state, reviews) {
+      state.reviews = reviews
     },
     GET_LOGIN_USER(state, user) {
       state.loginUser = user

@@ -169,10 +169,13 @@ export default {
   created() {
     this.getMovie()
   },
-  mounted(){
-    
-    
-  }
+  watch: {
+    '$route' (to, from) {
+      if (to !== from) {
+        this.getMovie()
+      }
+    }
+  },
 }
 </script>
 

@@ -20,10 +20,12 @@ User = get_user_model()
 @api_view(['GET'])
 def review_list(request):
     if request.method == 'GET':
-        # reviews = Review.objects.all()
         reviews = get_list_or_404(Review)
         reviews.reverse()
+        # print(reviews[0].user)
         serializer = ReviewSerializer(reviews, many=True)
+        # print()
+        # print(serializer.data)
         return Response(serializer.data)
 
 

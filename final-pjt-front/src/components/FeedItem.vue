@@ -54,6 +54,11 @@ export default {
   props:{
     review: Object,
   },
+  computed: {
+    movies() {
+      return this.$store.state.movies
+    }
+  },
   methods:{
     switchIsSpoiler(){
       if (this.isSpoiler) {
@@ -61,8 +66,10 @@ export default {
       }
     },
     pushMovie() {
-      this.$store.dispatch("putPreference", this.review.movie)
-      // putPreference()
+      const movie = this.movies.find((movie) => {return movie.id === this.review.movie})
+      for (const genre of Object.values(movie.genres)) {
+        this.$store.dispatch("putPreference", genre)
+      }
       this.$router.push({ name: 'DetailView', params: { pk: this.review.movie }}) 
     },
     goToProfile(username) {

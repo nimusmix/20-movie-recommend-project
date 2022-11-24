@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     allFilter(review) {
-      if (this.followings.includes(review.user) || this.similarUsers.includes(review.user)) {
+      if (this.followings.includes(review.user) || this.similarUsers.includes(review.user) || review.user === this.loginUser.id) {
         return true
       }
     },
@@ -81,6 +81,13 @@ export default {
     },
     reviews() {
       return this.$store.state.reviews
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      if (to !== from) {
+        this.filtering('all')
+      }
     }
   },
   created() {
