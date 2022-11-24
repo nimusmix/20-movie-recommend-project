@@ -2,7 +2,7 @@
   <div>
     <div class="home-video-box">
       <iframe frameborder="0" class="home-video"
-      :src="videoUrl"
+      :src="'recommendMovie' ? videoUrl : defaultUrl"
       allow="autoplay; encrypted-media"
       allowfullscreen></iframe>
 
@@ -21,7 +21,7 @@
     
     <div class="home-content-box">
       <div class="home-review-box">
-        <h3 class="box-title">최근 20 리뷰</h3>
+        <h3 class="box-title">최근 20. 리뷰</h3>
           <article v-for="review in recent2Reviews" :key="review.id">
             <FeedItem :review="review" style="width: 480px;"/>
           </article>
@@ -67,6 +67,7 @@ export default {
         }
       ],
       recommendMovie: null,
+      defaultUrl: `https://www.youtube.com/embed/T7A810duHvw?mute=1&loop=2&autoplay=1&rel=0&controls=0&showinfo=0&disablekb=1&fs=0&modestbranding=1&playsinline=1&vq=hd1080`
     }
   },
   computed: {
@@ -110,10 +111,10 @@ export default {
     }
   },
   created() {
+    this.getRecommendMovie()
     for (const recommendObj of this.recommendBaseList) {
       this.$store.dispatch('getRecommend', recommendObj)
     }
-    this.getRecommendMovie()
     this.$store.dispatch('getSimilar')
     this.$store.dispatch('getLoginUser')
   }
@@ -131,6 +132,7 @@ export default {
       width: 100%;
       height: 500px;
       background-color:rgba(0, 0, 0, 0.287); 
+      margin: 0px;
     }
 
     .home-video-text {

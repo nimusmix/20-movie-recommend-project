@@ -132,20 +132,6 @@ export default {
   data(){
     return {
       genres : [],
-      recommendBaseList: [
-        {
-          name: 'similar',
-          url: 'api/v1/recommend/similar',
-        },
-        {
-          name: 'latent',
-          url: 'api/v1/recommend/latent',
-        },
-        {
-          name: 'preference',
-          url: 'api/v1/recommend/preference',
-        }
-      ],
     }
   },
   methods: {
@@ -173,11 +159,6 @@ export default {
     },
     
   },
-  created() {
-    for (const recommendObj of this.recommendBaseList) {
-      this.$store.dispatch('getRecommend', recommendObj)
-    }
-  }
 }
 </script>
 

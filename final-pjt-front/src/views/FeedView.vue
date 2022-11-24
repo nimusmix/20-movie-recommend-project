@@ -106,5 +106,7 @@ export default {
   }
   .select-feed{
     font-weight: 700;
+    text-decoration: underline;
+    color: var(--primary-color);
   }
 </style>

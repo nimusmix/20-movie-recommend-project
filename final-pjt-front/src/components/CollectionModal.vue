@@ -16,8 +16,8 @@
               <h1 class="h1 m-0">@{{ profileUser?.username }}</h1>
               <div class="space"></div>
               <div v-if="loginUser.username !== profileUser?.username" @click="follow">
-                <button id="followBtn" class="main-button selected" v-if="flag">언팔로우</button>
-                <button id="followBtn" class="main-button selected" v-else>팔로우</button>
+                <button id="followBtn" class="main-button selected" v-if="flag">팔로우 중</button>
+                <button id="followBtn" class="main-button" v-else>팔로우하기</button>
               </div>
             </div>
             <div class="follow-info">

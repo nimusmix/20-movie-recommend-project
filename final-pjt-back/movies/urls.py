@@ -19,7 +19,4 @@ urlpatterns = [
 
     # 사용자 선호장르 추천
     path('recommend/preference/', views.recommend_preference_genre),
-
-    # 사용자 선호장르 추천
-    path('recommend/ott/<str:username>/', views.recommend_use_ott)
 ]

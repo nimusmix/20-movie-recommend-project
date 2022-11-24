@@ -44,13 +44,15 @@
         <h3 class="h3">줄거리</h3>
         <p>{{ movie?.overview }}</p>
       </div>
-      
-      <div class="space"></div>
-      <ReviewCreate @review-created="reviewCreated"/>
-      <div class="space"></div>
-      <MovieReviews :reviews="reviews"/>
+
       <div class="space"></div>
       <MovieCollections :movie="movie"/>
+      <div class="space"></div>
+      <ReviewCreate @review-created="reviewCreated"/>
+      <!-- 토스트 -->
+      <div id="toast-box"></div>
+      <div class="space"></div>
+      <MovieReviews :reviews="reviews"/>
     </div>
   </div>
 </template>
@@ -61,6 +63,8 @@ import axios from 'axios'
 import ReviewCreate from '@/components/ReviewCreate'
 import MovieReviews from '@/components/MovieReviews'
 import MovieCollections from '@/components/MovieCollections'
+
+let removeToast;
 
 export default {
   name: 'DetailView',
@@ -146,9 +150,9 @@ export default {
         .then(() => {
           this.$store.dispatch('getLoginUser')
           if (this.isCollected) {
-            alert('내 컬렉션에 추가했습니다.')
+            this.toast('내 컬렉션에 추가했습니다.')
           } else {
-            alert('내 컬렉션에서 제외했습니다.')
+            this.toast('내 컬렉션에서 제외했습니다.')
           }
         })
         .catch((err) => {
@@ -164,6 +168,20 @@ export default {
     },
     reviewCreated() {
       this.getMovie()
+      this.toast('리뷰가 등록되었습니다.')
+    },
+    toast(text) {
+      const toastBox = document.querySelector('#toast-box')
+
+      toastBox.classList.contains("reveal") ?
+        (clearTimeout(removeToast), removeToast = setTimeout(function () {
+            toastBox.classList.remove("reveal")
+          }, 3000)) :
+          removeToast = setTimeout(function () {
+            toastBox.classList.remove("reveal")
+          }, 3000)
+        toastBox.classList.add("reveal"),
+          toastBox.innerText = text
     }
   },
   created() {
@@ -233,5 +251,28 @@ export default {
         margin: 0;
       }
     }
+  }
+
+  #toast-box {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    padding: 15px 20px;
+    transform: translate(-50%, 10px);
+    border-radius: 30px;
+    overflow: hidden;
+    font-size: .8rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s, visibility .5s, transform .5s;
+    background: rgba(0, 0, 0, .35);
+    color: #fff;
+    z-index: 10000;
+  }
+
+  #toast-box.reveal {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0)
   }
 </style>
