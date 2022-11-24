@@ -16,7 +16,7 @@
               <h1 class="h1 m-0">@{{ profileUser?.username }}</h1>
               <div class="space"></div>
               <div v-if="loginUser.username !== profileUser?.username" @click="follow">
-                <button id="followBtn" class="main-button selected" v-if="isFollowing">언팔로우</button>
+                <button id="followBtn" class="main-button selected" v-if="flag">언팔로우</button>
                 <button id="followBtn" class="main-button selected" v-else>팔로우</button>
               </div>
             </div>
@@ -66,7 +66,7 @@ export default {
   data(){
     return{
       profileUser: null,
-      isFollowing: false,
+      flag: false,
       leftIcon : '<',
       rightIcon : '>',
     }
@@ -95,16 +95,14 @@ export default {
         this.profileUser = res.data
       })
       .then(() => {
-        if (this.loginUser.followings.includes(this.profileUser.id)) {
-          this.isFollowing = true
-        }
+        
+        this.isFollowing()
       })
       .catch((err) => {
         console.log(err)
       })
     },
     follow() {
-      this.isFollowing = !this.isFollowing
 
       axios({
         method: 'post',
@@ -114,12 +112,21 @@ export default {
         },
       })
         .then(() => {
-          this.getProfileUser()
           this.$store.dispatch('getLoginUser')
+          this.getProfileUser()
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    isFollowing() {
+      this.flag = false
+      
+      this.profileUser.followers.forEach((following)=>{
+          if (following.username===this.loginUser.username){
+            this.flag = true
+          }
+      })
     },
     goToEdit() {
       this.$router.push({ name: 'UserEditView', params: { name: 'UserEditView', signUpFlag: 0 } })

@@ -129,6 +129,19 @@ export default {
       }
     },
   },
+  created(){
+    console.log(this.$store.state.selectedOtts, this.$store.state.selectedGenres)
+    this.selectedOtts = this.$store.state.selectedOtts
+    this.selectedGenres = this.$store.state.selectedGenres
+  },
+  beforeDestroy(){
+    const data = {
+      selectedOtts:this.selectedOtts,
+      selectedGenres:this.selectedGenres,
+    }
+    this.$store.commit('SAVE_CATEGORY', data)
+  }
+
 }
 </script>
 
