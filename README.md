@@ -1,3 +1,9 @@
+발표대본 : https://stupendous-vise-0f6.notion.site/bb2312a131be440b9b8b17ed8d466cb6
+https://www.notion.so/bb2312a131be440b9b8b17ed8d466cb6
+
+기타 : https://stupendous-vise-0f6.notion.site/8c9f6ba2fa4148b698b362bf93bf140e
+https://www.notion.so/8c9f6ba2fa4148b698b362bf93bf140e
+
 ![Group_98](./README.assets/Group_98.png)
 
 # 유사 사용자 기반 영화 추천 프로젝트 20.
@@ -78,7 +84,7 @@
 
 ---
 
-![Untitled](asset/Untitled.png)
+![Untitled](./README.assets/Untitled.png)
 
 ![Untitled1](./README.assets/Untitled1.png)
 
