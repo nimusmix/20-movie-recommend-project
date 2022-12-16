@@ -1,9 +1,3 @@
-발표대본 : https://stupendous-vise-0f6.notion.site/bb2312a131be440b9b8b17ed8d466cb6
-https://www.notion.so/bb2312a131be440b9b8b17ed8d466cb6
-
-기타 : https://stupendous-vise-0f6.notion.site/8c9f6ba2fa4148b698b362bf93bf140e
-https://www.notion.so/8c9f6ba2fa4148b698b362bf93bf140e
-
 ![Group_98](./README.assets/Group_98.png)
 
 # 유사 사용자 기반 영화 추천 프로젝트 20.
@@ -80,13 +74,27 @@ https://www.notion.so/8c9f6ba2fa4148b698b362bf93bf140e
     - CSS : 희제
     - router : 수민
 
+## 구동
+---
+### Django
+```
+python -m venv venv
+source venv/Scripts/activate
+pip install -r requirements.txt 
+python manage.py makemigrations
+python manage.py migrate
+python manage.py loaddata data2.json
+python manage.py runserver
+```
+### Vue
+```
+npm install
+npm run serve
+```
+
 ## 목표 서비스 구현 및 실제 구현 정도
 
 ---
-
-![Untitled](./README.assets/Untitled.png)
-
-![Untitled1](./README.assets/Untitled1.png)
 
 ### 목표 서비스 요소
 
@@ -106,6 +114,7 @@ https://www.notion.so/8c9f6ba2fa4148b698b362bf93bf140e
     - ✔선호 사용 장르 영화 추천
 - 카테고리
     - ✔장르, OTT를 구분 filter 기능
+    - ✔무한스크롤 페이지네이션
 - 디테일
     - ✔영화를 컬렉션에 넣은 사용자 보기
     - ✔컬렉션 모달 구현
@@ -120,7 +129,7 @@ https://www.notion.so/8c9f6ba2fa4148b698b362bf93bf140e
 
 ---
 
-![Untitled2](./README.assets/Untitled2.png)**
+![ERD](./README.assets/ERD.png)**
 
 **받아오는 모델**: Movie, Genre
 
@@ -265,7 +274,7 @@ def recommend_latent_model(request):
 - 내가 좋아할 만한 영화
   
 
-### ![Untitled3](./README.assets/Untitled3.png)
+### ![홈페이지](./README.assets/홈페이지.png)
 
 ### 네비게이션
 
