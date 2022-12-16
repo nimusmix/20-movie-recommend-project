@@ -1,5 +1,5 @@
-<template>
-  <div class="router-view-padding">
+<template >
+  <div class="router-view-padding" ref="scrollcheck">
     <h1 class="h1">카테고리</h1>
     <div class="button-list">
       <button
@@ -24,11 +24,21 @@
     <p class="movie-count">{{ filteredMovies.length }}개의 영화가 있습니다.</p>
     <div class="row row-cols-1 row-cols-md-4 row-cols-xl-6 g-4">
       <article 
-        v-for="movie in filteredMovies"
+        v-for="movie in filteredMovies.slice( 0, visibleIdx )"
         :key="movie.id"
         class="col"
       >
-      <MovieItem :movie="movie"/>
+        <MovieItem :movie="movie"/>
+        <!-- <div class="movie-card">
+          <a class="t-d-none">
+            <div  style="position:relative">
+              <div class="card-img-top" style="background-color:gray" alt="..."></div>
+            </div>
+            <h5 class="movie-card-title">{{   }}</h5>
+            <div class="movie-card-detail">{{   }}</div>
+            <p class="movie-card-detail"><span>로딩 중... </span> </p>
+          </a>
+        </div> -->
       </article>
     </div>
   </div>
@@ -37,6 +47,8 @@
 <script>
 import MovieItem from '@/components/MovieItem'
 
+
+
 export default {
   name: 'CategoryView',
   components: {
@@ -44,6 +56,7 @@ export default {
   },
   data() {
     return {
+      visibleIdx: 100,
       ottList: {
         watcha: '왓챠',
         waave: '웨이브',
@@ -128,18 +141,28 @@ export default {
         return false
       }
     },
+    handleScroll() {
+      if ( this.$refs.scrollcheck.scrollHeight - (window.innerHeight + window.scrollY) < 1000){
+        this.visibleIdx += 100
+      }
+    }
   },
   created() {
     this.selectedOtts = this.$store.state.selectedOtts
     this.selectedGenres = this.$store.state.selectedGenres
+    this.visibleIdx = this.$store.state.visibleIdx
   },
   beforeDestroy() {
     const data = {
       selectedOtts: this.selectedOtts,
       selectedGenres: this.selectedGenres,
+      visibleIdx: this.visibleIdx,
     }
     this.$store.commit('SAVE_CATEGORY', data)
   },
+  updated(){
+    window.addEventListener("scroll", this.handleScroll)
+  }
 }
 </script>
 

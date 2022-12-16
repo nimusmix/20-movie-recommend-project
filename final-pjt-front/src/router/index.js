@@ -96,6 +96,7 @@ const router = new VueRouter({
         const data = {
           selectedOtts:[],
           selectedGenres:[],
+          visibleIdx:100
         }
         store.commit('SAVE_CATEGORY', data)
       }
@@ -106,6 +107,7 @@ const router = new VueRouter({
         const data = {
           selectedOtts:[],
           selectedGenres:[],
+          visibleIdx:100
         }
         store.commit('SAVE_CATEGORY', data)
       }

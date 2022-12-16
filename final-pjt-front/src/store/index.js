@@ -43,6 +43,7 @@ export default new Vuex.Store({
     height: 0,
     selectedOtts: [],
     selectedGenres: [],
+    visibleIdx: 100,
     // recommend
     recommendSimilar: [],
     recommendLatent: [],
@@ -102,6 +103,7 @@ export default new Vuex.Store({
     SAVE_CATEGORY(state, data){
       state.selectedOtts = data.selectedOtts
       state.selectedGenres = data.selectedGenres
+      state.visibleIdx = data.visibleIdx
     }
   },
   actions: {
