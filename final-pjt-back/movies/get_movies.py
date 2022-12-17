@@ -90,14 +90,6 @@ def get_movies():
                             if not value in movie['fields']['otts']:
                                 print(movie['fields']['title'])
                                 movie['fields']['otts'].append(value)
-                    
-
-    # # 받아오기
-    # maked_url = make_url(URL, params)
-    # response = requests.get(maked_url).json()
- 
-    # # 데이터 정제
-    # results = response.get('results')
 
     # json 저장하기
     file_path = "./finalmovie_0.json" # 주소

@@ -1,12 +1,13 @@
 import requests
 import json
+import api_keys  # 숨겨놓은 api키
 
 
-# with open('final-pjt-back/movies/fixtures/movies.json', 'r', encoding="UTF-8") as json_file:
+api_key = api_keys.API_KEY
+
+
 with open('finalmovie_0.json', 'r', encoding="UTF-8") as json_file:
     data_json_list = json.load(json_file)
-
-
 
 
 def make_url(url, params):
@@ -17,7 +18,7 @@ def make_url(url, params):
 def get_movies(movie_id):
     
     params = {
-        'api_key': 'b62d15126d65f2f351e77aa02c968e67',
+        'api_key': api_key,
         'language':'en-US',
     }
     URL = f'https://api.themoviedb.org/3/movie/{movie_id}/videos?'

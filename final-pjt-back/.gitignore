@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,macos,windows,database,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,macos,windows,database,venv
 
+api_keys.py
+
 ### Database ###
 *.accdb
 *.db

@@ -1,12 +1,6 @@
 import requests
 import json
-
 import api_keys  # 숨겨놓은 api키
-
-# def make_url(url, params):
-#     for key, value in params.items():
-#         url = url + f'&{key}={value}'
-#     return url
 
 def get_movies(movie_id, page_num):
     api_key = api_keys.API_KEY
@@ -37,11 +31,6 @@ for data_json in data_json_list:
         'reviews':get_movies(data_json["pk"], 1)
     }
     result.append(new_dict)
-# new_dict = {
-#     'id': 8835,
-#     # "title": data_json["fields"]["title"],
-#     'reviews':get_movies(8835, 1)
-# }
 result.append(new_dict)
 
 
