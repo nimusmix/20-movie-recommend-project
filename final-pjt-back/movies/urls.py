@@ -19,4 +19,7 @@ urlpatterns = [
 
     # 사용자 선호장르 추천
     path('recommend/preference/', views.recommend_preference_genre),
+
+    # 카테고리view에서 검색
+    path('movies-search/<str:movie_title>/', views.movie_search),
 ]

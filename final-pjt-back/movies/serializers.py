@@ -20,3 +20,10 @@ class GenreListSerializer(serializers.ModelSerializer):
 class TestSerializer(serializers.Serializer):
     label = serializers.CharField()
     movies = MovieSerializer(many=True, read_only=True)
+
+
+class MovieSearchSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Movie
+        fields = ['id','title']

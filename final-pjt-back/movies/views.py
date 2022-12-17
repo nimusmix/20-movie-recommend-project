@@ -14,10 +14,12 @@ from rest_framework.decorators import permission_classes
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, get_list_or_404
 
-from .serializers import MovieSerializer, GenreListSerializer, TestSerializer
+from .serializers import MovieSerializer, GenreListSerializer, TestSerializer, MovieSearchSerializer
 from .models import Movie, Genre
 from community.models import Review
 from accounts.models import Preference
+
+from django.db.models import Q
 
 User = get_user_model()
 
@@ -194,4 +196,17 @@ def recommend_preference_genre(request):
     
     # Json 추출
     serializer = TestSerializer(result, many=True)
+    return Response(serializer.data)
+
+
+# 검색
+@api_view(['GET'])
+def movie_search(request, movie_title):
+    movies = []
+    try:
+        movies.append(Movie.objects.get(title=movie_title))
+    except:
+        pass
+    movies.extend((Movie.objects.filter(title__contains=movie_title) & Movie.objects.exclude(title=movie_title))[:5])
+    serializer = MovieSearchSerializer(movies, many=True)
     return Response(serializer.data)
