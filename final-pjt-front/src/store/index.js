@@ -48,6 +48,8 @@ export default new Vuex.Store({
     recommendSimilar: [],
     recommendLatent: [],
     recommendPreference: {},
+    // index <--> id를 참조하기 위한 리스트
+    movieIdIndex:{},
   },
 
   getters: {
@@ -64,6 +66,9 @@ export default new Vuex.Store({
     },
     GET_MOVIES(state, movies) {
       state.movies = movies
+      movies.forEach((movie, index)=>{
+        state.movieIdIndex[movie.id] = index
+      })
     },
     GET_REVIEWS(state, reviews) {
       state.reviews = reviews
@@ -113,7 +118,7 @@ export default new Vuex.Store({
         url: `${context.state.API_URL}/api/v1/genres/`,
       })
         .then((res) => {
-          console.log('1 actions의 getGenres 성공!')
+          // console.log('1 actions의 getGenres 성공!')
           context.commit('GET_GENRES', res.data)
         })
         .catch(() => {
@@ -126,7 +131,7 @@ export default new Vuex.Store({
         url: `${context.state.API_URL}/api/v1/movies/`,
       })
         .then((res) => {
-          console.log('2 actions의 getMovies 성공!')
+          // console.log('2 actions의 getMovies 성공!')
           context.commit('GET_MOVIES', res.data)
         })
         .catch(() => {
@@ -139,7 +144,7 @@ export default new Vuex.Store({
         url: `${context.state.API_URL}/api/v2/reviews/`,
       })
         .then((res) => {
-          console.log('3 actions의 getReviews 성공!')
+          // console.log('3 actions의 getReviews 성공!')
           context.commit('GET_REVIEWS', res.data)
         })
         .catch(() => {
@@ -188,7 +193,7 @@ export default new Vuex.Store({
         },
       })
         .then(() => {
-          console.log('actions의 putPreference 성공!')
+          // console.log('actions의 putPreference 성공!')
           // context.dispatch('getRecommend')
         })
         .catch(() => {

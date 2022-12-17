@@ -129,7 +129,7 @@ export default {
           url: `${this.$store.state.API_URL}/api/v2/movies/${this.movie.id}/get-reviews/`,
         })
         .then((res) => {
-          console.log('detailView의 get-reviews 성공!')
+          // console.log('detailView의 get-reviews 성공!')
           this.reviews = res.data.review_set.reverse()
         })
         .catch(() => {
