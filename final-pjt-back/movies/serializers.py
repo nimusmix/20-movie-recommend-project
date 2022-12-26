@@ -17,7 +17,7 @@ class GenreListSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TestSerializer(serializers.Serializer):
+class LabelSerializer(serializers.Serializer):
     label = serializers.CharField()
     movies = MovieSerializer(many=True, read_only=True)
 

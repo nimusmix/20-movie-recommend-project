@@ -14,7 +14,7 @@ from rest_framework.decorators import permission_classes
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404, get_list_or_404
 
-from .serializers import MovieSerializer, GenreListSerializer, TestSerializer, MovieSearchSerializer
+from .serializers import MovieSerializer, GenreListSerializer, LabelSerializer, MovieSearchSerializer
 from .models import Movie, Genre
 from community.models import Review
 from accounts.models import Preference
@@ -195,7 +195,7 @@ def recommend_preference_genre(request):
                     result[idx]['count'] += 1
     
     # Json 추출
-    serializer = TestSerializer(result, many=True)
+    serializer = LabelSerializer(result, many=True)
     return Response(serializer.data)
 
 
